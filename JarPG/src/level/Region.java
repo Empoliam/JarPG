@@ -7,7 +7,15 @@ public class Region
 	boolean polar = false;
 	boolean beach = false;
 	boolean ocean = true;
-	boolean river = false;
+	boolean mountain = false;
+
+	public boolean getMountain() 
+	{
+		return mountain;
+	}
+	public void setMountain(boolean mountain) {
+		this.mountain = mountain;
+	}
 
 	public Region() {}
 
@@ -18,7 +26,7 @@ public class Region
 		this.polar = in.polar;
 		this.beach = in.beach;
 		this.ocean = in.ocean;
-		this.river = in.river;
+		this.mountain = in.mountain;
 
 	}
 
@@ -31,7 +39,7 @@ public class Region
 
 	}
 	public boolean getOcean() {return ocean;}
-	
+
 	public void setSolid(boolean set)
 	{
 
@@ -40,7 +48,7 @@ public class Region
 
 	}
 	public boolean getSolid() {return solid;}
-	
+
 	public void setPolar(boolean set)
 	{
 
@@ -51,19 +59,10 @@ public class Region
 
 	}
 	public boolean getPolar() {return polar;}
-	
-	public void setBeach(boolean set){beach = set;}
+
+	public void setBeach(boolean set){
+		beach = set;
+	}
 	public boolean getBeach() {return beach;}
 
-	public void setRiver(boolean set)
-	{
-		
-		river = set;
-		beach = !set;
-		solid = !set;
-		polar = !set;
-		
-	}
-	public boolean getRiver(){return river;}
-	
 }

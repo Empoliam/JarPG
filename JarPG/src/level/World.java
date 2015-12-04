@@ -22,7 +22,7 @@ public class World
 	private boolean GENERATE_BEACHES = false;
 	private int WORLD_SIZE = 400;
 	private double POLE_DIVISOR = 2;
-	private int RIVER_COUNT = 5;
+	private int MOUNTAIN_COUNT = 5;
 
 	//Colours
 	Color sea = new Color(30, 98, 168); int SEA_COLOUR = sea.getRGB();
@@ -30,6 +30,7 @@ public class World
 	Color ice = new Color(200,200,255); int ICE_COLOUR = ice.getRGB();
 	Color beach = new Color(255,223,128); int BEACH_COLOUR = beach.getRGB();
 	Color river = new Color(60,60,190); int RIVER_COLOUR = river.getRGB();
+	Color mountian = new Color(170,170,170); int MOUNTAIN_COLOUR = mountian.getRGB();
 
 	Region[][] regions;
 
@@ -49,6 +50,7 @@ public class World
 		if(GENERATE_POLES == true) buildPoles();
 		cleanLand();
 		if(GENERATE_BEACHES == true) buildBeaches();
+		seedMountains();
 
 	}
 
@@ -180,13 +182,13 @@ public class World
 				boolean polar = regions[x][y].getPolar();
 				boolean beach = regions[x][y].getBeach();
 				boolean ocean = regions[x][y].getOcean();
-				boolean river = regions[x][y].getRiver();
+				boolean mountain = regions[x][y].getMountain();
 
 				if(solid && !polar) image.setRGB(x, y, LAND_COLOUR);
 				if(polar) image.setRGB(x, y, ICE_COLOUR);
 				if(ocean) image.setRGB(x, y, SEA_COLOUR);
 				if(beach) image.setRGB(x, y, BEACH_COLOUR);
-				if(river) image.setRGB(x, y, RIVER_COLOUR);
+				if(mountain) image.setRGB(x, y, MOUNTAIN_COLOUR);
 
 			}
 
@@ -388,10 +390,32 @@ public class World
 
 	}
 
-	private void growMountains()
+	private void seedMountains()
 	{
 
+		for(int x = 0; x < MOUNTAIN_COUNT; x ++)
+		{
 
+			Dice Coord = new Dice(0,WORLD_SIZE-1);
+
+			int setx = Coord.Roll();
+			int sety = Coord.Roll();
+			
+			boolean ocean = regions[setx][sety].getOcean();
+			
+			while(ocean == true)
+			{
+
+				setx = Coord.Roll();
+				sety = Coord.Roll();
+				
+				regions[setx][sety].getOcean();
+
+			}
+
+			regions[setx][sety].setMountain(true);
+
+		}
 
 	}
 
