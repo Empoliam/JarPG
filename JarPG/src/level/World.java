@@ -57,6 +57,7 @@ public class World
 		recordLand();
 		seedMountains();
 		buildMountains();
+		cleanMountains();
 
 	}
 
@@ -105,7 +106,7 @@ public class World
 
 					dummy[x][y] = new Region(regions[x][y]);
 
-					boolean polepresent = checkPolar(x, y);
+					boolean polepresent = checkTags(1, x, y);
 
 					if (polepresent == true)
 					{
@@ -147,9 +148,9 @@ public class World
 
 					dummy[x][y] = new Region(regions[x][y]);
 
-					boolean mountainpresent = checkMountain(x, y);
-					boolean ocean = checkOcean(x, y);
-					
+					boolean mountainpresent = checkTags(4, x, y);
+					boolean ocean = checkTags(3, x, y);
+
 					if (mountainpresent == true && ocean == false)
 					{
 
@@ -158,6 +159,7 @@ public class World
 
 							dummy[x][y].setMountain(true);
 							dummy[x][y].setSnow(true);
+							dummy[x][y].setBeach(false);
 
 						}
 
@@ -170,7 +172,7 @@ public class World
 			regions = dummy;
 
 		}
-		
+
 		for(int t = 0; t < (int)WORLD_SIZE / 40; t ++)
 		{
 
@@ -186,9 +188,9 @@ public class World
 
 					dummy[x][y] = new Region(regions[x][y]);
 
-					boolean mountainpresent = checkMountain(x, y);
-					boolean ocean = checkOcean(x, y);
-					
+					boolean mountainpresent = checkTags(4 ,x, y);
+					boolean ocean = regions[x][y].getOcean();
+
 					if (mountainpresent == true && ocean == false)
 					{
 
@@ -196,6 +198,7 @@ public class World
 						{
 
 							dummy[x][y].setMountain(true);
+							dummy[x][y].setBeach(false);
 
 						}
 
@@ -210,24 +213,7 @@ public class World
 		}
 
 	}
-	
-	private boolean checkMountain(int x, int y)
-	{
-		
-		boolean mountainpresent = false;
-		try { if(regions[x-1][y-1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y-1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y-1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y+1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y+1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y+1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
-		return mountainpresent;
-		
-	}
-	
 	private void buildLand()
 	{
 
@@ -252,7 +238,7 @@ public class World
 				for(;x < WORLD_SIZE; x ++)
 				{
 
-					boolean solidpresent = checkSolid(x, y);
+					boolean solidpresent = checkTags(0, x, y);
 
 					dummy[x][y] = new Region(regions[x][y]);
 
@@ -289,7 +275,7 @@ public class World
 				boolean ocean = regions[x][y].getOcean();
 				boolean mountain = regions[x][y].getMountain();
 				boolean snow = regions[x][y].getSnow();
-				
+
 				if(solid && !polar) image.setRGB(x, y, LAND_COLOUR);
 				if(polar) image.setRGB(x, y, ICE_COLOUR);
 				if(ocean) image.setRGB(x, y, SEA_COLOUR);
@@ -301,26 +287,10 @@ public class World
 
 		}
 
-		File f = new File("map.bmp");
+		new File("world").mkdirs();
+		File f = new File("world/map.bmp");
 		try { ImageIO.write(image, "BMP", f); }
 		catch(IOException e){System.out.println("Failed to print map");};
-
-	}
-
-	private boolean checkSolid(int x, int y)
-	{
-
-		boolean solidpresent = false;
-		try { if(regions[x-1][y-1].getSolid() == true) solidpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y-1].getSolid() == true) solidpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y-1].getSolid() == true) solidpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y].getSolid() == true) solidpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y].getSolid() == true) solidpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y+1].getSolid() == true) solidpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y+1].getSolid() == true) solidpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y+1].getSolid() == true) solidpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-
-		return solidpresent;
 
 	}
 
@@ -338,42 +308,6 @@ public class World
 		try { if(regions[x+1][y+1].getSolid() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		return solidcount;
-
-	}
-	
-	private boolean checkOcean(int x, int y)
-	{
-
-		boolean oceanpresent = false;
-
-		try { if(regions[x-1][y-1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y-1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y-1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y+1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y+1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y+1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-
-		return oceanpresent;
-
-	}
-
-	private boolean checkPolar(int x, int y)
-	{
-
-		boolean polepresent = false;
-
-		try { if(regions[x-1][y-1].getPolar() == true) polepresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y-1].getPolar() == true) polepresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y-1].getPolar() == true) polepresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y].getPolar() == true) polepresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y].getPolar() == true) polepresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y+1].getPolar() == true) polepresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y+1].getPolar() == true) polepresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y+1].getPolar() == true) polepresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-
-		return polepresent;
 
 	}
 
@@ -430,7 +364,7 @@ public class World
 			for(; x < WORLD_SIZE; x++)
 			{
 
-				boolean nearocean = checkOcean(x,y);
+				boolean nearocean = checkTags(3, x, y);
 				boolean polar = regions[x][y].getPolar();
 				boolean ocean = !regions[x][y].getSolid();				
 
@@ -566,30 +500,30 @@ public class World
 
 		File f = new File("world/land.txt");
 		long maxlines = 0;
-		
+
 		try 
 		{
-			
+
 			BufferedReader lineCount = new  BufferedReader(new FileReader(f));
 			while (lineCount.readLine() != null)
 			{
-				
+
 				maxlines ++;
-				
+
 			}
 			lineCount.close();
-			
+
 		}
 		catch (IOException e)
 		{
-			
+
 			e.printStackTrace();
-			
+
 		}
 
 		for(int w = 0; w < MOUNTAIN_COUNT; w ++)
 		{
-			
+
 			try 
 			{
 
@@ -620,8 +554,206 @@ public class World
 				e.printStackTrace();
 
 			}
-			
+
 		}
+
+	}
+
+	private void cleanMountains()
+	{
+
+		for(int y = 0; y < WORLD_SIZE; y ++)
+		{
+
+			int x = 0;
+
+			for(; x < WORLD_SIZE; x++)
+			{
+
+				if(regions[x][y].getSolid() == true)
+				{
+					
+					int mountainCount = countMountain(x, y);
+
+					if (mountainCount < 4)
+					{
+
+						regions[x][y].setMountain(false);
+
+					}
+					if (mountainCount == 8)
+					{
+
+						regions[x][y].setMountain(true);
+
+					}
+					
+				}
+
+			}
+
+		}
+
+	}
+
+	private int countMountain(int x, int y)
+	{
+
+		int solidcount = 0;
+		try { if(regions[x-1][y-1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x][y-1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x+1][y-1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x-1][y].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x+1][y].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x-1][y+1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x][y+1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x+1][y+1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		return solidcount;
+
+	}
+
+	private boolean checkTags(int tag, int x, int y)
+	{
+
+		boolean[] presence = new boolean[6];
+
+		/*solid   */ presence[0] = false;
+		/*polar   */ presence[1] = false;
+		/*beach   */ presence[2] = false;
+		/*ocean   */ presence[3] = false;
+		/*mountain*/ presence[4] = false;
+		/*snow    */ presence[5] = false;
+
+		try 
+		{ 
+
+			Region active = regions[x-1][y-1];
+
+			if (active.getSolid() == true) presence[0] = true;
+			if (active.getPolar() == true) presence[1] = true;
+			if (active.getBeach() == true) presence[2] = true;
+			if (active.getOcean() == true) presence[3] = true;
+			if (active.getMountain() == true) presence[4] = true;
+			if (active.getSnow() == true) presence[5] = true;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x][y-1];
+
+			if (active.getSolid() == true) presence[0] = true;
+			if (active.getPolar() == true) presence[1] = true;
+			if (active.getBeach() == true) presence[2] = true;
+			if (active.getOcean() == true) presence[3] = true;
+			if (active.getMountain() == true) presence[4] = true;
+			if (active.getSnow() == true) presence[5] = true;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x+1][y-1];
+
+			if (active.getSolid() == true) presence[0] = true;
+			if (active.getPolar() == true) presence[1] = true;
+			if (active.getBeach() == true) presence[2] = true;
+			if (active.getOcean() == true) presence[3] = true;
+			if (active.getMountain() == true) presence[4] = true;
+			if (active.getSnow() == true) presence[5] = true;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x-1][y];
+
+			if (active.getSolid() == true) presence[0] = true;
+			if (active.getPolar() == true) presence[1] = true;
+			if (active.getBeach() == true) presence[2] = true;
+			if (active.getOcean() == true) presence[3] = true;
+			if (active.getMountain() == true) presence[4] = true;
+			if (active.getSnow() == true) presence[5] = true;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x+1][y];
+
+			if (active.getSolid() == true) presence[0] = true;
+			if (active.getPolar() == true) presence[1] = true;
+			if (active.getBeach() == true) presence[2] = true;
+			if (active.getOcean() == true) presence[3] = true;
+			if (active.getMountain() == true) presence[4] = true;
+			if (active.getSnow() == true) presence[5] = true;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x-1][y+1];
+
+			if (active.getSolid() == true) presence[0] = true;
+			if (active.getPolar() == true) presence[1] = true;
+			if (active.getBeach() == true) presence[2] = true;
+			if (active.getOcean() == true) presence[3] = true;
+			if (active.getMountain() == true) presence[4] = true;
+			if (active.getSnow() == true) presence[5] = true;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x][y+1];
+
+			if (active.getSolid() == true) presence[0] = true;
+			if (active.getPolar() == true) presence[1] = true;
+			if (active.getBeach() == true) presence[2] = true;
+			if (active.getOcean() == true) presence[3] = true;
+			if (active.getMountain() == true) presence[4] = true;
+			if (active.getSnow() == true) presence[5] = true;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x+1][y+1];
+
+			if (active.getSolid() == true) presence[0] = true;
+			if (active.getPolar() == true) presence[1] = true;
+			if (active.getBeach() == true) presence[2] = true;
+			if (active.getOcean() == true) presence[3] = true;
+			if (active.getMountain() == true) presence[4] = true;
+			if (active.getSnow() == true) presence[5] = true;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		return presence[tag];
 
 	}
 

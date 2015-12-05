@@ -85,7 +85,7 @@ public class WorldWindow extends JDialog
 						
 			try 
 			{
-				BufferedImage img = ImageIO.read(new File("map.bmp"));
+				BufferedImage img = ImageIO.read(new File("world/map.bmp"));
 				ImageIcon icon = new ImageIcon(img);
 				imgPane.setIcon(icon);
 				pack();

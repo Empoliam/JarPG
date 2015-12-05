@@ -10,15 +10,6 @@ public class Region
 	boolean mountain = false;
 	boolean snow = false;
 
-	public boolean getMountain() 
-	{
-		return mountain;
-	}
-	public void setMountain(boolean mountain)
-	{
-		this.mountain = mountain;
-	}
-
 	public Region() {}
 
 	public Region(Region in)
@@ -78,4 +69,15 @@ public class Region
 		snow = setsnow;
 	}
 
+	public boolean getMountain() 
+	{
+		return mountain;
+	}
+	public void setMountain(boolean set)
+	{
+		
+		mountain = set;
+		
+	}
+	
 }
