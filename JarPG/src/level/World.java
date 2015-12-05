@@ -53,11 +53,11 @@ public class World
 		buildLand();
 		if(GENERATE_POLES == true) buildPoles();
 		cleanLand();
-		if(GENERATE_BEACHES == true) buildBeaches();
 		recordLand();
 		seedMountains();
 		buildMountains();
 		cleanMountains();
+		if(GENERATE_BEACHES == true) buildBeaches();
 
 	}
 
@@ -297,43 +297,48 @@ public class World
 	private void cleanLand()
 	{
 
-		for(int y = 0; y < WORLD_SIZE; y ++)
+		for(int t = 1; t <= 2; t ++)
 		{
 
-			int x = 0;
-
-			for(; x < WORLD_SIZE; x++)
+			for(int y = 0; y < WORLD_SIZE; y ++)
 			{
 
-				int landcount = countTags(0, x, y);
+				int x = 0;
 
-				if (landcount < 4)
+				for(; x < WORLD_SIZE; x++)
 				{
 
-					regions[x][y].setOcean(true);
+					int landcount = countTags(0, x, y);
 
-				}
-				if (landcount == 8)
-				{
+					if (landcount < 4)
+					{
 
-					regions[x][y].setSolid(true);
+						regions[x][y].setOcean(true);
 
-				}
+					}
+					if (landcount >= 5)
+					{
 
-				int polarcount = countTags(1, x, y);
+						regions[x][y].setSolid(true);
 
-				if (polarcount == 8)
-				{
+					}
 
-					regions[x][y].setSolid(true);
-					regions[x][y].setPolar(true);
+					int polarcount = countTags(1, x, y);
+
+					if (polarcount >= 5)
+					{
+
+						regions[x][y].setSolid(true);
+						regions[x][y].setPolar(true);
+
+					}
 
 				}
 
 			}
 
 		}
-
+		
 	}
 
 	private void buildBeaches()
@@ -547,7 +552,7 @@ public class World
 						regions[x][y].setMountain(false);
 
 					}
-					if (mountainCount == 8)
+					if (mountainCount >= 5)
 					{
 
 						regions[x][y].setMountain(true);

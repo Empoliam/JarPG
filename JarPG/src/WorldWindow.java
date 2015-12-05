@@ -80,6 +80,7 @@ public class WorldWindow extends JDialog
 			sTemp = bTemperature.getSelectedIndex();
 			mountains = Integer.parseInt(fMountains.getText());
 			
+			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches,mountains);
 			world.imgOut();
 						
@@ -91,7 +92,9 @@ public class WorldWindow extends JDialog
 				pack();
 			} 
 			catch (IOException e1){e1.printStackTrace();}
-						
+			
+			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			
 		}
 	};
 	
