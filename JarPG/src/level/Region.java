@@ -8,12 +8,14 @@ public class Region
 	boolean beach = false;
 	boolean ocean = true;
 	boolean mountain = false;
+	boolean snow = false;
 
 	public boolean getMountain() 
 	{
 		return mountain;
 	}
-	public void setMountain(boolean mountain) {
+	public void setMountain(boolean mountain)
+	{
 		this.mountain = mountain;
 	}
 
@@ -27,6 +29,7 @@ public class Region
 		this.beach = in.beach;
 		this.ocean = in.ocean;
 		this.mountain = in.mountain;
+		this.snow = in.snow;
 
 	}
 
@@ -56,6 +59,7 @@ public class Region
 		solid = set;
 		ocean = !set;
 		beach = !set;
+		snow = !set;
 
 	}
 	public boolean getPolar() {return polar;}
@@ -64,5 +68,14 @@ public class Region
 		beach = set;
 	}
 	public boolean getBeach() {return beach;}
+
+	public boolean getSnow() 
+	{
+		return snow;
+	}
+	public void setSnow(boolean setsnow) 
+	{
+		snow = setsnow;
+	}
 
 }

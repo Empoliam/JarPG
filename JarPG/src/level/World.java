@@ -33,6 +33,7 @@ public class World
 	Color beach = new Color(255,223,128); int BEACH_COLOUR = beach.getRGB();
 	Color river = new Color(60,60,190); int RIVER_COLOUR = river.getRGB();
 	Color mountian = new Color(170,170,170); int MOUNTAIN_COLOUR = mountian.getRGB();
+	Color snow = new Color(204, 255, 255); int SNOW_COLOUR = snow.getRGB();
 
 	Region[][] regions;
 
@@ -55,6 +56,7 @@ public class World
 		if(GENERATE_BEACHES == true) buildBeaches();
 		recordLand();
 		seedMountains();
+		buildMountains();
 
 	}
 
@@ -127,6 +129,105 @@ public class World
 
 	}
 
+	private void buildMountains()
+	{
+
+		for(int t = 0; t < (int)WORLD_SIZE / 50; t ++)
+		{
+
+			Region[][] dummy = new Region[WORLD_SIZE][WORLD_SIZE];
+
+			for (int y = 0; y < WORLD_SIZE; y ++)
+			{
+
+				int x = 0;
+
+				for(;x < WORLD_SIZE; x ++)
+				{
+
+					dummy[x][y] = new Region(regions[x][y]);
+
+					boolean mountainpresent = checkMountain(x, y);
+					boolean ocean = checkOcean(x, y);
+					
+					if (mountainpresent == true && ocean == false)
+					{
+
+						if((new Dice(0,1000).Roll())%3 == 0) 
+						{
+
+							dummy[x][y].setMountain(true);
+							dummy[x][y].setSnow(true);
+
+						}
+
+					}
+
+				}
+
+			}
+
+			regions = dummy;
+
+		}
+		
+		for(int t = 0; t < (int)WORLD_SIZE / 40; t ++)
+		{
+
+			Region[][] dummy = new Region[WORLD_SIZE][WORLD_SIZE];
+
+			for (int y = 0; y < WORLD_SIZE; y ++)
+			{
+
+				int x = 0;
+
+				for(;x < WORLD_SIZE; x ++)
+				{
+
+					dummy[x][y] = new Region(regions[x][y]);
+
+					boolean mountainpresent = checkMountain(x, y);
+					boolean ocean = checkOcean(x, y);
+					
+					if (mountainpresent == true && ocean == false)
+					{
+
+						if((new Dice(0,1000).Roll())%3 == 0) 
+						{
+
+							dummy[x][y].setMountain(true);
+
+						}
+
+					}
+
+				}
+
+			}
+
+			regions = dummy;
+
+		}
+
+	}
+	
+	private boolean checkMountain(int x, int y)
+	{
+		
+		boolean mountainpresent = false;
+		try { if(regions[x-1][y-1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x][y-1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x+1][y-1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x-1][y].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x+1][y].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x-1][y+1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x][y+1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x+1][y+1].getMountain() == true) mountainpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		return mountainpresent;
+		
+	}
+	
 	private void buildLand()
 	{
 
@@ -187,12 +288,14 @@ public class World
 				boolean beach = regions[x][y].getBeach();
 				boolean ocean = regions[x][y].getOcean();
 				boolean mountain = regions[x][y].getMountain();
-
+				boolean snow = regions[x][y].getSnow();
+				
 				if(solid && !polar) image.setRGB(x, y, LAND_COLOUR);
 				if(polar) image.setRGB(x, y, ICE_COLOUR);
 				if(ocean) image.setRGB(x, y, SEA_COLOUR);
 				if(beach) image.setRGB(x, y, BEACH_COLOUR);
 				if(mountain) image.setRGB(x, y, MOUNTAIN_COLOUR);
+				if(snow) image.setRGB(x, y, SNOW_COLOUR);
 
 			}
 
