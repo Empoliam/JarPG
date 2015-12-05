@@ -50,7 +50,7 @@ public class World
 		if(GENERATE_POLES == true) buildPoles();
 		cleanLand();
 		if(GENERATE_BEACHES == true) buildBeaches();
-		seedMountains();
+		//seedMountains();
 
 	}
 
@@ -390,7 +390,14 @@ public class World
 
 	}
 
-	private void seedMountains()
+	private void recordLand()
+	{
+		
+		
+		
+	}
+	
+	/*private void seedMountains()
 	{
 
 		for(int x = 0; x < MOUNTAIN_COUNT; x ++)
@@ -406,6 +413,8 @@ public class World
 			while(ocean == true)
 			{
 
+				System.out.println(setx + "," + sety);
+				
 				setx = Coord.Roll();
 				sety = Coord.Roll();
 				
@@ -414,9 +423,10 @@ public class World
 			}
 
 			regions[setx][sety].setMountain(true);
-
+			
 		}
 
 	}
+	*/
 
 }
