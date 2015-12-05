@@ -36,6 +36,7 @@ public class WorldWindow extends JDialog
 	World world;	
 	int nGen;
 	int sTemp;
+	int mountains;
 	
 	JPanel panel = new JPanel();
 	
@@ -44,13 +45,15 @@ public class WorldWindow extends JDialog
 	JLabel lWorldSize = new JLabel("World size (n*x): ");
 	JLabel lContinents = new JLabel("Number of continents: ");
 	JLabel lPoles = new JLabel("Generate poles?");
-	JLabel lGen = new JLabel("Number of generation passes");
+	JLabel lGen = new JLabel("Number of generation passes: ");
 	JLabel lBeach = new JLabel("Generate beaches?");
 	JLabel lTemperature = new JLabel("Temperature: ");
+	JLabel lMountains = new JLabel ("Number of mountains: ");
 	
 	JTextField fWorldSize = new JTextField(4);
 	JTextField fContinents = new JTextField(4);
 	JTextField fGen = new JTextField(4);
+	JTextField fMountains = new JTextField(4);
 	
 	JCheckBox cPoles = new JCheckBox();
 	JCheckBox cBeach = new JCheckBox();
@@ -75,8 +78,9 @@ public class WorldWindow extends JDialog
 			poles = cPoles.isSelected();
 			beaches = cBeach.isSelected();
 			sTemp = bTemperature.getSelectedIndex();
+			mountains = Integer.parseInt(fMountains.getText());
 			
-			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches);
+			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches,mountains);
 			world.imgOut();
 						
 			try 
@@ -118,6 +122,8 @@ public class WorldWindow extends JDialog
 		panel.add(fContinents,"align left, push, wrap");
 		panel.add(lGen,"align right, push");
 		panel.add(fGen,"align left, push, wrap");
+		panel.add(lMountains,"align right, push");
+		panel.add(fMountains,"align left, push, wrap");
 		panel.add(lPoles, "align right, push");
 		panel.add(cPoles, "align left, push, wrap");
 		panel.add(lBeach, "align right, push");
@@ -136,6 +142,7 @@ public class WorldWindow extends JDialog
 		fWorldSize.setText("400");
 		fContinents.setText("6");
 		fGen.setText("50");
+		fMountains.setText("5");
 		cBeach.setSelected(true);
 		cPoles.setSelected(true);
 		bTemperature.setSelectedIndex(2);

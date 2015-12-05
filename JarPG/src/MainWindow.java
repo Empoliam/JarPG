@@ -8,11 +8,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import level.World;
-
 import javax.swing.JButton;
-import javax.swing.JDialog;
-
 import net.miginfocom.swing.MigLayout;
 
 import unit.*;

@@ -8,9 +8,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 import javax.imageio.ImageIO;
 
 import utilities.Dice;
@@ -39,7 +36,7 @@ public class World
 
 	Region[][] regions;
 
-	public World(int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin)
+	public World(int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains)
 	{
 
 		WORLD_SIZE = sizein;
@@ -47,6 +44,7 @@ public class World
 		GENERATE_POLES = polesin;
 		GENERATE_BEACHES = beachin;
 		CONTINENT_GENERATIONS = generationsin;
+		MOUNTAIN_COUNT = mountains;
 
 		getPolarDiv(tempin);
 
@@ -239,6 +237,24 @@ public class World
 		return solidcount;
 
 	}
+	
+	private boolean checkOcean(int x, int y)
+	{
+
+		boolean oceanpresent = false;
+
+		try { if(regions[x-1][y-1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x][y-1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x+1][y-1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x-1][y].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x+1][y].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x-1][y+1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x][y+1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+		try { if(regions[x+1][y+1].getOcean() == true) oceanpresent = true; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		return oceanpresent;
+
+	}
 
 	private boolean checkPolar(int x, int y)
 	{
@@ -311,11 +327,11 @@ public class World
 			for(; x < WORLD_SIZE; x++)
 			{
 
-				int count = countSolid(x, y);
+				boolean nearocean = checkOcean(x,y);
 				boolean polar = regions[x][y].getPolar();
 				boolean ocean = !regions[x][y].getSolid();				
 
-				if (count != 8 && polar !=true && ocean == false)
+				if (nearocean == true && polar != true && ocean == false)
 				{
 
 					regions[x][y].setBeach(true);
@@ -458,6 +474,7 @@ public class World
 				maxlines ++;
 				
 			}
+			lineCount.close();
 			
 		}
 		catch (IOException e)
@@ -485,7 +502,6 @@ public class World
 
 				}
 				String activeLine = reader.readLine();
-				System.out.println(activeLine);
 				String[] activeCoords = activeLine.split(",");
 				int x = Integer.parseInt(activeCoords[0]);
 				int y = Integer.parseInt(activeCoords[1]);
