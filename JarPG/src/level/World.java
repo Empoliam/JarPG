@@ -2,6 +2,7 @@ package level;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -50,6 +51,7 @@ public class World
 		if(GENERATE_POLES == true) buildPoles();
 		cleanLand();
 		if(GENERATE_BEACHES == true) buildBeaches();
+		recordLand();
 		//seedMountains();
 
 	}
@@ -392,11 +394,50 @@ public class World
 
 	private void recordLand()
 	{
+
+		new File("world").mkdirs();
+		File f = new File("world/land.txt");
+		try {
+			f.createNewFile();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		
-		
-		
+		try 
+		{ 
+			BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+
+			for (int y = 0; y < WORLD_SIZE; y ++)
+			{
+
+				int x = 0;
+
+				for(;x < WORLD_SIZE; x ++)
+				{
+
+					boolean isLand = regions[x][y].getSolid();
+					boolean isPolar = regions[x][y].getPolar();
+					boolean isBeach = regions[x][y].getBeach();
+
+					if(isLand == true && isPolar == false && isBeach == false)
+					{
+
+						writer.write(x + "," + y);
+						writer.newLine();
+
+					}
+
+				}
+
+			}
+			
+			writer.close();
+
+		}
+		catch (IOException e) { e.printStackTrace();}
+
 	}
-	
+
 	/*private void seedMountains()
 	{
 
@@ -407,26 +448,26 @@ public class World
 
 			int setx = Coord.Roll();
 			int sety = Coord.Roll();
-			
+
 			boolean ocean = regions[setx][sety].getOcean();
-			
+
 			while(ocean == true)
 			{
 
 				System.out.println(setx + "," + sety);
-				
+
 				setx = Coord.Roll();
 				sety = Coord.Roll();
-				
+
 				regions[setx][sety].getOcean();
 
 			}
 
 			regions[setx][sety].setMountain(true);
-			
+
 		}
 
 	}
-	*/
+	 */
 
 }
