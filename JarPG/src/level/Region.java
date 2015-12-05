@@ -80,4 +80,12 @@ public class Region
 		
 	}
 	
+	public boolean[] getTags()
+	{
+		
+		boolean[] tags = new boolean[] {solid, polar, beach, ocean, mountain, snow};
+		return tags;
+		
+	}
+	
 }

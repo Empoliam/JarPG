@@ -25,6 +25,7 @@ public class World
 	private int WORLD_SIZE = 400;
 	private double POLE_DIVISOR = 2;
 	private int MOUNTAIN_COUNT = 5;
+	private int TAG_COUNT = 6;
 
 	//Colours
 	Color sea = new Color(30, 98, 168); int SEA_COLOUR = sea.getRGB();
@@ -294,23 +295,6 @@ public class World
 
 	}
 
-	private int countSolid(int x, int y)
-	{
-
-		int solidcount = 0;
-		try { if(regions[x-1][y-1].getSolid() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y-1].getSolid() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y-1].getSolid() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y].getSolid() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y].getSolid() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y+1].getSolid() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y+1].getSolid() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y+1].getSolid() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-
-		return solidcount;
-
-	}
-
 	private void cleanLand()
 	{
 
@@ -322,7 +306,7 @@ public class World
 			for(; x < WORLD_SIZE; x++)
 			{
 
-				int landcount = countSolid(x, y);
+				int landcount = countTags(0, x, y);
 
 				if (landcount < 4)
 				{
@@ -337,7 +321,7 @@ public class World
 
 				}
 
-				int polarcount = countPolar(x, y);
+				int polarcount = countTags(1, x, y);
 
 				if (polarcount == 8)
 				{
@@ -378,23 +362,6 @@ public class World
 			}
 
 		}
-
-	}
-
-	private int countPolar(int x, int y)
-	{
-
-		int polarcount = 0;
-		try { if(regions[x-1][y-1].getPolar() == true) polarcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y-1].getPolar() == true) polarcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y-1].getPolar() == true) polarcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y].getPolar() == true) polarcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y].getPolar() == true) polarcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y+1].getPolar() == true) polarcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y+1].getPolar() == true) polarcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y+1].getPolar() == true) polarcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-
-		return polarcount;
 
 	}
 
@@ -573,7 +540,7 @@ public class World
 				if(regions[x][y].getSolid() == true)
 				{
 					
-					int mountainCount = countMountain(x, y);
+					int mountainCount = countTags(4, x, y);
 
 					if (mountainCount < 4)
 					{
@@ -596,27 +563,10 @@ public class World
 
 	}
 
-	private int countMountain(int x, int y)
-	{
-
-		int solidcount = 0;
-		try { if(regions[x-1][y-1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y-1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y-1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x-1][y+1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x][y+1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-		try { if(regions[x+1][y+1].getMountain() == true) solidcount ++; } catch(java.lang.ArrayIndexOutOfBoundsException e){};
-
-		return solidcount;
-
-	}
-
 	private boolean checkTags(int tag, int x, int y)
 	{
 
-		boolean[] presence = new boolean[6];
+		boolean[] presence = new boolean[TAG_COUNT];
 
 		/*solid   */ presence[0] = false;
 		/*polar   */ presence[1] = false;
@@ -754,7 +704,150 @@ public class World
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		return presence[tag];
-
+		
 	}
+	private int countTags(int tag, int x, int y)
+	{
+		
+		int[] count = new int[TAG_COUNT];
 
+		/*solid   */ count[0] = 0;
+		/*polar   */ count[1] = 0;
+		/*beach   */ count[2] = 0;
+		/*ocean   */ count[3] = 0;
+		/*mountain*/ count[4] = 0;
+		/*snow    */ count[5] = 0;
+
+		try 
+		{ 
+
+			Region active = regions[x-1][y-1];
+
+			if (active.getSolid() == true) count[0] ++;
+			if (active.getPolar() == true) count[1] ++;
+			if (active.getBeach() == true) count[2] ++;
+			if (active.getOcean() == true) count[3] ++;
+			if (active.getMountain() == true) count[4] ++;
+			if (active.getSnow() == true) count[5] ++;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x][y-1];
+
+			if (active.getSolid() == true) count[0] ++;
+			if (active.getPolar() == true) count[1] ++;
+			if (active.getBeach() == true) count[2] ++;
+			if (active.getOcean() == true) count[3] ++;
+			if (active.getMountain() == true) count[4] ++;
+			if (active.getSnow() == true) count[5] ++;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x+1][y-1];
+
+			if (active.getSolid() == true) count[0] ++;
+			if (active.getPolar() == true) count[1] ++;
+			if (active.getBeach() == true) count[2] ++;
+			if (active.getOcean() == true) count[3] ++;
+			if (active.getMountain() == true) count[4] ++;
+			if (active.getSnow() == true) count[5] ++;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x-1][y];
+
+			if (active.getSolid() == true) count[0] ++;
+			if (active.getPolar() == true) count[1] ++;
+			if (active.getBeach() == true) count[2] ++;
+			if (active.getOcean() == true) count[3] ++;
+			if (active.getMountain() == true) count[4] ++;
+			if (active.getSnow() == true) count[5] ++;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x+1][y];
+
+			if (active.getSolid() == true) count[0] ++;
+			if (active.getPolar() == true) count[1] ++;
+			if (active.getBeach() == true) count[2] ++;
+			if (active.getOcean() == true) count[3] ++;
+			if (active.getMountain() == true) count[4] ++;
+			if (active.getSnow() == true) count[5] ++;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x-1][y+1];
+
+			if (active.getSolid() == true) count[0] ++;
+			if (active.getPolar() == true) count[1] ++;
+			if (active.getBeach() == true) count[2] ++;
+			if (active.getOcean() == true) count[3] ++;
+			if (active.getMountain() == true) count[4] ++;
+			if (active.getSnow() == true) count[5] ++;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x][y+1];
+
+			if (active.getSolid() == true) count[0] ++;
+			if (active.getPolar() == true) count[1] ++;
+			if (active.getBeach() == true) count[2] ++;
+			if (active.getOcean() == true) count[3] ++;
+			if (active.getMountain() == true) count[4] ++;
+			if (active.getSnow() == true) count[5] ++;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x+1][y+1];
+
+			if (active.getSolid() == true) count[0] ++;
+			if (active.getPolar() == true) count[1] ++;
+			if (active.getBeach() == true) count[2] ++;
+			if (active.getOcean() == true) count[3] ++;
+			if (active.getMountain() == true) count[4] ++;
+			if (active.getSnow() == true) count[5] ++;
+
+
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		return count[tag];
+		
+	}
+	
 }
