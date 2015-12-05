@@ -2,10 +2,14 @@ package level;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
@@ -52,7 +56,7 @@ public class World
 		cleanLand();
 		if(GENERATE_BEACHES == true) buildBeaches();
 		recordLand();
-		//seedMountains();
+		seedMountains();
 
 	}
 
@@ -402,7 +406,7 @@ public class World
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		try 
 		{ 
 			BufferedWriter writer = new BufferedWriter(new FileWriter(f));
@@ -430,7 +434,7 @@ public class World
 				}
 
 			}
-			
+
 			writer.close();
 
 		}
@@ -438,36 +442,68 @@ public class World
 
 	}
 
-	/*private void seedMountains()
+	private void seedMountains()
 	{
 
-		for(int x = 0; x < MOUNTAIN_COUNT; x ++)
+		File f = new File("world/land.txt");
+		long maxlines = 0;
+		
+		try 
 		{
+			
+			BufferedReader lineCount = new  BufferedReader(new FileReader(f));
+			while (lineCount.readLine() != null)
+			{
+				
+				maxlines ++;
+				
+			}
+			
+		}
+		catch (IOException e)
+		{
+			
+			e.printStackTrace();
+			
+		}
 
-			Dice Coord = new Dice(0,WORLD_SIZE-1);
-
-			int setx = Coord.Roll();
-			int sety = Coord.Roll();
-
-			boolean ocean = regions[setx][sety].getOcean();
-
-			while(ocean == true)
+		for(int w = 0; w < MOUNTAIN_COUNT; w ++)
+		{
+			
+			try 
 			{
 
-				System.out.println(setx + "," + sety);
+				BufferedReader reader = new BufferedReader(new FileReader(f));
+				Dice dice = new Dice(0L,maxlines);
 
-				setx = Coord.Roll();
-				sety = Coord.Roll();
+				long lineNo = dice.RollLong();
 
-				regions[setx][sety].getOcean();
+				for(long z = 0; z < lineNo - 1; z++)
+				{
+
+					reader.readLine();
+
+				}
+				String activeLine = reader.readLine();
+				System.out.println(activeLine);
+				String[] activeCoords = activeLine.split(",");
+				int x = Integer.parseInt(activeCoords[0]);
+				int y = Integer.parseInt(activeCoords[1]);
+
+				regions[x][y].setMountain(true);
+
+				reader.close();
 
 			}
+			catch (IOException e)
+			{
 
-			regions[setx][sety].setMountain(true);
+				e.printStackTrace();
 
+			}
+			
 		}
 
 	}
-	 */
 
 }
