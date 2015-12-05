@@ -25,7 +25,6 @@ public class World
 	private int WORLD_SIZE = 400;
 	private double POLE_DIVISOR = 2;
 	private int MOUNTAIN_COUNT = 5;
-	private int TAG_COUNT = 6;
 
 	//Colours
 	Color sea = new Color(30, 98, 168); int SEA_COLOUR = sea.getRGB();
@@ -566,136 +565,86 @@ public class World
 	private boolean checkTags(int tag, int x, int y)
 	{
 
-		boolean[] presence = new boolean[TAG_COUNT];
-
-		/*solid   */ presence[0] = false;
-		/*polar   */ presence[1] = false;
-		/*beach   */ presence[2] = false;
-		/*ocean   */ presence[3] = false;
-		/*mountain*/ presence[4] = false;
-		/*snow    */ presence[5] = false;
+		boolean presence = false;
 
 		try 
 		{ 
 			Region active = regions[x-1][y-1];
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) presence[w] = true;			
-			}
+			if(active.getTags()[tag] == true) presence = true;			
+
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
 			Region active = regions[x][y-1];
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) presence[w] = true;			
-			}
+			if(active.getTags()[tag] == true) presence = true;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
 			Region active = regions[x+1][y-1];
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) presence[w] = true;			
-			}
+			if(active.getTags()[tag] == true) presence = true;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
 			Region active = regions[x-1][y];
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) presence[w] = true;			
-			}
+			if(active.getTags()[tag] == true) presence = true;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
 			Region active = regions[x+1][y];
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) presence[w] = true;			
-			}
+			if(active.getTags()[tag] == true) presence = true;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
 			Region active = regions[x-1][y+1];
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) presence[w] = true;			
-			}
+			if(active.getTags()[tag] == true) presence = true;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
 			Region active = regions[x][y+1];
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) presence[w] = true;			
-			}
+			if(active.getTags()[tag] == true) presence = true;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
 			Region active = regions[x+1][y+1];
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) presence[w] = true;			
-			}
+			if(active.getTags()[tag] == true) presence = true;			
+
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
-		return presence[tag];
+		return presence;
 
 	}
 
 	private int countTags(int tag, int x, int y)
 	{
 
-		int[] count = new int[TAG_COUNT];
-
-		/*solid   */ count[0] = 0;
-		/*polar   */ count[1] = 0;
-		/*beach   */ count[2] = 0;
-		/*ocean   */ count[3] = 0;
-		/*mountain*/ count[4] = 0;
-		/*snow    */ count[5] = 0;
+		int count = 0;
 
 		try 
 		{ 
-
 			Region active = regions[x-1][y-1];
-
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) count[w] ++;			
-			}
-
-
+			if(active.getTags()[tag] == true) count ++;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
-
 			Region active = regions[x][y-1];
-
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) count[w] ++;			
-			}
-
-
+			if(active.getTags()[tag] == true) count ++;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
@@ -703,87 +652,46 @@ public class World
 		{ 
 
 			Region active = regions[x+1][y-1];
-
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) count[w] ++;			
-			}
-
-
+			if(active.getTags()[tag] == true) count ++;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
-
 			Region active = regions[x-1][y];
-
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) count[w] ++;			
-			}
-
-
+			if(active.getTags()[tag] == true) count ++;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
-
 			Region active = regions[x+1][y];
-
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) count[w] ++;			
-			}
-
-
+			if(active.getTags()[tag] == true) count ++;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
-
 			Region active = regions[x-1][y+1];
-
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) count[w] ++;			
-			}
-
-
+			if(active.getTags()[tag] == true) count ++;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
-
 			Region active = regions[x][y+1];
-
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) count[w] ++;			
-			}
-
-
+			if(active.getTags()[tag] == true) count ++;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		try 
 		{ 
-
 			Region active = regions[x+1][y+1];
-
-			for(int w = 0; w < TAG_COUNT; w ++)
-			{
-				if(active.getTags()[w] == true) count[w] ++;			
-			}
-
-
+			if(active.getTags()[tag] == true) count ++;			
 		} 
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
-		return count[tag];
+		return count;
 
 	}
 
