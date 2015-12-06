@@ -53,7 +53,7 @@ public class World
 
 		getPolarDiv(tempin);
 		getMountainDiv(mountainsizein);
-		
+
 		generateRegions();
 		buildLand();
 		if(GENERATE_POLES == true) buildPoles();
@@ -229,7 +229,7 @@ public class World
 		{
 
 			Dice randCoord = new Dice(0, WORLD_SIZE-1);
-			regions[randCoord.Roll()][randCoord.Roll()].setSolid(true);;			
+			regions[randCoord.Roll()][randCoord.Roll()].setSolid(true);			
 
 		}
 
@@ -262,6 +262,23 @@ public class World
 			}
 
 			regions = dummy;
+
+			if(new Dice(0,1000).Roll()%7 == 0)
+			{
+				Dice randCoord = new Dice(0, WORLD_SIZE-1);
+				regions[randCoord.Roll()][randCoord.Roll()].setSolid(true);
+			}
+			
+			if(t < (int) 0.9 * CONTINENT_GENERATIONS)
+			{
+
+				if(new Dice(0,1000).Roll()%3 == 0)
+				{
+					Dice randCoord = new Dice(0, WORLD_SIZE-1);
+					regions[randCoord.Roll()][randCoord.Roll()].setSolid(true);
+				}
+				
+			}
 
 		}
 

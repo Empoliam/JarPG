@@ -52,14 +52,14 @@ public class WorldWindow extends JDialog
 	JLabel imgPane = new JLabel();
 	
 	JLabel lWorldSize = new JLabel("World size (n*x): ");
-	JLabel lContinents = new JLabel("Number of continents: ");
+	JLabel lContinents = new JLabel("Continent seeds: ");
 	JLabel lPoles = new JLabel("Generate poles?");
-	JLabel lGen = new JLabel("Number of generation passes: ");
+	JLabel lGen = new JLabel("Generation passes: ");
 	JLabel lBeach = new JLabel("Generate beaches?");
 	JLabel lTemperature = new JLabel("Temperature: ");
-	JLabel lMountains = new JLabel ("Number of mountains: ");
+	JLabel lMountains = new JLabel ("Mountains: ");
 	JLabel lMountainSize = new JLabel("Mountain size: ");
-	JLabel lLakes = new JLabel("Number of lakes: ");
+	JLabel lLakes = new JLabel("Lakes: ");
 	
 	JTextField fWorldSize = new JTextField(4);
 	JTextField fContinents = new JTextField(4);
@@ -183,7 +183,7 @@ public class WorldWindow extends JDialog
 		mainpane.addTab("Parameters", parameterpanel);
 		
 		//add panels
-		add(mainpane,"align center, wrap,growx");
+		add(mainpane,"align center, wrap, push");
 		add(worldpanel);
 		
 		newWorld.addActionListener(aNewWorld);
