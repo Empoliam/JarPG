@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
@@ -42,6 +43,7 @@ public class WorldWindow extends JDialog
 	int sMountain;
 	int nLakes;
 	int sLakes;
+	int twistiness;
 			
 	JTabbedPane mainpane = new JTabbedPane();
 	
@@ -62,6 +64,7 @@ public class WorldWindow extends JDialog
 	JLabel lMountainSize = new JLabel("Mountain size: ");
 	JLabel lLakes = new JLabel("Lakes: ");
 	JLabel lLakeSize = new JLabel("Lake size: ");
+	JLabel lRiverTwistiness = new JLabel("River twistiness: ");
 	
 	JTextField fWorldSize = new JTextField(4);
 	JTextField fContinents = new JTextField(4);
@@ -78,6 +81,8 @@ public class WorldWindow extends JDialog
 	
 	JButton newWorld = new JButton("Generate new");
 	JButton useWorld = new JButton("Use this world");
+	
+	JSlider slTwistiness = new JSlider(0, 18, 12);
 	
 	JScrollPane mapScroll = new JScrollPane(imgPane);
 	
@@ -98,9 +103,10 @@ public class WorldWindow extends JDialog
 			sMountain = bMountainSize.getSelectedIndex();
 			nLakes = Integer.parseInt(fLakes.getText());
 			sLakes = bLakeSize.getSelectedIndex();
+			twistiness = slTwistiness.getValue();
 			
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes,sLakes);
+			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes,sLakes,twistiness);
 			world.imgOut();
 						
 			try 
@@ -151,17 +157,20 @@ public class WorldWindow extends JDialog
 		countpanel.add(fMountains,"align left, push, wrap");
 		countpanel.add(lLakes,"align right, push");
 		countpanel.add(fLakes,"align left, push, wrap");
-		countpanel.add(lPoles, "align right, push");
-		countpanel.add(cPoles, "align left, push, wrap");
-		countpanel.add(lBeach, "align right, push");
-		countpanel.add(cBeach, "align left, push, wrap");
-		
+				
 		parameterpanel.add(lTemperature, "align right, push");
 		parameterpanel.add(bTemperature, "align left, push, wrap");
 		parameterpanel.add(lMountainSize, "align right, push");
 		parameterpanel.add(bMountainSize, "align left, push, wrap");
 		parameterpanel.add(lLakeSize, "align right, push");
 		parameterpanel.add(bLakeSize, "align left, push, wrap");
+		parameterpanel.add(lRiverTwistiness, "align right, push");
+		parameterpanel.add(slTwistiness, "align left, push, wrap");
+		
+		parameterpanel.add(lPoles, "align right, push");
+		parameterpanel.add(cPoles, "align left, push, wrap");
+		parameterpanel.add(lBeach, "align right, push");
+		parameterpanel.add(cBeach, "align left, push, wrap");
 				
 		//Map panel
 		worldpanel.add(mapScroll, "span 2, align center, wrap");

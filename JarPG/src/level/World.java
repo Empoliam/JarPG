@@ -29,6 +29,7 @@ public class World
 	private double MOUNTAIN_DIVISOR = 50;
 	private double LAKE_DIVISOR = 75;
 	private int RIVER_COUNT = 5;
+	private int RIVER_TWISTINESS = 12;
 
 	//Colours
 	Color sea = new Color(30, 98, 168); int SEA_COLOUR = sea.getRGB();
@@ -42,7 +43,7 @@ public class World
 
 	Region[][] regions;
 
-	public World(int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein)
+	public World(int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein, int twistinessin)
 	{
 
 		WORLD_SIZE = sizein;
@@ -52,7 +53,8 @@ public class World
 		CONTINENT_GENERATIONS = generationsin;
 		MOUNTAIN_COUNT = mountains;
 		LAKE_COUNT = lakesin;
-
+		RIVER_TWISTINESS = twistinessin;
+		
 		getPolarDiv(tempin);
 		getMountainDiv(mountainsizein);
 		getLakeDiv(lakesizein);
@@ -305,6 +307,7 @@ public class World
 				boolean mountain = regions[x][y].getMountain();
 				boolean snow = regions[x][y].getSnow();
 				boolean lake = regions[x][y].getLake();
+				boolean river = regions[x][y].getRiver();
 
 				if(solid && !polar) image.setRGB(x, y, LAND_COLOUR);
 				if(polar) image.setRGB(x, y, ICE_COLOUR);
@@ -312,6 +315,7 @@ public class World
 				if(beach) image.setRGB(x, y, BEACH_COLOUR);
 				if(mountain) image.setRGB(x, y, MOUNTAIN_COLOUR);
 				if(snow) image.setRGB(x, y, SNOW_COLOUR);
+				if(river) image.setRGB(x, y, RIVER_COLOUR);
 				if(lake) image.setRGB(x, y, LAKE_COLOUR);
 
 			}
@@ -1001,10 +1005,10 @@ public class World
 
 					}
 
-					int change = new Dice(1,3).Roll();
+					int change = new Dice(1,20-RIVER_TWISTINESS).Roll();
 					
 					if(change == 1) direction ++;
-					else if(change == 3) direction --;
+					else if(change == 2) direction --;
 					if(direction == 9) direction = 1;
 					else if(direction == -1) direction = 8;
 					
