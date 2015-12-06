@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import org.apache.commons.io.FileUtils;
@@ -41,7 +42,12 @@ public class WorldWindow extends JDialog
 	int sMountain;
 	int nLakes;
 	
-	JPanel panel = new JPanel();
+	JTabbedPane mainpane = new JTabbedPane();
+	
+	JPanel countpanel = new JPanel();
+	JPanel parameterpanel = new JPanel();
+	
+	JPanel worldpanel = new JPanel();
 	
 	JLabel imgPane = new JLabel();
 	
@@ -126,35 +132,42 @@ public class WorldWindow extends JDialog
 	WorldWindow()
 	{
 		
-		panel.setLayout(new MigLayout());
+		setLayout(new MigLayout());
+		worldpanel.setLayout(new MigLayout());
+		countpanel.setLayout(new MigLayout());
+		parameterpanel.setLayout(new MigLayout());
 		
-		panel.add(lWorldSize,"align right, push");
-		panel.add(fWorldSize,"align left, push, wrap");
-		panel.add(lContinents,"align right, push");
-		panel.add(fContinents,"align left, push, wrap");
-		panel.add(lGen,"align right, push");
-		panel.add(fGen,"align left, push, wrap");
-		panel.add(lMountains,"align right, push");
-		panel.add(fMountains,"align left, push, wrap");
-		panel.add(lLakes,"align right, push");
-		panel.add(fLakes,"align left, push, wrap");
-		panel.add(lPoles, "align right, push");
-		panel.add(cPoles, "align left, push, wrap");
-		panel.add(lBeach, "align right, push");
-		panel.add(cBeach, "align left, push, wrap");
-		panel.add(lTemperature, "align right, push");
-		panel.add(bTemperature, "align left, push, wrap");
-		panel.add(lMountainSize, "align right, push");
-		panel.add(bMountainSize, "align left, push, wrap");		
+		countpanel.add(lWorldSize,"align right, push");
+		countpanel.add(fWorldSize,"align left, push, wrap");
+		countpanel.add(lContinents,"align right, push");
+		countpanel.add(fContinents,"align left, push, wrap");
+		countpanel.add(lGen,"align right, push");
+		countpanel.add(fGen,"align left, push, wrap");
+		countpanel.add(lMountains,"align right, push");
+		countpanel.add(fMountains,"align left, push, wrap");
+		countpanel.add(lLakes,"align right, push");
+		countpanel.add(fLakes,"align left, push, wrap");
+		countpanel.add(lPoles, "align right, push");
+		countpanel.add(cPoles, "align left, push, wrap");
+		countpanel.add(lBeach, "align right, push");
+		countpanel.add(cBeach, "align left, push, wrap");
 		
-		panel.add(mapScroll, "span 4, align center, wrap");
+		parameterpanel.add(lTemperature, "align right, push");
+		parameterpanel.add(bTemperature, "align left, push, wrap");
+		parameterpanel.add(lMountainSize, "align right, push");
+		parameterpanel.add(bMountainSize, "align left, push, wrap");
+		
+		//Map panel
+		worldpanel.add(mapScroll, "span 2, align center, wrap");
+		
 		mapScroll.setMaximumSize(new Dimension(600,600));
 		mapScroll.getVerticalScrollBar().setUnitIncrement(20);
 		mapScroll.getHorizontalScrollBar().setUnitIncrement(20);
 		
-		panel.add(newWorld, "align left, span 2");
-		panel.add(useWorld, "wrap, align right, span 2");
+		worldpanel.add(newWorld, "align left");
+		worldpanel.add(useWorld, "align right");
 		
+		//set component defaults
 		fWorldSize.setText("400");
 		fContinents.setText("6");
 		fGen.setText("100");
@@ -165,7 +178,13 @@ public class WorldWindow extends JDialog
 		bTemperature.setSelectedIndex(2);
 		bMountainSize.setSelectedIndex(1);
 		
-		add(panel);
+		//add tabs		
+		mainpane.addTab("Counts",countpanel);
+		mainpane.addTab("Parameters", parameterpanel);
+		
+		//add panels
+		add(mainpane,"align center, wrap,growx");
+		add(worldpanel);
 		
 		newWorld.addActionListener(aNewWorld);
 		useWorld.addActionListener(aUseWorld);

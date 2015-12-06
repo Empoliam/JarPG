@@ -401,9 +401,9 @@ public class World
 		switch(mountin)
 		{
 
-		case 0 : MOUNTAIN_DIVISOR = 70; break;
-		case 1 : MOUNTAIN_DIVISOR = 50; break;
-		case 2 : MOUNTAIN_DIVISOR = 30; break;
+		case 0 : MOUNTAIN_DIVISOR = 50; break;
+		case 1 : MOUNTAIN_DIVISOR = 30; break;
+		case 2 : MOUNTAIN_DIVISOR = 20; break;
 
 		}
 
