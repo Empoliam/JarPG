@@ -25,9 +25,10 @@ public class World
 	private int WORLD_SIZE = 400;
 	private double POLE_DIVISOR = 2;
 	private int MOUNTAIN_COUNT = 5;
-	private int LAKE_COUNT = 5;
+	private int LAKE_COUNT = 10;
 	private double MOUNTAIN_DIVISOR = 50;
 	private double LAKE_DIVISOR = 75;
+	private int RIVER_COUNT = 5;
 
 	//Colours
 	Color sea = new Color(30, 98, 168); int SEA_COLOUR = sea.getRGB();
@@ -51,11 +52,11 @@ public class World
 		CONTINENT_GENERATIONS = generationsin;
 		MOUNTAIN_COUNT = mountains;
 		LAKE_COUNT = lakesin;
-		
+
 		getPolarDiv(tempin);
 		getMountainDiv(mountainsizein);
 		getLakeDiv(lakesizein);
-		
+
 		generateRegions();
 		buildLand();
 		if(GENERATE_POLES == true) buildPoles();
@@ -64,6 +65,7 @@ public class World
 		seedMountains();
 		buildMountains();
 		cleanMountains();
+		createRivers();
 		seedLakes();
 		buildLakes();
 		cleanLakes();
@@ -270,7 +272,7 @@ public class World
 				Dice randCoord = new Dice(0, WORLD_SIZE-1);
 				regions[randCoord.Roll()][randCoord.Roll()].setSolid(true);
 			}
-			
+
 			if(t < (int) 0.9 * CONTINENT_GENERATIONS)
 			{
 
@@ -279,7 +281,7 @@ public class World
 					Dice randCoord = new Dice(0, WORLD_SIZE-1);
 					regions[randCoord.Roll()][randCoord.Roll()].setSolid(true);
 				}
-				
+
 			}
 
 		}
@@ -905,5 +907,114 @@ public class World
 		}
 
 	}
-	
+
+	private void createRivers()
+	{
+
+		File f = new File("world/land.txt");
+
+		long maxlines = countLines(f);
+
+		for(int t = 0; t < RIVER_COUNT; t ++)
+		{
+
+			int x = 0, y = 0;
+
+			try 
+			{
+
+				BufferedReader reader = new BufferedReader(new FileReader(f));
+				Dice dice = new Dice(0L,maxlines);
+
+				long lineNo = dice.RollLong();
+
+				for(long z = 0; z < lineNo - 1; z++)
+				{
+
+					reader.readLine();
+
+				}
+				String activeLine = reader.readLine();
+				String[] activeCoords = activeLine.split(",");
+				x = Integer.parseInt(activeCoords[0]);
+				y = Integer.parseInt(activeCoords[1]);
+
+				regions[x][y].setRiver(true);
+
+				reader.close();
+
+			}
+			catch (IOException e)
+			{
+
+				e.printStackTrace();
+
+			}
+
+			int direction = new Dice(1,8).Roll();
+
+			try
+			{
+
+				while(regions[x][y].getOcean() == false)
+				{
+
+					switch(direction)
+					{
+
+					case 1: 
+						x = x - 1;
+						y = y - 1;
+						regions[x][y].setRiver(true);
+						break;
+					case 2: 
+						y = y - 1;
+						regions[x][y].setRiver(true);
+						break;
+					case 3: 
+						x = x + 1;
+						y = y - 1;
+						regions[x][y].setRiver(true);
+						break;
+					case 4: 
+						x = x + 1;
+						regions[x][y].setRiver(true);
+						break;
+					case 5: 
+						x = x + 1;
+						y = y + 1;
+						regions[x][y].setRiver(true);
+						break;
+					case 6: 
+						y = y + 1;
+						regions[x][y].setRiver(true);
+						break;
+					case 7: 
+						x = x - 1;
+						y = y + 1;
+						regions[x][y].setRiver(true);
+						break;
+					case 8: 
+						x = x - 1;
+						regions[x][y].setRiver(true);
+						break;
+
+					}
+
+					int change = new Dice(1,3).Roll();
+					
+					if(change == 1) direction ++;
+					else if(change == 3) direction --;
+					if(direction == 9) direction = 1;
+					else if(direction == -1) direction = 8;
+					
+				}
+
+			}
+			catch(ArrayIndexOutOfBoundsException e){};
+
+		}
+
+	}
+
 }

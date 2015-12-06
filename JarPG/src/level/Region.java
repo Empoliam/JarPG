@@ -10,6 +10,7 @@ public class Region
 	boolean mountain = false;
 	boolean snow = false;
 	boolean lake = false;
+	boolean river = false;
 
 	public Region() {}
 
@@ -23,25 +24,31 @@ public class Region
 		this.mountain = in.mountain;
 		this.snow = in.snow;
 		this.lake = in.lake;
+		this.river = in.river;
 
 	}
 
 	public void setOcean(boolean set)
 	{
+		
 		ocean = set;
 		solid = !set;
 		polar = !set;
 		beach = !set;
-
+		mountain = !set;
+		snow = !set;
+		lake = !set;
+		river = !set;
+		
 	}
 	public boolean getOcean() {return ocean;}
 
 	public void setSolid(boolean set)
 	{
-
+		
 		solid = set;
 		ocean = !set;
-
+		
 	}
 	public boolean getSolid() {return solid;}
 
@@ -55,25 +62,43 @@ public class Region
 		snow = !set;
 
 	}
-	public boolean getPolar() {return polar;}
+	public boolean getPolar() 
+	{
+		
+		return polar;
+		
+	}
 
-	public void setBeach(boolean set){
+	public void setBeach(boolean set)
+	{
+		
 		beach = set;
 	}
-	public boolean getBeach() {return beach;}
+	public boolean getBeach() 
+	{
+		
+		return beach;
+		
+	}
 
 	public boolean getSnow() 
 	{
+		
 		return snow;
+		
 	}
 	public void setSnow(boolean setsnow) 
 	{
+		
 		snow = setsnow;
+		
 	}
 
 	public boolean getMountain() 
 	{
+		
 		return mountain;
+		
 	}
 	public void setMountain(boolean set)
 	{
@@ -92,13 +117,30 @@ public class Region
 	{
 		
 		lake = set;
+		solid = !set;
+		
+	}
+
+	public boolean getRiver() 
+	{
+		
+		return river;
+		
+	}
+
+	public void setRiver(boolean set) 
+	{
+		
+		this.river = set;
+		this.solid = !set;
+		this.mountain = !set;
 		
 	}
 
 	public boolean[] getTags()
 	{
 		
-		boolean[] tags = new boolean[] {solid, polar, beach, ocean, mountain, snow, lake};
+		boolean[] tags = new boolean[] {solid, polar, beach, ocean, mountain, snow, lake, river};
 		return tags;
 		
 	}
