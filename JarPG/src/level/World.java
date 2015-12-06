@@ -25,6 +25,8 @@ public class World
 	private int WORLD_SIZE = 400;
 	private double POLE_DIVISOR = 2;
 	private int MOUNTAIN_COUNT = 5;
+	private int LAKE_COUNT = 5;
+	private double MOUNTAIN_DIVISOR = 50;
 
 	//Colours
 	Color sea = new Color(30, 98, 168); int SEA_COLOUR = sea.getRGB();
@@ -34,10 +36,11 @@ public class World
 	Color river = new Color(60,60,190); int RIVER_COLOUR = river.getRGB();
 	Color mountian = new Color(170,170,170); int MOUNTAIN_COLOUR = mountian.getRGB();
 	Color snow = new Color(204, 255, 255); int SNOW_COLOUR = snow.getRGB();
+	Color lake = new Color (50,50,190); int LAKE_COLOUR = lake.getRGB();
 
 	Region[][] regions;
 
-	public World(int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains)
+	public World(int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin)
 	{
 
 		WORLD_SIZE = sizein;
@@ -46,9 +49,11 @@ public class World
 		GENERATE_BEACHES = beachin;
 		CONTINENT_GENERATIONS = generationsin;
 		MOUNTAIN_COUNT = mountains;
+		LAKE_COUNT = lakesin;
 
 		getPolarDiv(tempin);
-
+		getMountainDiv(mountainsizein);
+		
 		generateRegions();
 		buildLand();
 		if(GENERATE_POLES == true) buildPoles();
@@ -57,6 +62,9 @@ public class World
 		seedMountains();
 		buildMountains();
 		cleanMountains();
+		seedLakes();
+		buildLakes();
+		cleanLakes();
 		if(GENERATE_BEACHES == true) buildBeaches();
 
 	}
@@ -133,7 +141,7 @@ public class World
 	private void buildMountains()
 	{
 
-		for(int t = 0; t < (int)WORLD_SIZE / 50; t ++)
+		for(int t = 0; t < (int)WORLD_SIZE / (MOUNTAIN_DIVISOR * 1.25); t ++)
 		{
 
 			Region[][] dummy = new Region[WORLD_SIZE][WORLD_SIZE];
@@ -173,7 +181,7 @@ public class World
 
 		}
 
-		for(int t = 0; t < (int)WORLD_SIZE / 40; t ++)
+		for(int t = 0; t < (int)WORLD_SIZE / (MOUNTAIN_DIVISOR / 1.25); t ++)
 		{
 
 			Region[][] dummy = new Region[WORLD_SIZE][WORLD_SIZE];
@@ -275,6 +283,7 @@ public class World
 				boolean ocean = regions[x][y].getOcean();
 				boolean mountain = regions[x][y].getMountain();
 				boolean snow = regions[x][y].getSnow();
+				boolean lake = regions[x][y].getLake();
 
 				if(solid && !polar) image.setRGB(x, y, LAND_COLOUR);
 				if(polar) image.setRGB(x, y, ICE_COLOUR);
@@ -282,6 +291,7 @@ public class World
 				if(beach) image.setRGB(x, y, BEACH_COLOUR);
 				if(mountain) image.setRGB(x, y, MOUNTAIN_COLOUR);
 				if(snow) image.setRGB(x, y, SNOW_COLOUR);
+				if(lake) image.setRGB(x, y, LAKE_COLOUR);
 
 			}
 
@@ -338,7 +348,7 @@ public class World
 			}
 
 		}
-		
+
 	}
 
 	private void buildBeaches()
@@ -380,6 +390,20 @@ public class World
 		case 2 : POLE_DIVISOR = 12; break;
 		case 3 : POLE_DIVISOR = 24; break;
 		case 4 : POLE_DIVISOR = 48; break;
+
+		}
+
+	}
+
+	private void getMountainDiv(int mountin)
+	{
+
+		switch(mountin)
+		{
+
+		case 0 : MOUNTAIN_DIVISOR = 70; break;
+		case 1 : MOUNTAIN_DIVISOR = 50; break;
+		case 2 : MOUNTAIN_DIVISOR = 30; break;
 
 		}
 
@@ -470,27 +494,8 @@ public class World
 	{
 
 		File f = new File("world/land.txt");
-		long maxlines = 0;
 
-		try 
-		{
-
-			BufferedReader lineCount = new  BufferedReader(new FileReader(f));
-			while (lineCount.readLine() != null)
-			{
-
-				maxlines ++;
-
-			}
-			lineCount.close();
-
-		}
-		catch (IOException e)
-		{
-
-			e.printStackTrace();
-
-		}
+		long maxlines = countLines(f);
 
 		for(int w = 0; w < MOUNTAIN_COUNT; w ++)
 		{
@@ -560,6 +565,64 @@ public class World
 					}
 
 				}
+
+			}
+
+		}
+
+	}
+
+	private void seedLakes()
+	{
+
+		File f = new File("world/land.txt");
+
+		long maxlines = countLines(f);
+
+		for(int w = 0; w < LAKE_COUNT; w ++)
+		{
+
+			try 
+			{
+
+				boolean loop = true;
+
+				while(loop)
+				{
+
+					BufferedReader reader = new BufferedReader(new FileReader(f));
+					Dice dice = new Dice(0L,maxlines);
+
+					long lineNo = dice.RollLong();
+
+					for(long z = 0; z < lineNo - 1; z++)
+					{
+
+						reader.readLine();
+
+					}
+					String activeLine = reader.readLine();
+					String[] activeCoords = activeLine.split(",");
+					int x = Integer.parseInt(activeCoords[0]);
+					int y = Integer.parseInt(activeCoords[1]);
+
+					if(regions[x][y].getMountain() == false && checkTags(3, x, y) == false)
+					{
+
+						regions[x][y].setLake(true);
+						loop = false;
+
+					}
+
+					reader.close();
+
+				}
+
+			}
+			catch (IOException e)
+			{
+
+				e.printStackTrace();
 
 			}
 
@@ -697,6 +760,116 @@ public class World
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		return count;
+
+	}
+
+	private long countLines(File f)
+	{
+
+		long maxlines = 0;
+
+		try 
+		{
+
+			BufferedReader lineCount = new  BufferedReader(new FileReader(f));
+			while (lineCount.readLine() != null)
+			{
+
+				maxlines ++;
+
+			}
+			lineCount.close();
+
+		}
+		catch (IOException e)
+		{
+
+			e.printStackTrace();
+
+		}
+
+		return maxlines;
+
+	}
+
+	private void buildLakes()
+	{
+
+		for(int t = 0; t < (int)WORLD_SIZE / 75; t ++)
+		{
+
+			Region[][] dummy = new Region[WORLD_SIZE][WORLD_SIZE];
+
+			for (int y = 0; y < WORLD_SIZE; y ++)
+			{
+
+				int x = 0;
+
+				for(;x < WORLD_SIZE; x ++)
+				{
+
+					dummy[x][y] = new Region(regions[x][y]);
+
+					boolean mountainpresent = checkTags(4, x, y);
+					boolean oceanpresent = checkTags(3, x, y);
+					boolean lakepresent = checkTags(6,x,y);
+
+					if (oceanpresent == false && mountainpresent == false && lakepresent == true)
+					{
+
+						if((new Dice(0,1000).Roll()%2) == 0) 
+						{
+
+							dummy[x][y].setLake(true);
+
+						}
+
+					}
+
+				}
+
+			}
+
+			regions = dummy;
+
+		}
+
+	}
+
+	private void cleanLakes()
+	{
+
+		for(int y = 0; y < WORLD_SIZE; y ++)
+		{
+
+			int x = 0;
+
+			for(; x < WORLD_SIZE; x++)
+			{
+
+				if(regions[x][y].getSolid() == true)
+				{
+
+					int lakeCount = countTags(6, x, y);
+
+					if (lakeCount < 3)
+					{
+
+						regions[x][y].setLake(false);
+
+					}
+					if (lakeCount >= 4)
+					{
+
+						regions[x][y].setLake(true);
+
+					}
+
+				}
+
+			}
+
+		}
 
 	}
 

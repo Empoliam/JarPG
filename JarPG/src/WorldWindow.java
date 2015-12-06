@@ -28,6 +28,7 @@ public class WorldWindow extends JDialog
 	private static final long serialVersionUID = -6672888944649399921L;
 
 	String[] TEMPERATURES = { "Very Cold", "Cold", "Average", "Hot", "Very Hot" };
+	String[] MOUNTAIN_SIZES = { "Small", "Medium", "Large" };
 	
 	int worldSize;
 	int nContinents;
@@ -37,6 +38,8 @@ public class WorldWindow extends JDialog
 	int nGen;
 	int sTemp;
 	int mountains;
+	int sMountain;
+	int nLakes;
 	
 	JPanel panel = new JPanel();
 	
@@ -49,16 +52,20 @@ public class WorldWindow extends JDialog
 	JLabel lBeach = new JLabel("Generate beaches?");
 	JLabel lTemperature = new JLabel("Temperature: ");
 	JLabel lMountains = new JLabel ("Number of mountains: ");
+	JLabel lMountainSize = new JLabel("Mountain size: ");
+	JLabel lLakes = new JLabel("Number of lakes: ");
 	
 	JTextField fWorldSize = new JTextField(4);
 	JTextField fContinents = new JTextField(4);
 	JTextField fGen = new JTextField(4);
 	JTextField fMountains = new JTextField(4);
+	JTextField fLakes = new JTextField(4);
 	
 	JCheckBox cPoles = new JCheckBox();
 	JCheckBox cBeach = new JCheckBox();
 	
 	JComboBox<String> bTemperature = new JComboBox<>(TEMPERATURES);
+	JComboBox<String> bMountainSize = new JComboBox<>(MOUNTAIN_SIZES);
 	
 	JButton newWorld = new JButton("Generate new");
 	JButton useWorld = new JButton("Use this world");
@@ -79,9 +86,11 @@ public class WorldWindow extends JDialog
 			beaches = cBeach.isSelected();
 			sTemp = bTemperature.getSelectedIndex();
 			mountains = Integer.parseInt(fMountains.getText());
+			sMountain = bMountainSize.getSelectedIndex();
+			nLakes = Integer.parseInt(fLakes.getText());
 			
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches,mountains);
+			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes);
 			world.imgOut();
 						
 			try 
@@ -127,28 +136,34 @@ public class WorldWindow extends JDialog
 		panel.add(fGen,"align left, push, wrap");
 		panel.add(lMountains,"align right, push");
 		panel.add(fMountains,"align left, push, wrap");
+		panel.add(lLakes,"align right, push");
+		panel.add(fLakes,"align left, push, wrap");
 		panel.add(lPoles, "align right, push");
 		panel.add(cPoles, "align left, push, wrap");
 		panel.add(lBeach, "align right, push");
 		panel.add(cBeach, "align left, push, wrap");
 		panel.add(lTemperature, "align right, push");
 		panel.add(bTemperature, "align left, push, wrap");
+		panel.add(lMountainSize, "align right, push");
+		panel.add(bMountainSize, "align left, push, wrap");		
 		
-		panel.add(mapScroll, "span 2, align center, wrap");
+		panel.add(mapScroll, "span 4, align center, wrap");
 		mapScroll.setMaximumSize(new Dimension(600,600));
 		mapScroll.getVerticalScrollBar().setUnitIncrement(20);
 		mapScroll.getHorizontalScrollBar().setUnitIncrement(20);
 		
-		panel.add(newWorld, "align left");
-		panel.add(useWorld, "wrap, align right");
+		panel.add(newWorld, "align left, span 2");
+		panel.add(useWorld, "wrap, align right, span 2");
 		
 		fWorldSize.setText("400");
 		fContinents.setText("6");
-		fGen.setText("50");
+		fGen.setText("100");
 		fMountains.setText("5");
+		fLakes.setText("10");
 		cBeach.setSelected(true);
 		cPoles.setSelected(true);
 		bTemperature.setSelectedIndex(2);
+		bMountainSize.setSelectedIndex(1);
 		
 		add(panel);
 		

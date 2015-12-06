@@ -9,6 +9,7 @@ public class Region
 	boolean ocean = true;
 	boolean mountain = false;
 	boolean snow = false;
+	boolean lake = false;
 
 	public Region() {}
 
@@ -80,10 +81,23 @@ public class Region
 		
 	}
 	
+	public boolean getLake() 
+	{
+		
+		return lake;
+		
+	}
+	public void setLake(boolean set) 
+	{
+		
+		lake = set;
+		
+	}
+
 	public boolean[] getTags()
 	{
 		
-		boolean[] tags = new boolean[] {solid, polar, beach, ocean, mountain, snow};
+		boolean[] tags = new boolean[] {solid, polar, beach, ocean, mountain, snow, lake};
 		return tags;
 		
 	}
