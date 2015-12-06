@@ -29,7 +29,7 @@ public class WorldWindow extends JDialog
 	private static final long serialVersionUID = -6672888944649399921L;
 
 	String[] TEMPERATURES = { "Very Cold", "Cold", "Average", "Hot", "Very Hot" };
-	String[] MOUNTAIN_SIZES = { "Small", "Medium", "Large" };
+	String[] SIZES = { "Small", "Medium", "Large" };
 	
 	int worldSize;
 	int nContinents;
@@ -41,7 +41,8 @@ public class WorldWindow extends JDialog
 	int mountains;
 	int sMountain;
 	int nLakes;
-	
+	int sLakes;
+			
 	JTabbedPane mainpane = new JTabbedPane();
 	
 	JPanel countpanel = new JPanel();
@@ -60,6 +61,7 @@ public class WorldWindow extends JDialog
 	JLabel lMountains = new JLabel ("Mountains: ");
 	JLabel lMountainSize = new JLabel("Mountain size: ");
 	JLabel lLakes = new JLabel("Lakes: ");
+	JLabel lLakeSize = new JLabel("Lake size: ");
 	
 	JTextField fWorldSize = new JTextField(4);
 	JTextField fContinents = new JTextField(4);
@@ -71,7 +73,8 @@ public class WorldWindow extends JDialog
 	JCheckBox cBeach = new JCheckBox();
 	
 	JComboBox<String> bTemperature = new JComboBox<>(TEMPERATURES);
-	JComboBox<String> bMountainSize = new JComboBox<>(MOUNTAIN_SIZES);
+	JComboBox<String> bMountainSize = new JComboBox<>(SIZES);
+	JComboBox<String> bLakeSize = new JComboBox<>(SIZES);
 	
 	JButton newWorld = new JButton("Generate new");
 	JButton useWorld = new JButton("Use this world");
@@ -94,9 +97,10 @@ public class WorldWindow extends JDialog
 			mountains = Integer.parseInt(fMountains.getText());
 			sMountain = bMountainSize.getSelectedIndex();
 			nLakes = Integer.parseInt(fLakes.getText());
+			sLakes = bLakeSize.getSelectedIndex();
 			
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes);
+			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes,sLakes);
 			world.imgOut();
 						
 			try 
@@ -156,7 +160,9 @@ public class WorldWindow extends JDialog
 		parameterpanel.add(bTemperature, "align left, push, wrap");
 		parameterpanel.add(lMountainSize, "align right, push");
 		parameterpanel.add(bMountainSize, "align left, push, wrap");
-		
+		parameterpanel.add(lLakeSize, "align right, push");
+		parameterpanel.add(bLakeSize, "align left, push, wrap");
+				
 		//Map panel
 		worldpanel.add(mapScroll, "span 2, align center, wrap");
 		
@@ -177,6 +183,7 @@ public class WorldWindow extends JDialog
 		cPoles.setSelected(true);
 		bTemperature.setSelectedIndex(2);
 		bMountainSize.setSelectedIndex(1);
+		bLakeSize.setSelectedIndex(1);
 		
 		//add tabs		
 		mainpane.addTab("Counts",countpanel);

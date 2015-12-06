@@ -22,6 +22,7 @@ public class Region
 		this.ocean = in.ocean;
 		this.mountain = in.mountain;
 		this.snow = in.snow;
+		this.lake = in.lake;
 
 	}
 

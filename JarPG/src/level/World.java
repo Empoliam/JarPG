@@ -27,6 +27,7 @@ public class World
 	private int MOUNTAIN_COUNT = 5;
 	private int LAKE_COUNT = 5;
 	private double MOUNTAIN_DIVISOR = 50;
+	private double LAKE_DIVISOR = 75;
 
 	//Colours
 	Color sea = new Color(30, 98, 168); int SEA_COLOUR = sea.getRGB();
@@ -40,7 +41,7 @@ public class World
 
 	Region[][] regions;
 
-	public World(int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin)
+	public World(int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein)
 	{
 
 		WORLD_SIZE = sizein;
@@ -50,10 +51,11 @@ public class World
 		CONTINENT_GENERATIONS = generationsin;
 		MOUNTAIN_COUNT = mountains;
 		LAKE_COUNT = lakesin;
-
+		
 		getPolarDiv(tempin);
 		getMountainDiv(mountainsizein);
-
+		getLakeDiv(lakesizein);
+		
 		generateRegions();
 		buildLand();
 		if(GENERATE_POLES == true) buildPoles();
@@ -812,7 +814,7 @@ public class World
 	private void buildLakes()
 	{
 
-		for(int t = 0; t < (int)WORLD_SIZE / 75; t ++)
+		for(int t = 0; t < (int)WORLD_SIZE / LAKE_DIVISOR; t ++)
 		{
 
 			Region[][] dummy = new Region[WORLD_SIZE][WORLD_SIZE];
@@ -890,4 +892,18 @@ public class World
 
 	}
 
+	private void getLakeDiv(int lakein)
+	{
+
+		switch(lakein)
+		{
+
+		case 0 : LAKE_DIVISOR = 100; break;
+		case 1 : LAKE_DIVISOR = 75; break;
+		case 2 : LAKE_DIVISOR = 50; break;
+
+		}
+
+	}
+	
 }
