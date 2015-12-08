@@ -9,7 +9,7 @@ public class Dice
 	public Dice(int l, int h)
 	{
 		
-		min = l - 1;
+		min = l;
 		max = h + 1;
 		
 	}
@@ -17,7 +17,7 @@ public class Dice
 	public Dice(long l, long h)
 	{
 		
-		lMin = l - 1;
+		lMin = l;
 		lMax = h + 1;
 		
 	}
