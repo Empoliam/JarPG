@@ -2,7 +2,8 @@ package level;
 
 public class Region 
 {
-
+	
+	//state tags
 	boolean solid = false;
 	boolean polar = false;
 	boolean beach = false;
@@ -11,7 +12,14 @@ public class Region
 	boolean snow = false;
 	boolean lake = false;
 	boolean river = false;
-
+		
+	//biome tags
+	boolean grassland = false;
+	boolean desert = false;
+	boolean forest = false;
+	boolean tundra = false;
+	boolean jungle = false;
+	
 	public Region() {}
 
 	public Region(Region in)
@@ -127,7 +135,6 @@ public class Region
 		return river;
 		
 	}
-
 	public void setRiver(boolean set) 
 	{
 		
@@ -135,6 +142,46 @@ public class Region
 		this.solid = !set;
 		this.mountain = !set;
 		
+	}
+
+	public boolean getGrassland() {
+		return grassland;
+	}
+	
+	public boolean getDesert() {
+		return desert;
+	}
+	
+	public boolean getForest() {
+		return forest;
+	}
+
+	public boolean getTundra() {
+		return tundra;
+	}
+
+	public boolean getJungle() {
+		return jungle;
+	}
+
+	public void setGrassland(boolean grassland) {
+		this.grassland = grassland;
+	}
+
+	public void setDesert(boolean desert) {
+		this.desert = desert;
+	}
+
+	public void setForest(boolean forest) {
+		this.forest = forest;
+	}
+
+	public void setTundra(boolean tundra) {
+		this.tundra = tundra;
+	}
+
+	public void setJungle(boolean jungle) {
+		this.jungle = jungle;
 	}
 
 	public boolean[] getTags()
