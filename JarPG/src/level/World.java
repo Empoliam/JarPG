@@ -72,8 +72,6 @@ public class World
 		buildLakes();
 		cleanLakes();
 		if(GENERATE_BEACHES == true) buildBeaches();
-		
-		new BiomeMap(WORLD_SIZE);
 
 	}
 
