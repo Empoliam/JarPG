@@ -123,8 +123,8 @@ public class WorldWindow extends JDialog
 		}
 	};
 	
-	ActionListener aUseWorld = new ActionListener(
-			) {
+	ActionListener aUseWorld = new ActionListener() 
+	{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) 
@@ -221,4 +221,11 @@ public class WorldWindow extends JDialog
 		
 	}
 	
+	public int[] getSpawn()
+	{
+		
+		return world.getSpawn();
+		
+	}
+		
 }

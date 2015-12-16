@@ -54,7 +54,7 @@ public class World
 		MOUNTAIN_COUNT = mountains;
 		LAKE_COUNT = lakesin;
 		RIVER_TWISTINESS = twistinessin;
-		
+
 		getPolarDiv(tempin);
 		getMountainDiv(mountainsizein);
 		getLakeDiv(lakesizein);
@@ -452,7 +452,7 @@ public class World
 				{
 
 					System.out.println("Saving " + x + "," + y);
-					FileWriter writer = new FileWriter("world/tile" + x + "-" + y +".json");
+					FileWriter writer = new FileWriter("world/" + x + "-" + y +".json");
 					writer.write(json);
 					writer.close();
 
@@ -1006,18 +1006,65 @@ public class World
 					}
 
 					int change = new Dice(1,20-RIVER_TWISTINESS).Roll();
-					
+
 					if(change == 1) direction ++;
 					else if(change == 2) direction --;
 					if(direction == 9) direction = 1;
 					else if(direction == -1) direction = 8;
-					
+
 				}
 
 			}
 			catch(ArrayIndexOutOfBoundsException e){};
 
 		}
+
+	}
+
+	public int[] getSpawn()
+	{
+
+		int[] spawn = new int[2];
+
+		File f = new File("world/land.txt");
+
+		long maxlines = countLines(f);
+
+		int x = 0, y = 0;
+
+		try 
+		{
+
+			BufferedReader reader = new BufferedReader(new FileReader(f));
+			Dice dice = new Dice(0L,maxlines);
+
+			long lineNo = dice.RollLong();
+
+			for(long z = 0; z < lineNo - 1; z++)
+			{
+
+				reader.readLine();
+
+			}
+			String activeLine = reader.readLine();
+			String[] activeCoords = activeLine.split(",");
+			x = Integer.parseInt(activeCoords[0]);
+			y = Integer.parseInt(activeCoords[1]);
+
+			reader.close();
+
+		}
+		catch (IOException e)
+		{
+
+			e.printStackTrace();
+
+		}
+
+		spawn[0] = x;
+		spawn[1] = y;
+
+		return spawn;
 
 	}
 
