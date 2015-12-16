@@ -92,7 +92,10 @@ public class WorldWindow extends JDialog
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-						
+			
+			try {FileUtils.deleteDirectory(new File("world"));} 
+			catch (IOException e1) {e1.printStackTrace();}
+			
 			worldSize = Integer.parseInt(fWorldSize.getText());
 			nContinents = Integer.parseInt(fContinents.getText());
 			nGen = Integer.parseInt(fGen.getText()); 
@@ -111,10 +114,13 @@ public class WorldWindow extends JDialog
 						
 			try 
 			{
+				
+				new File("world").mkdirs();
 				BufferedImage img = ImageIO.read(new File("world/map.bmp"));
 				ImageIcon icon = new ImageIcon(img);
 				imgPane.setIcon(icon);
 				pack();
+				
 			} 
 			catch (IOException e1){e1.printStackTrace();}
 			
@@ -131,8 +137,6 @@ public class WorldWindow extends JDialog
 		{
 			
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			try {FileUtils.deleteDirectory(new File("world"));} 
-			catch (IOException e1) {e1.printStackTrace();}
 			saveWorld();
 			setVisible(false);
 			

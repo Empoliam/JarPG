@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -115,9 +116,11 @@ public class MainWindow extends JFrame implements ActionListener
 		*/
 		
 		WorldWindow worldGen = new WorldWindow();
+		textarea.append("Created world \n");
 		spawn = worldGen.getSpawn();
 		worldGen.dispose();
 		loadTile(spawn[0], spawn[1]);
+		textarea.append("Spawned at "+ spawn[0] + "," +spawn[1] +"\n");
 		
 	}
 	
@@ -127,7 +130,8 @@ public class MainWindow extends JFrame implements ActionListener
 		BufferedReader br;
 		try {
 			
-			br = new BufferedReader(new FileReader(x + "-" + y +".json"));
+			File f = new File("world/" + x + "-" + y +".json");
+			br = new BufferedReader(new FileReader(f));
 			Gson gson = new Gson();
 			activeRegion = gson.fromJson(br,Region.class);
 			

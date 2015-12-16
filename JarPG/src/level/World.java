@@ -451,7 +451,6 @@ public class World
 				try 
 				{
 
-					System.out.println("Saving " + x + "," + y);
 					FileWriter writer = new FileWriter("world/" + x + "-" + y +".json");
 					writer.write(json);
 					writer.close();
