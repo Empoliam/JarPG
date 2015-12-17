@@ -26,6 +26,8 @@ public class MainWindow extends JFrame implements ActionListener
 
 	private static final long serialVersionUID = -3241273755265444600L;
 	
+	String PATH;
+	
 	//UI
 	JPanel mainpanel = new JPanel();
 	JTextArea textarea = new JTextArea(16,50);
@@ -35,6 +37,7 @@ public class MainWindow extends JFrame implements ActionListener
 	JButton log = new JButton("Log");
 	JButton inv = new JButton("Inventory");
 	JButton stat = new JButton("Status");
+	JButton map = new JButton("Map");
 
 	//various constants
 	Player player;
@@ -67,13 +70,15 @@ public class MainWindow extends JFrame implements ActionListener
 		mainpanel.add(scroll,"push,grow,wrap");
 		mainpanel.add(send, "split 2");
 		mainpanel.add(inputfield, "pushx,growx,wrap");
-		mainpanel.add(log,"split 3,pushx,align center");
+		mainpanel.add(log,"split 4,pushx,align center");
 		mainpanel.add(inv, "pushx");
 		mainpanel.add(stat, "pushx");
+		mainpanel.add(map, "pushx");
 
 		log.setEnabled(false);
 		inv.setEnabled(false);
 		stat.setEnabled(false);
+		map.setEnabled(false);
 
 		add(mainpanel);
 
@@ -106,18 +111,17 @@ public class MainWindow extends JFrame implements ActionListener
 	public void playgame()
 	{
 
-		/*
 		CreateWindow create = new CreateWindow(this);
 		player = create.generate();
 		debug = create.Debug();
 		create.dispose();
 		textarea.append("Created player: " + player.getFName() + " " + player.getLName() + "\n");
 		if(debug) textarea.append("Debug Mode Enabled");
-		*/
 		
 		WorldWindow worldGen = new WorldWindow();
 		textarea.append("Created world \n");
 		spawn = worldGen.getSpawn();
+		PATH = worldGen.getPath();
 		worldGen.dispose();
 		loadTile(spawn[0], spawn[1]);
 		textarea.append("Spawned at "+ spawn[0] + "," +spawn[1] +"\n");
@@ -130,7 +134,7 @@ public class MainWindow extends JFrame implements ActionListener
 		BufferedReader br;
 		try {
 			
-			File f = new File("world/" + x + "-" + y +".json");
+			File f = new File(PATH + "/regions/" + x + "-" + y +".json");
 			br = new BufferedReader(new FileReader(f));
 			Gson gson = new Gson();
 			activeRegion = gson.fromJson(br,Region.class);

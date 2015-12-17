@@ -232,6 +232,11 @@ public class CreateWindow extends JDialog
 
 		go.addActionListener(GOa);
 		
+		HPField.setText("30");
+		MPField.setText("30");
+		ATTField.setText("7");
+		DEFField.setText("7");
+		
 		add(panel);
 		
 		pack();
@@ -240,7 +245,7 @@ public class CreateWindow extends JDialog
 
 		setLocationRelativeTo(null);
 		
-		new Timer(30, new ActionListener() 
+		new Timer(10, new ActionListener() 
 		{
 
 			public void actionPerformed(ActionEvent e) {

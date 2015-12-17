@@ -18,6 +18,8 @@ import com.google.gson.GsonBuilder;
 public class World 
 {
 
+	private String PATH;
+	
 	private int NUM_CONTINENTS = 6;
 	private int CONTINENT_GENERATIONS = 50;
 	private boolean GENERATE_POLES = false;
@@ -43,9 +45,11 @@ public class World
 
 	Region[][] regions;
 
-	public World(int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein, int twistinessin)
+	public World(String path, int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein, int twistinessin)
 	{
 
+		PATH = path;
+		
 		WORLD_SIZE = sizein;
 		NUM_CONTINENTS = continentsin;
 		GENERATE_POLES = polesin;
@@ -322,8 +326,8 @@ public class World
 
 		}
 
-		new File("world").mkdirs();
-		File f = new File("world/map.bmp");
+		new File(PATH).mkdirs();
+		File f = new File(PATH + "/map.bmp");
 		try { ImageIO.write(image, "BMP", f); }
 		catch(IOException e){System.out.println("Failed to print map");};
 
@@ -437,7 +441,7 @@ public class World
 	public void generateJSON()
 	{
 
-		new File("world").mkdirs();
+		new File(PATH + "/regions").mkdirs();
 
 		for(int y = 0; y < WORLD_SIZE; y ++)
 		{
@@ -451,7 +455,7 @@ public class World
 				try 
 				{
 
-					FileWriter writer = new FileWriter("world/" + x + "-" + y +".json");
+					FileWriter writer = new FileWriter(PATH + "/regions/" + x + "-" + y +".json");
 					writer.write(json);
 					writer.close();
 
@@ -471,8 +475,8 @@ public class World
 	private void recordLand()
 	{
 
-		new File("world").mkdirs();
-		File f = new File("world/land.txt");
+		new File(PATH).mkdirs();
+		File f = new File(PATH + "/land.txt");
 		try {
 			f.createNewFile();
 		} catch (IOException e1) {
@@ -517,7 +521,7 @@ public class World
 	private void seedMountains()
 	{
 
-		File f = new File("world/land.txt");
+		File f = new File(PATH + "/land.txt");
 
 		long maxlines = countLines(f);
 
@@ -599,7 +603,7 @@ public class World
 	private void seedLakes()
 	{
 
-		File f = new File("world/land.txt");
+		File f = new File(PATH + "/land.txt");
 
 		long maxlines = countLines(f);
 
@@ -914,7 +918,7 @@ public class World
 	private void createRivers()
 	{
 
-		File f = new File("world/land.txt");
+		File f = new File(PATH + "/land.txt");
 
 		long maxlines = countLines(f);
 
@@ -1025,7 +1029,7 @@ public class World
 
 		int[] spawn = new int[2];
 
-		File f = new File("world/land.txt");
+		File f = new File(PATH + "/land.txt");
 
 		long maxlines = countLines(f);
 

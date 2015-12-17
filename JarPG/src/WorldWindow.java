@@ -32,6 +32,9 @@ public class WorldWindow extends JDialog
 	String[] TEMPERATURES = { "Very Cold", "Cold", "Average", "Hot", "Very Hot" };
 	String[] SIZES = { "Small", "Medium", "Large" };
 	
+	String PATH = "worlds/";
+	String PATH_REGIONS;
+	
 	int worldSize;
 	int nContinents;
 	boolean poles;
@@ -65,12 +68,14 @@ public class WorldWindow extends JDialog
 	JLabel lLakes = new JLabel("Lakes: ");
 	JLabel lLakeSize = new JLabel("Lake size: ");
 	JLabel lRiverTwistiness = new JLabel("River twistiness: ");
+	JLabel lName = new JLabel("World Name: ");
 	
 	JTextField fWorldSize = new JTextField(4);
 	JTextField fContinents = new JTextField(4);
 	JTextField fGen = new JTextField(4);
 	JTextField fMountains = new JTextField(4);
 	JTextField fLakes = new JTextField(4);
+	JTextField fName = new JTextField(20);
 	
 	JCheckBox cPoles = new JCheckBox();
 	JCheckBox cBeach = new JCheckBox();
@@ -93,7 +98,9 @@ public class WorldWindow extends JDialog
 		public void actionPerformed(ActionEvent e) 
 		{
 			
-			try {FileUtils.deleteDirectory(new File("world"));} 
+			PATH = PATH + fName.getText();
+			
+			try {FileUtils.deleteDirectory(new File(PATH));} 
 			catch (IOException e1) {e1.printStackTrace();}
 			
 			worldSize = Integer.parseInt(fWorldSize.getText());
@@ -109,14 +116,14 @@ public class WorldWindow extends JDialog
 			twistiness = slTwistiness.getValue();
 			
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			world = new World(worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes,sLakes,twistiness);
+			world = new World(PATH,worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes,sLakes,twistiness);
 			world.imgOut();
 						
 			try 
 			{
 				
-				new File("world").mkdirs();
-				BufferedImage img = ImageIO.read(new File("world/map.bmp"));
+				new File(PATH).mkdirs();
+				BufferedImage img = ImageIO.read(new File(PATH + "/map.bmp"));
 				ImageIcon icon = new ImageIcon(img);
 				imgPane.setIcon(icon);
 				pack();
@@ -197,12 +204,15 @@ public class WorldWindow extends JDialog
 		bTemperature.setSelectedIndex(2);
 		bMountainSize.setSelectedIndex(1);
 		bLakeSize.setSelectedIndex(1);
+		fName.setText("world");
 		
 		//add tabs		
 		mainpane.addTab("Counts",countpanel);
 		mainpane.addTab("Parameters", parameterpanel);
 		
 		//add panels
+		add(lName,"split 2, align center");
+		add(fName,"align center, wrap");
 		add(mainpane,"align center, wrap, push");
 		add(worldpanel);
 		
@@ -229,6 +239,13 @@ public class WorldWindow extends JDialog
 	{
 		
 		return world.getSpawn();
+		
+	}
+	
+	public String getPath()
+	{
+		
+		return PATH;
 		
 	}
 		
