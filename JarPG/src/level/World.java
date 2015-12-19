@@ -20,18 +20,18 @@ public class World
 
 	private String PATH;
 	
-	private int NUM_CONTINENTS = 6;
-	private int CONTINENT_GENERATIONS = 50;
-	private boolean GENERATE_POLES = false;
-	private boolean GENERATE_BEACHES = false;
-	private int WORLD_SIZE = 400;
-	private double POLE_DIVISOR = 2;
-	private int MOUNTAIN_COUNT = 5;
-	private int LAKE_COUNT = 10;
-	private double MOUNTAIN_DIVISOR = 50;
-	private double LAKE_DIVISOR = 75;
-	private int RIVER_COUNT = 5;
-	private int RIVER_TWISTINESS = 12;
+	private int NUM_CONTINENTS;
+	private int CONTINENT_GENERATIONS;
+	private boolean GENERATE_POLES;
+	private boolean GENERATE_BEACHES;
+	private int WORLD_SIZE;
+	private double POLE_DIVISOR;
+	private int MOUNTAIN_COUNT;
+	private int LAKE_COUNT;
+	private double MOUNTAIN_DIVISOR;
+	private double LAKE_DIVISOR;
+	private int RIVER_COUNT;
+	private int RIVER_TWISTINESS;
 
 	//Colours
 	Color sea = new Color(30, 98, 168); int SEA_COLOUR = sea.getRGB();
@@ -45,7 +45,7 @@ public class World
 
 	Region[][] regions;
 
-	public World(String path, int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein, int twistinessin)
+	public World(String path, int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein, int twistinessin, int nriversin)
 	{
 
 		PATH = path;
@@ -58,6 +58,7 @@ public class World
 		MOUNTAIN_COUNT = mountains;
 		LAKE_COUNT = lakesin;
 		RIVER_TWISTINESS = twistinessin;
+		RIVER_COUNT = nriversin;
 
 		getPolarDiv(tempin);
 		getMountainDiv(mountainsizein);
@@ -326,7 +327,6 @@ public class World
 
 		}
 
-		new File(PATH).mkdirs();
 		File f = new File(PATH + "/map.bmp");
 		try { ImageIO.write(image, "BMP", f); }
 		catch(IOException e){System.out.println("Failed to print map");};
@@ -441,7 +441,7 @@ public class World
 	public void generateJSON()
 	{
 
-		new File(PATH + "/regions").mkdirs();
+		new File(PATH + "/regions").mkdir();
 
 		for(int y = 0; y < WORLD_SIZE; y ++)
 		{
@@ -475,7 +475,6 @@ public class World
 	private void recordLand()
 	{
 
-		new File(PATH).mkdirs();
 		File f = new File(PATH + "/land.txt");
 		try {
 			f.createNewFile();

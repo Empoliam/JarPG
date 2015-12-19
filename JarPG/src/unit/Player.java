@@ -4,7 +4,7 @@ public class Player extends Unit
 {
 
 	String fName, lName;
-	String superX, superY;
+	int x, y;
 	
 	public Player(String ifName, String ilName, int HPi, int MPi, int ATTi, int DEFi)
 	{
@@ -18,20 +18,28 @@ public class Player extends Unit
 	public String getFName(){ return fName; }
 	public String getLName(){ return lName; }
 
-	public String getSuperX() {
-		return superX;
+	public int getX() {
+		return x;
 	}
 
-	public String getSuperY() {
-		return superY;
+	public int getY() {
+		return y;
 	}
 
-	public void setSuperX(String superX) {
-		this.superX = superX;
+	public void setX(int x) {
+		this.x = x;
 	}
 
-	public void setSuperY(String superY) {
-		this.superY = superY;
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public void setXY(int x, int y)
+	{
+		
+		this.x = x;
+		this.y = y;
+		
 	}
 	
 }

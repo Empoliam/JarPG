@@ -1,4 +1,4 @@
-package utilities;
+package utilities.noise;
 
 import java.util.Random;
 

@@ -110,7 +110,15 @@ public class MainWindow extends JFrame implements ActionListener
 
 	public void playgame()
 	{
-
+		
+		makePlayer();
+		makeWorld();
+		
+	}
+	
+	private void makePlayer()
+	{
+		
 		CreateWindow create = new CreateWindow(this);
 		player = create.generate();
 		debug = create.Debug();
@@ -118,12 +126,18 @@ public class MainWindow extends JFrame implements ActionListener
 		textarea.append("Created player: " + player.getFName() + " " + player.getLName() + "\n");
 		if(debug) textarea.append("Debug Mode Enabled");
 		
+	}
+	
+	private void makeWorld()
+	{
+		
 		WorldWindow worldGen = new WorldWindow();
 		textarea.append("Created world \n");
 		spawn = worldGen.getSpawn();
 		PATH = worldGen.getPath();
 		worldGen.dispose();
 		loadTile(spawn[0], spawn[1]);
+		player.setXY(spawn[0], spawn[1]);
 		textarea.append("Spawned at "+ spawn[0] + "," +spawn[1] +"\n");
 		
 	}
@@ -143,7 +157,7 @@ public class MainWindow extends JFrame implements ActionListener
 		catch (FileNotFoundException e) 
 		{
 		
-			textarea.append("Failed to load world. Please restart \n");
+			textarea.append("Failed to load tile. Please restart \n");
 			
 		}
 				

@@ -47,6 +47,7 @@ public class WorldWindow extends JDialog
 	int nLakes;
 	int sLakes;
 	int twistiness;
+	int nRivers;
 			
 	JTabbedPane mainpane = new JTabbedPane();
 	
@@ -69,6 +70,7 @@ public class WorldWindow extends JDialog
 	JLabel lLakeSize = new JLabel("Lake size: ");
 	JLabel lRiverTwistiness = new JLabel("River twistiness: ");
 	JLabel lName = new JLabel("World Name: ");
+	JLabel lRivers = new JLabel("Rivers: ");
 	
 	JTextField fWorldSize = new JTextField(4);
 	JTextField fContinents = new JTextField(4);
@@ -76,6 +78,7 @@ public class WorldWindow extends JDialog
 	JTextField fMountains = new JTextField(4);
 	JTextField fLakes = new JTextField(4);
 	JTextField fName = new JTextField(20);
+	JTextField fRivers = new JTextField(4);
 	
 	JCheckBox cPoles = new JCheckBox();
 	JCheckBox cBeach = new JCheckBox();
@@ -98,10 +101,12 @@ public class WorldWindow extends JDialog
 		public void actionPerformed(ActionEvent e) 
 		{
 			
+			PATH = "worlds/";
 			PATH = PATH + fName.getText();
 			
 			try {FileUtils.deleteDirectory(new File(PATH));} 
 			catch (IOException e1) {e1.printStackTrace();}
+			new File(PATH).mkdirs();
 			
 			worldSize = Integer.parseInt(fWorldSize.getText());
 			nContinents = Integer.parseInt(fContinents.getText());
@@ -114,15 +119,15 @@ public class WorldWindow extends JDialog
 			nLakes = Integer.parseInt(fLakes.getText());
 			sLakes = bLakeSize.getSelectedIndex();
 			twistiness = slTwistiness.getValue();
+			nRivers = Integer.parseInt(fRivers.getText());
 			
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			world = new World(PATH,worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes,sLakes,twistiness);
+			world = new World(PATH,worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes,sLakes,twistiness,nRivers);
 			world.imgOut();
 						
 			try 
 			{
 				
-				new File(PATH).mkdirs();
 				BufferedImage img = ImageIO.read(new File(PATH + "/map.bmp"));
 				ImageIcon icon = new ImageIcon(img);
 				imgPane.setIcon(icon);
@@ -168,6 +173,8 @@ public class WorldWindow extends JDialog
 		countpanel.add(fMountains,"align left, push, wrap");
 		countpanel.add(lLakes,"align right, push");
 		countpanel.add(fLakes,"align left, push, wrap");
+		countpanel.add(lRivers,"align right, push");
+		countpanel.add(fRivers,"align left, push, wrap");
 				
 		parameterpanel.add(lTemperature, "align right, push");
 		parameterpanel.add(bTemperature, "align left, push, wrap");
@@ -190,15 +197,13 @@ public class WorldWindow extends JDialog
 		mapScroll.getVerticalScrollBar().setUnitIncrement(20);
 		mapScroll.getHorizontalScrollBar().setUnitIncrement(20);
 		
-		worldpanel.add(newWorld, "align left");
-		worldpanel.add(useWorld, "align right");
-		
 		//set component defaults
 		fWorldSize.setText("400");
 		fContinents.setText("6");
 		fGen.setText("100");
 		fMountains.setText("5");
 		fLakes.setText("10");
+		fRivers.setText("5");
 		cBeach.setSelected(true);
 		cPoles.setSelected(true);
 		bTemperature.setSelectedIndex(2);
@@ -214,7 +219,9 @@ public class WorldWindow extends JDialog
 		add(lName,"split 2, align center");
 		add(fName,"align center, wrap");
 		add(mainpane,"align center, wrap, push");
-		add(worldpanel);
+		add(worldpanel,"wrap, align center");
+		add(newWorld, "align center, split 2");
+		add(useWorld, "align center");
 		
 		newWorld.addActionListener(aNewWorld);
 		useWorld.addActionListener(aUseWorld);
