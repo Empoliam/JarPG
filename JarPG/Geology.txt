@@ -1,9 +1,9 @@
 //Native Elements : 0
-Gold
-Silver
-Copper
-Iron
-Sulphur
+Gold								
+Silver								
+Copper								
+Iron								
+Sulphur								
 
 //Metal ores : 1
 Pyrite			- Iron

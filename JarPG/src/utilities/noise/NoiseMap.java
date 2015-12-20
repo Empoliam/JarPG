@@ -6,7 +6,7 @@ import utilities.noise.SimplexNoise;
 public class NoiseMap 
 {
 
-	double[][] result;
+	private double[][] result;
 	
 	public NoiseMap(int size)
 	{
@@ -40,6 +40,13 @@ public class NoiseMap
 	{
 		
 		return result[x][y];
+		
+	}
+	
+	public double[][] getResult()
+	{
+		
+		return result;
 		
 	}
 	

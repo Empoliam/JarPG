@@ -1,6 +1,5 @@
 package level;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,6 +15,11 @@ import utilities.noise.NoiseMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import geology.NativeLayer;
+import items.Rock;
+
+import static utilities.ColourBank.*;
 
 public class World 
 {
@@ -36,33 +40,11 @@ public class World
 	private int RIVER_TWISTINESS;
 
 	//Colours
-	int SEA_COLOUR = new Color(30, 98, 168).getRGB();
-	int LAND_COLOUR = new Color(0, 163, 22).getRGB();
-	int ICE_COLOUR = new Color(200,200,255).getRGB();
-	int BEACH_COLOUR = new Color(255,223,128).getRGB();
-	int RIVER_COLOUR = new Color(60,60,190).getRGB();
-	int MOUNTAIN_COLOUR = new Color(170,170,170).getRGB();
-	int SNOW_COLOUR = new Color(204, 255, 255).getRGB();
-	int LAKE_COLOUR = new Color (50,50,190).getRGB();
-
-	int DESERT_COLOUR = new Color(255, 204, 102).getRGB();
-	int SAVANNA_COLOUR = new Color(153, 204, 0).getRGB();
-	int SEASONAL_FOREST_COLOUR = new Color(115, 153, 0).getRGB();
-	int RAINFOREST_COLOUR = new Color(51, 102, 0).getRGB();
-	int PLAINS_COLOUR = new Color(102, 255, 51).getRGB();
-	int WOODS_COLOUR = new Color(0, 153, 0).getRGB();
-	int FOREST_COLOUR = new Color(0, 102, 0).getRGB();
-	int SWAMP_COLOUR = new Color (51, 51, 0).getRGB();
-	int TAIGA_COLOUR = new Color (0, 204, 102).getRGB();
-	int TUNDRA_COLOUR = new Color (102, 153, 153).getRGB();
 	
 	//Data Arrays
 	Region[][] regions;
 	int[][] biomes;
-		
-	//Biome noise maps
-	NoiseMap temperature;
-	NoiseMap rainfall;
+	Rock[][] nativeLayer0;	
 	
 	public World(String path, int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein, int twistinessin, int nriversin)
 	{
@@ -97,6 +79,7 @@ public class World
 		buildLakes();
 		cleanLakes();
 		if(GENERATE_BEACHES == true) buildBeaches();
+		createGeology();
 
 	}
 
@@ -1096,8 +1079,8 @@ public class World
 		
 		BufferedImage image = new BufferedImage(WORLD_SIZE, WORLD_SIZE, BufferedImage.TYPE_INT_RGB);
 		
-		temperature = new NoiseMap(WORLD_SIZE);
-		rainfall = new NoiseMap(WORLD_SIZE);
+		NoiseMap temperature = new NoiseMap(WORLD_SIZE);
+		NoiseMap rainfall = new NoiseMap(WORLD_SIZE);
 		
 		biomes = new int[WORLD_SIZE][WORLD_SIZE];
 		
@@ -1173,6 +1156,13 @@ public class World
 		File f = new File(PATH + "/biomemap.bmp");
 		try { ImageIO.write(image, "BMP", f); }
 		catch(IOException e){System.out.println("Failed to print map");};
+		
+	}
+	
+	public void createGeology()
+	{
+		
+		new NativeLayer(WORLD_SIZE);
 		
 	}
 	
