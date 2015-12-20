@@ -12,13 +12,23 @@ public class Region
 	boolean snow = false;
 	boolean lake = false;
 	boolean river = false;
-		
-	//biome tags
-	boolean grassland = false;
-	boolean desert = false;
-	boolean forest = false;
-	boolean tundra = false;
-	boolean jungle = false;
+	
+	/*biomes
+	 * 0 = Desert
+	 * 1 = Savanna
+	 * 2 = Seasonal Forest
+	 * 3 = Rainforest
+	 * 4 = Plains
+	 * 5 = Woods
+	 * 6 = Forest
+	 * 7 = Swamp
+	 * 8 = Taiga
+	 * 9 = Tundra
+	 * 10 = Ocean
+	 * 11 = Polar
+	 * */
+	
+	int biometype;
 	
 	public Region() {}
 
@@ -144,46 +154,20 @@ public class Region
 		
 	}
 
-	public boolean getGrassland() {
-		return grassland;
+	public int getType()
+	{
+		
+		return biometype;
+		
 	}
 	
-	public boolean getDesert() {
-		return desert;
+	public void setType(int biometype)
+	{
+		
+		this.biometype = biometype;
+		
 	}
 	
-	public boolean getForest() {
-		return forest;
-	}
-
-	public boolean getTundra() {
-		return tundra;
-	}
-
-	public boolean getJungle() {
-		return jungle;
-	}
-
-	public void setGrassland(boolean grassland) {
-		this.grassland = grassland;
-	}
-
-	public void setDesert(boolean desert) {
-		this.desert = desert;
-	}
-
-	public void setForest(boolean forest) {
-		this.forest = forest;
-	}
-
-	public void setTundra(boolean tundra) {
-		this.tundra = tundra;
-	}
-
-	public void setJungle(boolean jungle) {
-		this.jungle = jungle;
-	}
-
 	public boolean[] getTags()
 	{
 		

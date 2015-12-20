@@ -1,5 +1,4 @@
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -14,7 +13,6 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -23,6 +21,7 @@ import org.apache.commons.io.FileUtils;
 
 import level.World;
 import net.miginfocom.swing.MigLayout;
+import utilities.MScrollPane;
 
 public class WorldWindow extends JDialog
 {
@@ -50,6 +49,7 @@ public class WorldWindow extends JDialog
 	int nRivers;
 			
 	JTabbedPane mainpane = new JTabbedPane();
+	JTabbedPane imagepane = new JTabbedPane();
 	
 	JPanel countpanel = new JPanel();
 	JPanel parameterpanel = new JPanel();
@@ -57,6 +57,7 @@ public class WorldWindow extends JDialog
 	JPanel worldpanel = new JPanel();
 	
 	JLabel imgPane = new JLabel();
+	JLabel biomeImgPane = new JLabel();
 	
 	JLabel lWorldSize = new JLabel("World size (n*x): ");
 	JLabel lContinents = new JLabel("Continent seeds: ");
@@ -92,7 +93,8 @@ public class WorldWindow extends JDialog
 	
 	JSlider slTwistiness = new JSlider(0, 18, 12);
 	
-	JScrollPane mapScroll = new JScrollPane(imgPane);
+	MScrollPane mapScroll = new MScrollPane(imgPane);
+	MScrollPane biomeScroll = new MScrollPane(biomeImgPane);
 	
 	ActionListener aNewWorld = new ActionListener() 
 	{
@@ -128,9 +130,12 @@ public class WorldWindow extends JDialog
 			try 
 			{
 				
-				BufferedImage img = ImageIO.read(new File(PATH + "/map.bmp"));
-				ImageIcon icon = new ImageIcon(img);
-				imgPane.setIcon(icon);
+				BufferedImage mapImg = ImageIO.read(new File(PATH + "/map.bmp"));
+				ImageIcon mapIcon = new ImageIcon(mapImg);
+				imgPane.setIcon(mapIcon);
+				BufferedImage biomeImg = ImageIO.read(new File(PATH + "/biomemap.bmp"));
+				ImageIcon biomeIcon = new ImageIcon(biomeImg);
+				biomeImgPane.setIcon(biomeIcon);
 				pack();
 				
 			} 
@@ -191,12 +196,9 @@ public class WorldWindow extends JDialog
 		parameterpanel.add(cBeach, "align left, push, wrap");
 				
 		//Map panel
-		worldpanel.add(mapScroll, "span 2, align center, wrap");
-		
-		mapScroll.setMaximumSize(new Dimension(600,600));
-		mapScroll.getVerticalScrollBar().setUnitIncrement(20);
-		mapScroll.getHorizontalScrollBar().setUnitIncrement(20);
-		
+		imagepane.addTab("Map",mapScroll);
+		imagepane.addTab("Biomes",biomeScroll);
+				
 		//set component defaults
 		fWorldSize.setText("400");
 		fContinents.setText("6");
@@ -219,7 +221,7 @@ public class WorldWindow extends JDialog
 		add(lName,"split 2, align center");
 		add(fName,"align center, wrap");
 		add(mainpane,"align center, wrap, push");
-		add(worldpanel,"wrap, align center");
+		add(imagepane,"wrap, align center");
 		add(newWorld, "align center, split 2");
 		add(useWorld, "align center");
 		

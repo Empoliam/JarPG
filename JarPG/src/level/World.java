@@ -8,9 +8,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 import utilities.Dice;
+import utilities.noise.NoiseMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,17 +36,34 @@ public class World
 	private int RIVER_TWISTINESS;
 
 	//Colours
-	Color sea = new Color(30, 98, 168); int SEA_COLOUR = sea.getRGB();
-	Color land = new Color(0, 163, 22); int LAND_COLOUR = land.getRGB();
-	Color ice = new Color(200,200,255); int ICE_COLOUR = ice.getRGB();
-	Color beach = new Color(255,223,128); int BEACH_COLOUR = beach.getRGB();
-	Color river = new Color(60,60,190); int RIVER_COLOUR = river.getRGB();
-	Color mountian = new Color(170,170,170); int MOUNTAIN_COLOUR = mountian.getRGB();
-	Color snow = new Color(204, 255, 255); int SNOW_COLOUR = snow.getRGB();
-	Color lake = new Color (50,50,190); int LAKE_COLOUR = lake.getRGB();
+	int SEA_COLOUR = new Color(30, 98, 168).getRGB();
+	int LAND_COLOUR = new Color(0, 163, 22).getRGB();
+	int ICE_COLOUR = new Color(200,200,255).getRGB();
+	int BEACH_COLOUR = new Color(255,223,128).getRGB();
+	int RIVER_COLOUR = new Color(60,60,190).getRGB();
+	int MOUNTAIN_COLOUR = new Color(170,170,170).getRGB();
+	int SNOW_COLOUR = new Color(204, 255, 255).getRGB();
+	int LAKE_COLOUR = new Color (50,50,190).getRGB();
 
+	int DESERT_COLOUR = new Color(255, 204, 102).getRGB();
+	int SAVANNA_COLOUR = new Color(153, 204, 0).getRGB();
+	int SEASONAL_FOREST_COLOUR = new Color(115, 153, 0).getRGB();
+	int RAINFOREST_COLOUR = new Color(51, 102, 0).getRGB();
+	int PLAINS_COLOUR = new Color(102, 255, 51).getRGB();
+	int WOODS_COLOUR = new Color(0, 153, 0).getRGB();
+	int FOREST_COLOUR = new Color(0, 102, 0).getRGB();
+	int SWAMP_COLOUR = new Color (51, 51, 0).getRGB();
+	int TAIGA_COLOUR = new Color (0, 204, 102).getRGB();
+	int TUNDRA_COLOUR = new Color (102, 153, 153).getRGB();
+	
+	//Data Arrays
 	Region[][] regions;
-
+	int[][] biomes;
+		
+	//Biome noise maps
+	NoiseMap temperature;
+	NoiseMap rainfall;
+	
 	public World(String path, int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein, int twistinessin, int nriversin)
 	{
 
@@ -69,6 +88,7 @@ public class World
 		if(GENERATE_POLES == true) buildPoles();
 		cleanLand();
 		recordLand();
+		buildBiomeMap();
 		seedMountains();
 		buildMountains();
 		cleanMountains();
@@ -450,6 +470,7 @@ public class World
 			for(;x < WORLD_SIZE; x++)
 			{
 
+				regions[x][y].setType(biomes[x][y]);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create();
 				String json = gson.toJson(regions[x][y]);
 				try 
@@ -1070,4 +1091,89 @@ public class World
 
 	}
 
+	public void buildBiomeMap()
+	{
+		
+		BufferedImage image = new BufferedImage(WORLD_SIZE, WORLD_SIZE, BufferedImage.TYPE_INT_RGB);
+		
+		temperature = new NoiseMap(WORLD_SIZE);
+		rainfall = new NoiseMap(WORLD_SIZE);
+		
+		biomes = new int[WORLD_SIZE][WORLD_SIZE];
+		
+		for(int y = 0; y < WORLD_SIZE; y ++)
+		{
+			
+			int x = 0;
+			
+			for(;x < WORLD_SIZE; x ++)
+			{
+				
+				double vTemp = temperature.getValue(x, y);
+				double vRain = rainfall.getValue(x, y);
+				
+				if((vTemp <= 1.00 && vTemp > 0.70) && (vRain >= 0 && vRain < 0.25)) biomes[x][y] = 0;
+				else if((vTemp <= 1 && vTemp > 0.75) && (vRain >= 0.25 && vRain < 0.50)) biomes[x][y] = 1;
+				else if((vTemp <= 1 && vTemp > 0.75) && (vRain >= 0.50 && vRain < 0.75)) biomes[x][y] = 2;
+				else if((vTemp <= 1 && vTemp > 0.75) && (vRain >= 0.75 && vRain <= 1)) biomes[x][y] = 3;
+				else if((vTemp <= 0.70 && vTemp > 0.25) && (vRain >= 0 && vRain < 0.25)) biomes[x][y] = 4;
+				else if((vTemp <= 0.75 && vTemp > 0.40) && (vRain >= 0.25 && vRain < 0.50)) biomes[x][y] = 5;
+				else if((vTemp <= 0.75 && vTemp > 0.40) && (vRain >= 0.50 && vRain < 0.75)) biomes[x][y] = 6;
+				else if((vTemp <= 0.75 && vTemp > 0.40) && (vRain >= 0.75 && vRain <= 1)) biomes[x][y] = 7;
+				else if((vTemp <= 0.40 && vTemp > 0.25) && (vRain >= 0.25 && vRain <= 1)) biomes[x][y] = 8;
+				else if(vTemp <= 0.25 && vTemp >= 0) biomes[x][y] = 9;
+				
+				if(regions[x][y].getOcean()) biomes[x][y] = 10;
+				if(regions[x][y].getPolar()) biomes[x][y] = 11;
+				
+				switch(biomes[x][y])
+				{
+				case 0:
+					image.setRGB(x, y, DESERT_COLOUR);
+					break;
+				case 1: 
+					image.setRGB(x, y, SAVANNA_COLOUR);
+					break;
+				case 2: 
+					image.setRGB(x, y, SEASONAL_FOREST_COLOUR);
+					break;
+				case 3: 
+					image.setRGB(x, y, RAINFOREST_COLOUR);
+					break;
+				case 4: 
+					image.setRGB(x, y, PLAINS_COLOUR);
+					break;
+				case 5: 
+					image.setRGB(x, y, WOODS_COLOUR);
+					break;
+				case 6: 
+					image.setRGB(x, y, FOREST_COLOUR);
+					break;
+				case 7: 
+					image.setRGB(x, y, SWAMP_COLOUR);
+					break;
+				case 8: 
+					image.setRGB(x, y, TAIGA_COLOUR);
+					break;
+				case 9: 
+					image.setRGB(x, y, TUNDRA_COLOUR);
+					break;
+				case 10:
+					image.setRGB(x, y, SEA_COLOUR);
+					break;
+				case 11:
+					image.setRGB(x, y, ICE_COLOUR);
+					break;
+				}
+								
+			}
+			
+		}
+		
+		File f = new File(PATH + "/biomemap.bmp");
+		try { ImageIO.write(image, "BMP", f); }
+		catch(IOException e){System.out.println("Failed to print map");};
+		
+	}
+	
 }
