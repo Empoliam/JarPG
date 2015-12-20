@@ -24,6 +24,8 @@ public class Region
 	 * 7 = Swamp
 	 * 8 = Taiga
 	 * 9 = Tundra
+	 * 10 = Ocean
+	 * 11 = Polar
 	 * */
 	
 	int biometype;

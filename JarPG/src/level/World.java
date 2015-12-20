@@ -1113,8 +1113,6 @@ public class World
 				double vTemp = temperature.getValue(x, y);
 				double vRain = rainfall.getValue(x, y);
 				
-				System.out.println(x + "," + y + ":" + vTemp + "," + vRain);
-				
 				if((vTemp <= 1.00 && vTemp > 0.70) && (vRain >= 0 && vRain < 0.25)) biomes[x][y] = 0;
 				else if((vTemp <= 1 && vTemp > 0.75) && (vRain >= 0.25 && vRain < 0.50)) biomes[x][y] = 1;
 				else if((vTemp <= 1 && vTemp > 0.75) && (vRain >= 0.50 && vRain < 0.75)) biomes[x][y] = 2;
@@ -1125,10 +1123,12 @@ public class World
 				else if((vTemp <= 0.75 && vTemp > 0.40) && (vRain >= 0.75 && vRain <= 1)) biomes[x][y] = 7;
 				else if((vTemp <= 0.40 && vTemp > 0.25) && (vRain >= 0.25 && vRain <= 1)) biomes[x][y] = 8;
 				else if(vTemp <= 0.25 && vTemp >= 0) biomes[x][y] = 9;
-								
+				
+				if(regions[x][y].getOcean()) biomes[x][y] = 10;
+				if(regions[x][y].getPolar()) biomes[x][y] = 11;
+				
 				switch(biomes[x][y])
 				{
-				
 				case 0:
 					image.setRGB(x, y, DESERT_COLOUR);
 					break;
@@ -1159,7 +1159,12 @@ public class World
 				case 9: 
 					image.setRGB(x, y, TUNDRA_COLOUR);
 					break;
-				
+				case 10:
+					image.setRGB(x, y, SEA_COLOUR);
+					break;
+				case 11:
+					image.setRGB(x, y, ICE_COLOUR);
+					break;
 				}
 								
 			}
