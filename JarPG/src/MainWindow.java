@@ -139,7 +139,8 @@ public class MainWindow extends JFrame implements ActionListener
 		loadTile(spawn[0], spawn[1]);
 		player.setXY(spawn[0], spawn[1]);
 		textarea.append("Spawned at "+ spawn[0] + "," +spawn[1] +"\n");
-		
+		textarea.append("Spawned in biome type " + activeRegion.getType() + "\n");
+				
 	}
 	
 	private void loadTile(int x, int y)
