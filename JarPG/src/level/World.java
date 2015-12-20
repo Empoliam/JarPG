@@ -470,6 +470,7 @@ public class World
 			for(;x < WORLD_SIZE; x++)
 			{
 
+				regions[x][y].setType(biomes[x][y]);
 				Gson gson = new GsonBuilder().setPrettyPrinting().create();
 				String json = gson.toJson(regions[x][y]);
 				try 
@@ -1107,8 +1108,6 @@ public class World
 			
 			for(;x < WORLD_SIZE; x ++)
 			{
-				
-				
 				
 				double vTemp = temperature.getValue(x, y);
 				double vRain = rainfall.getValue(x, y);
