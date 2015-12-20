@@ -11,14 +11,14 @@ public class NoiseMap
 	public NoiseMap(int size)
 	{
 		
-		SimplexNoise noise = new SimplexNoise(100, 0.3, new Random().nextInt());
+		SimplexNoise noise = new SimplexNoise(1000, 0.6, new Random().nextInt());
 		
 		double xStart=0;
 		double XEnd=500;
 		double yStart=0;
 		double yEnd=500;
 
-		double[][] result = new double[size][size];
+		result = new double[size][size];
 
 		for(int i=0;i<size;i++)
 		{
@@ -28,7 +28,7 @@ public class NoiseMap
 				
 				int x=(int)(xStart+i*((XEnd-xStart)/size));
 				int y=(int)(yStart+j*((yEnd-yStart)/size));
-				result[i][j]=0.5*(1+noise.getNoise(x,y));
+				result[i][j]=(1+(noise.getNoise(x,y)))*0.5;
 				
 			}
 			
