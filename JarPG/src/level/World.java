@@ -8,9 +8,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 
 import utilities.Dice;
+import utilities.noise.NoiseMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,8 +46,14 @@ public class World
 	Color snow = new Color(204, 255, 255); int SNOW_COLOUR = snow.getRGB();
 	Color lake = new Color (50,50,190); int LAKE_COLOUR = lake.getRGB();
 
+	//Data Arrays
 	Region[][] regions;
-
+	int[][] biomes;
+		
+	//Biome noise maps
+	NoiseMap temperature;
+	NoiseMap rainfall;
+	
 	public World(String path, int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein, int twistinessin, int nriversin)
 	{
 
@@ -1070,4 +1079,40 @@ public class World
 
 	}
 
+	public void buildBiomeMap()
+	{
+		
+		temperature = new NoiseMap(WORLD_SIZE);
+		rainfall = new NoiseMap(WORLD_SIZE);
+		
+		biomes = new int[WORLD_SIZE][WORLD_SIZE];
+		
+		for(int y = 0; y < WORLD_SIZE; y ++)
+		{
+			
+			int x = 0;
+			
+			for(;x < WORLD_SIZE; x ++)
+			{
+				
+				double vTemp = temperature.getValue(x, y);
+				double vRain = rainfall.getValue(x, y);
+				
+				if((vTemp <= 1.00 && vTemp > 0.70) && (vRain >= 0 && vRain < 0.25)) biomes[x][y] = 0;
+				else if((vTemp <= 1 && vTemp > 0.75) && (vRain >= 0.25 && vRain < 0.50)) biomes[x][y] = 1;
+				else if((vTemp <= 1 && vTemp > 0.75) && (vRain >= 0.50 && vRain < 0.75)) biomes[x][y] = 2;
+				else if((vTemp <= 1 && vTemp > 0.75) && (vRain >= 0.75 && vRain <= 1)) biomes[x][y] = 3;
+				else if((vTemp <= 0.70 && vTemp > 0.25) && (vRain >= 0 && vRain < 0.25)) biomes[x][y] = 4;
+				else if((vTemp <= 0.75 && vTemp > 0.50) && (vRain >= 0.25 && vRain < 0.50)) biomes[x][y] = 5;
+				else if((vTemp <= 0.75 && vTemp > 0.50) && (vRain >= 0.50 && vRain < 0.75)) biomes[x][y] = 6;
+				else if((vTemp <= 0.75 && vTemp > 0.50) && (vRain >= 0.75 && vRain <= 1)) biomes[x][y] = 7;
+				else if((vTemp <= 0.50 && vTemp > 0.25) && (vRain >= 0.25 && vRain <= 1)) biomes[x][y] = 8;
+				else if(vTemp <= 0.25 && vTemp >= 0) biomes[x][y] = 9;
+				
+			}
+			
+		}
+		
+	}
+	
 }
