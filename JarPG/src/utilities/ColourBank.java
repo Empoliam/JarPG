@@ -40,6 +40,21 @@ public final class ColourBank {
 	public static final int ANTHRACITE_COLOUR = new Color(37,37,37).getRGB();
 	public static final int BITUMINOUS_COAL_COLOUR = new Color(86,86,86).getRGB();
 	
+	//Sediments
+	public static final int BORAX_COLOUR = new Color(230,230,230).getRGB();
+	public static final int BRECCIA_COLOUR = new Color(145,141,130).getRGB();
+	public static final int CONGLOMERATE_COLOUR = new Color(186,165,120).getRGB();
+	public static final int ARKOSE_COLOUR = new Color(206,107,41).getRGB();
+	public static final int GREYWACKE_COLOUR = new Color(122,123,155).getRGB();
+	public static final int SILTSTONE_COLOUR = new Color(198,160,139).getRGB();
+	public static final int SANDSTONE_COLOUR = new Color(240,181,77).getRGB();
+	public static final int CLAYSTONE_COLOUR = new Color(131,116,75).getRGB();
+	public static final int MUDSTONE_COLOUR = new Color(210,196,169).getRGB();
+	public static final int SHALE_COLOUR = new Color(103,92,96).getRGB();
+	public static final int LOESS_COLOUR = new Color(224,179,86).getRGB();
+	public static final int LIMESTONE_COLOUR = new Color(212,202,200).getRGB();
+	public static final int ANHYDRITE_COLOUR = new Color(115,101,90).getRGB();
+	
 	private ColourBank(){}
 
 }

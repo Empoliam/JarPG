@@ -53,6 +53,7 @@ public class WorldWindow extends JDialog
 	JTabbedPane geologyPane = new JTabbedPane();
 	JTabbedPane nativePane = new JTabbedPane();
 	JTabbedPane organicPane = new JTabbedPane();
+	JTabbedPane sedimentPane = new JTabbedPane();
 	
 	JPanel countpanel = new JPanel();
 	JPanel parameterpanel = new JPanel();
@@ -66,6 +67,11 @@ public class WorldWindow extends JDialog
 	JLabel native3ImgPane = new JLabel();
 	JLabel organic1ImgPane = new JLabel();
 	JLabel organic2ImgPane = new JLabel();
+	JLabel sediment1ImgPane = new JLabel();
+	JLabel sediment2ImgPane = new JLabel();
+	JLabel sediment3ImgPane = new JLabel();
+	JLabel sediment4ImgPane = new JLabel();
+	
 	
 	JLabel lWorldSize = new JLabel("World size (n*x): ");
 	JLabel lContinents = new JLabel("Continent seeds: ");
@@ -110,6 +116,11 @@ public class WorldWindow extends JDialog
 	
 	MScrollPane organic1Scroll = new MScrollPane(organic1ImgPane);
 	MScrollPane organic2Scroll = new MScrollPane(organic2ImgPane);
+	
+	MScrollPane sediment1Scroll = new MScrollPane(sediment1ImgPane);
+	MScrollPane sediment2Scroll = new MScrollPane(sediment2ImgPane);
+	MScrollPane sediment3Scroll = new MScrollPane(sediment3ImgPane);
+	MScrollPane sediment4Scroll = new MScrollPane(sediment4ImgPane);
 	
 	ActionListener aNewWorld = new ActionListener() 
 	{
@@ -172,6 +183,22 @@ public class WorldWindow extends JDialog
 				BufferedImage organic2Img = ImageIO.read(new File(PATH + "/OrganicLayer02.bmp"));
 				ImageIcon organic2Icon = new ImageIcon(organic2Img);
 				organic2ImgPane.setIcon(organic2Icon);
+				
+				BufferedImage sediment1Img = ImageIO.read(new File(PATH + "/SedimentLayer01.bmp"));
+				ImageIcon sediment1Icon = new ImageIcon(sediment1Img);
+				sediment1ImgPane.setIcon(sediment1Icon);
+				
+				BufferedImage sediment2Img = ImageIO.read(new File(PATH + "/SedimentLayer02.bmp"));
+				ImageIcon sediment2Icon = new ImageIcon(sediment2Img);
+				sediment2ImgPane.setIcon(sediment2Icon);
+				
+				BufferedImage sediment3Img = ImageIO.read(new File(PATH + "/SedimentLayer03.bmp"));
+				ImageIcon sediment3Icon = new ImageIcon(sediment3Img);
+				sediment3ImgPane.setIcon(sediment3Icon);
+				
+				BufferedImage sediment4Img = ImageIO.read(new File(PATH + "/SedimentLayer04.bmp"));
+				ImageIcon sediment4Icon = new ImageIcon(sediment4Img);
+				sediment4ImgPane.setIcon(sediment4Icon);
 				
 				pack();
 				
@@ -237,6 +264,7 @@ public class WorldWindow extends JDialog
 		imagepane.addTab("Biomes",biomeScroll);
 		imagepane.addTab("Geology", geologyPane);
 		
+		geologyPane.addTab("Sedimentary", sedimentPane);
 		geologyPane.addTab("Organic", organicPane);
 		geologyPane.addTab("Native", nativePane);
 		
@@ -246,7 +274,12 @@ public class WorldWindow extends JDialog
 		nativePane.addTab("Layer 1",native1Scroll);
 		nativePane.addTab("Layer 2",native2Scroll);
 		nativePane.addTab("Layer 3",native3Scroll);
-				
+		
+		sedimentPane.addTab("Layer 1", sediment1Scroll);
+		sedimentPane.addTab("Layer 2", sediment2Scroll);
+		sedimentPane.addTab("Layer 3", sediment3Scroll);
+		sedimentPane.addTab("Layer 4", sediment4Scroll);
+		
 		//set component defaults
 		fWorldSize.setText("400");
 		fContinents.setText("6");
