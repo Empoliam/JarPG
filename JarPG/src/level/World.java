@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import geology.NativeLayer;
+import geology.OrganicsLayer;
 import items.Rock;
 
 import static utilities.ColourBank.*;
@@ -1164,6 +1165,9 @@ public class World
 		
 		new NativeLayer(WORLD_SIZE, PATH, "NativeLayer01");
 		new NativeLayer(WORLD_SIZE, PATH, "NativeLayer02");
+		new NativeLayer(WORLD_SIZE, PATH, "NativeLayer03");
+		new OrganicsLayer(WORLD_SIZE, PATH, "OrganicLayer01");
+		new OrganicsLayer(WORLD_SIZE, PATH, "OrganicLayer02");
 		
 	}
 	

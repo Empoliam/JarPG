@@ -50,6 +50,9 @@ public class WorldWindow extends JDialog
 			
 	JTabbedPane mainpane = new JTabbedPane();
 	JTabbedPane imagepane = new JTabbedPane();
+	JTabbedPane geologyPane = new JTabbedPane();
+	JTabbedPane nativePane = new JTabbedPane();
+	JTabbedPane organicPane = new JTabbedPane();
 	
 	JPanel countpanel = new JPanel();
 	JPanel parameterpanel = new JPanel();
@@ -58,6 +61,11 @@ public class WorldWindow extends JDialog
 	
 	JLabel imgPane = new JLabel();
 	JLabel biomeImgPane = new JLabel();
+	JLabel native1ImgPane = new JLabel();
+	JLabel native2ImgPane = new JLabel();
+	JLabel native3ImgPane = new JLabel();
+	JLabel organic1ImgPane = new JLabel();
+	JLabel organic2ImgPane = new JLabel();
 	
 	JLabel lWorldSize = new JLabel("World size (n*x): ");
 	JLabel lContinents = new JLabel("Continent seeds: ");
@@ -96,6 +104,13 @@ public class WorldWindow extends JDialog
 	MScrollPane mapScroll = new MScrollPane(imgPane);
 	MScrollPane biomeScroll = new MScrollPane(biomeImgPane);
 	
+	MScrollPane native1Scroll = new MScrollPane(native1ImgPane);
+	MScrollPane native2Scroll = new MScrollPane(native2ImgPane);
+	MScrollPane native3Scroll = new MScrollPane(native3ImgPane);
+	
+	MScrollPane organic1Scroll = new MScrollPane(organic1ImgPane);
+	MScrollPane organic2Scroll = new MScrollPane(organic2ImgPane);
+	
 	ActionListener aNewWorld = new ActionListener() 
 	{
 		
@@ -133,9 +148,31 @@ public class WorldWindow extends JDialog
 				BufferedImage mapImg = ImageIO.read(new File(PATH + "/map.bmp"));
 				ImageIcon mapIcon = new ImageIcon(mapImg);
 				imgPane.setIcon(mapIcon);
+				
 				BufferedImage biomeImg = ImageIO.read(new File(PATH + "/biomemap.bmp"));
 				ImageIcon biomeIcon = new ImageIcon(biomeImg);
 				biomeImgPane.setIcon(biomeIcon);
+				
+				BufferedImage native1Img = ImageIO.read(new File(PATH + "/NativeLayer01.bmp"));
+				ImageIcon native1Icon = new ImageIcon(native1Img);
+				native1ImgPane.setIcon(native1Icon);
+
+				BufferedImage native2Img = ImageIO.read(new File(PATH + "/NativeLayer02.bmp"));
+				ImageIcon native2Icon = new ImageIcon(native2Img);
+				native2ImgPane.setIcon(native2Icon);
+				
+				BufferedImage native3Img = ImageIO.read(new File(PATH + "/NativeLayer03.bmp"));
+				ImageIcon native3Icon = new ImageIcon(native3Img);
+				native3ImgPane.setIcon(native3Icon);
+				
+				BufferedImage organic1Img = ImageIO.read(new File(PATH + "/OrganicLayer01.bmp"));
+				ImageIcon organic1Icon = new ImageIcon(organic1Img);
+				organic1ImgPane.setIcon(organic1Icon);
+				
+				BufferedImage organic2Img = ImageIO.read(new File(PATH + "/OrganicLayer02.bmp"));
+				ImageIcon organic2Icon = new ImageIcon(organic2Img);
+				organic2ImgPane.setIcon(organic2Icon);
+				
 				pack();
 				
 			} 
@@ -198,6 +235,17 @@ public class WorldWindow extends JDialog
 		//Map panel
 		imagepane.addTab("Map",mapScroll);
 		imagepane.addTab("Biomes",biomeScroll);
+		imagepane.addTab("Geology", geologyPane);
+		
+		geologyPane.addTab("Organic", organicPane);
+		geologyPane.addTab("Native", nativePane);
+		
+		organicPane.addTab("Layer 1", organic1Scroll);
+		organicPane.addTab("Layer 2", organic2Scroll);
+		
+		nativePane.addTab("Layer 1",native1Scroll);
+		nativePane.addTab("Layer 2",native2Scroll);
+		nativePane.addTab("Layer 3",native3Scroll);
 				
 		//set component defaults
 		fWorldSize.setText("400");

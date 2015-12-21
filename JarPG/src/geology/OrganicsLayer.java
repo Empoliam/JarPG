@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class NativeLayer{
+public class OrganicsLayer{
 
 	int size;
 	int data[][];
@@ -17,7 +17,7 @@ public class NativeLayer{
 	double[][] A;
 	double[][] B;
 
-	public NativeLayer(int size, String PATH, String name) 
+	public OrganicsLayer(int size, String PATH, String name) 
 	{
 
 		this.size = size;
@@ -48,42 +48,42 @@ public class NativeLayer{
 				double pointDataA = A[x][y];
 				double pointDataB = B[x][y];
 											
-				if (pointDataA < 0.7 && pointDataB > 0.7)
+				if((pointDataA > 0.4 && pointDataA < 0.6) && pointDataB > 0.6)
 				{
-
-					data[x][y] = 4;
-					image.setRGB(x, y, SULPHUR_COLOUR);
-
+					
+					data[x][y] = 92;
+					image.setRGB(x, y, PEAT_COLOUR);
+					
 				}
-				else if (pointDataA < 0.45 && pointDataB < 0.7)
+				else if ((pointDataA < 0.4 || pointDataA > 0.6) && (pointDataB > 0.4 && pointDataB < 0.6))
 				{
-
-					data[x][y] = 3;
-					image.setRGB(x, y, IRON_COLOUR);
-
+					
+					data[x][y] = 91;
+					image.setRGB(x, y, TAR_COLOUR);
+					
 				}
-				else if ((pointDataA < 0.7 && pointDataA > 0.45)&& pointDataB < 0.7)
+				else if ((pointDataA < 0.4 && pointDataB < 0.4) || (pointDataA > 0.6 && pointDataB > 0.6))
 				{
-
-					data[x][y] = 2;
-					image.setRGB(x, y, COPPER_COLOUR);
-
+					
+					data[x][y] = 95;
+					image.setRGB(x, y, LIGNITE_COLOUR);
+					
 				}
-				else if (pointDataA > 0.7 && pointDataB < 0.7)
+				else if((pointDataA > 0.4 && pointDataA < 0.6) && pointDataB < 0.4)
 				{
-
-					data[x][y] = 1;
-					image.setRGB(x, y, SILVER_COLOUR);
-
+					
+					data[x][y] = 93;
+					image.setRGB(x, y, ANTHRACITE_COLOUR);
+					
 				}
-				else if (pointDataA > 0.7 && pointDataB > 0.7)
+				else
 				{
-
-					data[x][y] = 0;
-					image.setRGB(x, y, GOLD_COLOUR);
-
+					
+					data[x][y] = 94;
+					image.setRGB(x,y,BITUMINOUS_COAL_COLOUR);
+					
 				}
-
+				
 			}
 
 		}

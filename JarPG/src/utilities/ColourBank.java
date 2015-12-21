@@ -33,6 +33,13 @@ public final class ColourBank {
 	public static final int IRON_COLOUR = new Color (128, 25, 0).getRGB();
 	public static final int SULPHUR_COLOUR = new Color (255, 255, 102).getRGB();
 	
+	//Organics
+	public static final int PEAT_COLOUR = new Color (47,23,0).getRGB();
+	public static final int TAR_COLOUR = new Color(0,0,0).getRGB();
+	public static final int LIGNITE_COLOUR = new Color(188,58,38).getRGB();
+	public static final int ANTHRACITE_COLOUR = new Color(37,37,37).getRGB();
+	public static final int BITUMINOUS_COAL_COLOUR = new Color(86,86,86).getRGB();
+	
 	private ColourBank(){}
 
 }
