@@ -17,7 +17,7 @@ public class NativeLayer{
 	double[][] A;
 	double[][] B;
 
-	public NativeLayer(int size) 
+	public NativeLayer(int size, String PATH, String name) 
 	{
 
 		this.size = size;
@@ -29,7 +29,7 @@ public class NativeLayer{
 		B = new NoiseMap(size).getResult();
 		
 		data = new int[size][size];
-		populateLayer("worlds/world" , "NativeLayer01");
+		data = populateLayer(PATH, name);
 
 	}
 
@@ -47,42 +47,36 @@ public class NativeLayer{
 
 				double pointDataA = A[x][y];
 				double pointDataB = B[x][y];
-				
-				boolean goldConstraint = -(0.25*pointDataA)-(0.25*pointDataB) > -0.44;
-				boolean silverConstraint = (-(0.25*pointDataA)-(0.25*pointDataB) <= -0.44) && ((0.5*pointDataA)+(0.5*pointDataB) > 0.75);
-				boolean copperConstraint = ((0.5*pointDataA)+(0.5*pointDataB) <= 0.75) && ((0.9*pointDataA)+(0.9*pointDataB) > 0.81);
-				boolean ironConstraint = (0.9*pointDataA)+(0.9*pointDataB) <= 0.81 && ((0.3*pointDataA)+(0.3*pointDataB) > 0.09);
-				boolean sulphurConstraint = ((0.3*pointDataA)+(0.3*pointDataB) <= 0.09);
-								
-				if (sulphurConstraint == true)
+											
+				if ((pointDataA < 0.7 && pointDataA > 0.45)&& pointDataB > 0.7)
 				{
 
 					data[x][y] = 4;
 					image.setRGB(x, y, SULPHUR_COLOUR);
 
 				}
-				else if (ironConstraint == true)
+				else if (pointDataA < 0.45)
 				{
 
 					data[x][y] = 3;
 					image.setRGB(x, y, IRON_COLOUR);
 
 				}
-				else if (copperConstraint == true)
+				else if ((pointDataA < 0.7 && pointDataA > 0.45)&& pointDataB < 0.7)
 				{
 
 					data[x][y] = 2;
 					image.setRGB(x, y, COPPER_COLOUR);
 
 				}
-				else if (silverConstraint == true)
+				else if (pointDataA > 0.7 && pointDataB < 0.7)
 				{
 
 					data[x][y] = 1;
 					image.setRGB(x, y, SILVER_COLOUR);
 
 				}
-				else if (goldConstraint == true)
+				else if (pointDataA > 0.7 && pointDataB > 0.7)
 				{
 
 					data[x][y] = 0;

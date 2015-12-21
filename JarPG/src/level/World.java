@@ -1162,7 +1162,8 @@ public class World
 	public void createGeology()
 	{
 		
-		new NativeLayer(WORLD_SIZE);
+		new NativeLayer(WORLD_SIZE, PATH, "NativeLayer01");
+		new NativeLayer(WORLD_SIZE, PATH, "NativeLayer02");
 		
 	}
 	
