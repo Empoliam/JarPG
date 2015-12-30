@@ -1,5 +1,7 @@
 package level;
 
+import geology.Rock;
+
 public class Region 
 {
 	
@@ -29,6 +31,16 @@ public class Region
 	 * */
 	
 	int biometype;
+	
+	Rock native01;
+	Rock native02;
+	Rock native03;
+	Rock organic01;
+	Rock organic02;
+	Rock sediment01;
+	Rock sediment02;
+	Rock sediment03;
+	Rock sediment04;
 	
 	public Region() {}
 
@@ -174,6 +186,42 @@ public class Region
 		boolean[] tags = new boolean[] {solid, polar, beach, ocean, mountain, snow, lake, river};
 		return tags;
 		
+	}
+
+	public void setNative01(Rock native01) {
+		this.native01 = native01;
+	}
+
+	public void setNative02(Rock native02) {
+		this.native02 = native02;
+	}
+
+	public void setNative03(Rock native03) {
+		this.native03 = native03;
+	}
+
+	public void setOrganic01(Rock organic01) {
+		this.organic01 = organic01;
+	}
+	
+	public void setOrganic02(Rock organic02) {
+		this.organic02 = organic02;
+	}
+
+	public void setSediment01(Rock sediment01) {
+		this.sediment01 = sediment01;
+	}
+
+	public  void setSediment02(Rock sediment02) {
+		this.sediment02 = sediment02;
+	}
+
+	public void setSediment03(Rock sediment03) {
+		this.sediment03 = sediment03;
+	}
+
+	public void setSediment04(Rock sediment04) {
+		this.sediment04 = sediment04;
 	}
 	
 }

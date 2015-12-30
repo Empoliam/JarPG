@@ -18,8 +18,8 @@ import com.google.gson.GsonBuilder;
 
 import geology.NativeLayer;
 import geology.OrganicsLayer;
+import geology.Rock;
 import geology.SedimentLayer;
-import items.Rock;
 
 import static utilities.ColourBank.*;
 
@@ -46,7 +46,15 @@ public class World
 	//Data Arrays
 	Region[][] regions;
 	int[][] biomes;
-	Rock[][] nativeLayer0;	
+	NativeLayer native01;
+	NativeLayer native02;
+	NativeLayer native03;
+	OrganicsLayer organic01;
+	OrganicsLayer organic02;
+	SedimentLayer sediment01;
+	SedimentLayer sediment02;
+	SedimentLayer sediment03;
+	SedimentLayer sediment04;
 	
 	public World(String path, int sizein, int continentsin, int generationsin,int tempin ,boolean polesin, boolean beachin, int mountains, int mountainsizein, int lakesin, int lakesizein, int twistinessin, int nriversin)
 	{
@@ -456,8 +464,19 @@ public class World
 			{
 
 				regions[x][y].setType(biomes[x][y]);
+				regions[x][y].setSediment01(new Rock(sediment01.getData(x, y)));
+				regions[x][y].setSediment02(new Rock(sediment02.getData(x, y)));
+				regions[x][y].setSediment03(new Rock(sediment03.getData(x, y)));
+				regions[x][y].setSediment04(new Rock(sediment04.getData(x, y)));
+				regions[x][y].setOrganic01(new Rock(organic01.getData(x, y)));
+				regions[x][y].setOrganic02(new Rock(organic02.getData(x, y)));
+				regions[x][y].setNative01(new Rock(native01.getData(x, y)));
+				regions[x][y].setNative02(new Rock(native02.getData(x, y)));
+				regions[x][y].setNative03(new Rock(native03.getData(x, y)));
+				
 				Gson gson = new GsonBuilder().setPrettyPrinting().create();
 				String json = gson.toJson(regions[x][y]);
+				
 				try 
 				{
 
@@ -1164,15 +1183,15 @@ public class World
 	public void createGeology()
 	{
 		
-		new NativeLayer(WORLD_SIZE, PATH, "NativeLayer01");
-		new NativeLayer(WORLD_SIZE, PATH, "NativeLayer02");
-		new NativeLayer(WORLD_SIZE, PATH, "NativeLayer03");
-		new OrganicsLayer(WORLD_SIZE, PATH, "OrganicLayer01");
-		new OrganicsLayer(WORLD_SIZE, PATH, "OrganicLayer02");
-		new SedimentLayer(WORLD_SIZE, PATH, "SedimentLayer01");
-		new SedimentLayer(WORLD_SIZE, PATH, "SedimentLayer02");
-		new SedimentLayer(WORLD_SIZE, PATH, "SedimentLayer03");
-		new SedimentLayer(WORLD_SIZE, PATH, "SedimentLayer04");
+		native01 = new NativeLayer(WORLD_SIZE, PATH, "NativeLayer01");
+		native02 = new NativeLayer(WORLD_SIZE, PATH, "NativeLayer02");
+		native03 = new NativeLayer(WORLD_SIZE, PATH, "NativeLayer03");
+		organic01 = new OrganicsLayer(WORLD_SIZE, PATH, "OrganicLayer01");
+		organic02 = new OrganicsLayer(WORLD_SIZE, PATH, "OrganicLayer02");
+		sediment01 = new SedimentLayer(WORLD_SIZE, PATH, "SedimentLayer01");
+		sediment02 = new SedimentLayer(WORLD_SIZE, PATH, "SedimentLayer02");
+		sediment03 = new SedimentLayer(WORLD_SIZE, PATH, "SedimentLayer03");
+		sediment04 = new SedimentLayer(WORLD_SIZE, PATH, "SedimentLayer04");
 		
 	}
 	

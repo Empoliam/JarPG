@@ -1,4 +1,4 @@
-package items;
+package geology;
 
 public class Rock 
 {
@@ -9,7 +9,7 @@ public class Rock
 	public Rock(int id)
 	{
 		
-		
+		this.id = id;
 		
 	}
 	
