@@ -8,7 +8,6 @@ import javax.swing.JScrollPane;;
 public class MScrollPane extends JScrollPane 
 {
 
-	
 	private static final long serialVersionUID = 1523164363463473L;
 
 	public MScrollPane(Component c)
@@ -16,7 +15,8 @@ public class MScrollPane extends JScrollPane
 		
 		super(c);
 		
-		setMaximumSize(new Dimension(600,600));
+		setMinimumSize(new Dimension(400,400));
+		setPreferredSize(new Dimension(400,400));
 		getVerticalScrollBar().setUnitIncrement(20);
 		getHorizontalScrollBar().setUnitIncrement(20);
 		

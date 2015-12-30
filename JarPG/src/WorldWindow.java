@@ -50,6 +50,10 @@ public class WorldWindow extends JDialog
 			
 	JTabbedPane mainpane = new JTabbedPane();
 	JTabbedPane imagepane = new JTabbedPane();
+	JTabbedPane geologyPane = new JTabbedPane();
+	JTabbedPane nativePane = new JTabbedPane();
+	JTabbedPane organicPane = new JTabbedPane();
+	JTabbedPane sedimentPane = new JTabbedPane();
 	
 	JPanel countpanel = new JPanel();
 	JPanel parameterpanel = new JPanel();
@@ -58,6 +62,16 @@ public class WorldWindow extends JDialog
 	
 	JLabel imgPane = new JLabel();
 	JLabel biomeImgPane = new JLabel();
+	JLabel native1ImgPane = new JLabel();
+	JLabel native2ImgPane = new JLabel();
+	JLabel native3ImgPane = new JLabel();
+	JLabel organic1ImgPane = new JLabel();
+	JLabel organic2ImgPane = new JLabel();
+	JLabel sediment1ImgPane = new JLabel();
+	JLabel sediment2ImgPane = new JLabel();
+	JLabel sediment3ImgPane = new JLabel();
+	JLabel sediment4ImgPane = new JLabel();
+	
 	
 	JLabel lWorldSize = new JLabel("World size (n*x): ");
 	JLabel lContinents = new JLabel("Continent seeds: ");
@@ -96,6 +110,18 @@ public class WorldWindow extends JDialog
 	MScrollPane mapScroll = new MScrollPane(imgPane);
 	MScrollPane biomeScroll = new MScrollPane(biomeImgPane);
 	
+	MScrollPane native1Scroll = new MScrollPane(native1ImgPane);
+	MScrollPane native2Scroll = new MScrollPane(native2ImgPane);
+	MScrollPane native3Scroll = new MScrollPane(native3ImgPane);
+	
+	MScrollPane organic1Scroll = new MScrollPane(organic1ImgPane);
+	MScrollPane organic2Scroll = new MScrollPane(organic2ImgPane);
+	
+	MScrollPane sediment1Scroll = new MScrollPane(sediment1ImgPane);
+	MScrollPane sediment2Scroll = new MScrollPane(sediment2ImgPane);
+	MScrollPane sediment3Scroll = new MScrollPane(sediment3ImgPane);
+	MScrollPane sediment4Scroll = new MScrollPane(sediment4ImgPane);
+	
 	ActionListener aNewWorld = new ActionListener() 
 	{
 		
@@ -133,9 +159,47 @@ public class WorldWindow extends JDialog
 				BufferedImage mapImg = ImageIO.read(new File(PATH + "/map.bmp"));
 				ImageIcon mapIcon = new ImageIcon(mapImg);
 				imgPane.setIcon(mapIcon);
+				
 				BufferedImage biomeImg = ImageIO.read(new File(PATH + "/biomemap.bmp"));
 				ImageIcon biomeIcon = new ImageIcon(biomeImg);
 				biomeImgPane.setIcon(biomeIcon);
+				
+				BufferedImage native1Img = ImageIO.read(new File(PATH + "/NativeLayer01.bmp"));
+				ImageIcon native1Icon = new ImageIcon(native1Img);
+				native1ImgPane.setIcon(native1Icon);
+
+				BufferedImage native2Img = ImageIO.read(new File(PATH + "/NativeLayer02.bmp"));
+				ImageIcon native2Icon = new ImageIcon(native2Img);
+				native2ImgPane.setIcon(native2Icon);
+				
+				BufferedImage native3Img = ImageIO.read(new File(PATH + "/NativeLayer03.bmp"));
+				ImageIcon native3Icon = new ImageIcon(native3Img);
+				native3ImgPane.setIcon(native3Icon);
+				
+				BufferedImage organic1Img = ImageIO.read(new File(PATH + "/OrganicLayer01.bmp"));
+				ImageIcon organic1Icon = new ImageIcon(organic1Img);
+				organic1ImgPane.setIcon(organic1Icon);
+				
+				BufferedImage organic2Img = ImageIO.read(new File(PATH + "/OrganicLayer02.bmp"));
+				ImageIcon organic2Icon = new ImageIcon(organic2Img);
+				organic2ImgPane.setIcon(organic2Icon);
+				
+				BufferedImage sediment1Img = ImageIO.read(new File(PATH + "/SedimentLayer01.bmp"));
+				ImageIcon sediment1Icon = new ImageIcon(sediment1Img);
+				sediment1ImgPane.setIcon(sediment1Icon);
+				
+				BufferedImage sediment2Img = ImageIO.read(new File(PATH + "/SedimentLayer02.bmp"));
+				ImageIcon sediment2Icon = new ImageIcon(sediment2Img);
+				sediment2ImgPane.setIcon(sediment2Icon);
+				
+				BufferedImage sediment3Img = ImageIO.read(new File(PATH + "/SedimentLayer03.bmp"));
+				ImageIcon sediment3Icon = new ImageIcon(sediment3Img);
+				sediment3ImgPane.setIcon(sediment3Icon);
+				
+				BufferedImage sediment4Img = ImageIO.read(new File(PATH + "/SedimentLayer04.bmp"));
+				ImageIcon sediment4Icon = new ImageIcon(sediment4Img);
+				sediment4ImgPane.setIcon(sediment4Icon);
+				
 				pack();
 				
 			} 
@@ -198,7 +262,24 @@ public class WorldWindow extends JDialog
 		//Map panel
 		imagepane.addTab("Map",mapScroll);
 		imagepane.addTab("Biomes",biomeScroll);
-				
+		imagepane.addTab("Geology", geologyPane);
+		
+		geologyPane.addTab("Sedimentary", sedimentPane);
+		geologyPane.addTab("Organic", organicPane);
+		geologyPane.addTab("Native", nativePane);
+		
+		organicPane.addTab("Layer 1", organic1Scroll);
+		organicPane.addTab("Layer 2", organic2Scroll);
+		
+		nativePane.addTab("Layer 1",native1Scroll);
+		nativePane.addTab("Layer 2",native2Scroll);
+		nativePane.addTab("Layer 3",native3Scroll);
+		
+		sedimentPane.addTab("Layer 1", sediment1Scroll);
+		sedimentPane.addTab("Layer 2", sediment2Scroll);
+		sedimentPane.addTab("Layer 3", sediment3Scroll);
+		sedimentPane.addTab("Layer 4", sediment4Scroll);
+		
 		//set component defaults
 		fWorldSize.setText("400");
 		fContinents.setText("6");

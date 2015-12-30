@@ -1,0 +1,109 @@
+//Native Elements : 0
+Gold								
+Silver								
+Copper								
+Iron								
+Sulphur								
+
+//Metal ores : 1
+Pyrite			- Iron
+Chalcopyrite	- Copper
+Sphalerite		- Zinc
+Stibnite		- Antimony
+Cinnabar		- Mercury
+Realgar			- Arsenic
+Galena			- Lead
+Hematite		- Iron
+Spinel			- Zinc
+Magnetite		- Iron
+Illmenite		- Titanium
+Chromite		- Chromium
+Cassiterite		- Tin
+Rutile			- Titanium
+Uraninite		- Uranium
+Goethite		- Iron
+Malachite		- Copper
+Wolframite		- Tungsten
+Wulfenite		- Lead
+Carnotite		- Uranium
+
+//Sediments : 2
+Borax
+Anhydrite
+Breccia
+Conglomerate
+Arkose
+Greywacke
+Siltstone
+Sandstone
+Claystone
+Mudstone
+Shale
+Loess
+Limestone
+
+//Metamorphic : 3
+Sillimanite
+Kyanite
+Staurolite
+Talc
+Skarn
+Serpentinite
+Marble
+Hornfels
+Migmatite
+Slate
+Phyllite
+Quartzite
+Schist
+Gneiss
+Eclogite
+Granulite
+Amphibolite
+Mylonite
+Jadeitite		- Jade
+
+//Igneous : 4
+Granite
+Pegmatite
+Grandiorite
+Dolerite
+Gabbro
+Diorite
+Lamprophyre
+Kimberlite		- Diamond
+Peridotite		- Peridot
+Basalt
+Dacite
+Obsidian
+Andesite
+Rhyolite
+
+//Minerals : 5
+Corundum 		- Sapphire
+Flourite		- Flourine
+Halite			- Salt
+Dolomite		- Dolomite
+Rhodochrosite	- Rhodochrosite
+Calcite			- Calcite
+Azurite			- Azurite
+Gypsum			- Gypsum
+Turquoise		- Turquoise
+Garnet vein		- Garnet
+Olivine vein	- Olivine
+Zircon vein		- Zircon
+Andalusite		- Chaistolite
+Topaz vein		- Topaz
+Epidote vein	- Epidote
+Beryl vein		- Beryl
+Pyroxene vein	- Pyroxene
+Amphibole vein	- Amphibole
+Muscovite		- Mica
+Quartz			- Quartz
+
+//Organics : 6
+Tar
+Peat
+Anthracite
+Bituminous Coal
+Lignite

@@ -1,0 +1,96 @@
+0,Native Gold,0,0,null
+1,Native Silver,0,1,null
+2,Native Copper,0,2,null
+3,Native Iron,0,3,null
+4,Sulphur,0,4,null
+5,Pyrite,1,5,null
+6,Chalcopyrite,1,6,null
+7,Sphalerite,1,7,null
+8,Stibnite,1,8,null
+9,Cinnabar,1,9,null
+10,Realgar,1,10,null
+11,Galena,1,11,null
+12,Hematite,1,12,null
+13,Spinel,1,13,null
+14,Magnetite,1,14,null
+15,Illmenite,1,15,null
+16,Chromite,1,16,null
+17,Cassiterite,1,17,null
+18,Rutile,1,18,null
+19,Uraninite,1,19,null
+20,Goethite,1,20,null
+21,Malachite,1,21,null
+22,Wolframite,1,22,null
+23,Wulfenite,1,23,null
+24,Carnotite,1,24,null
+25,Borax,2,25,null
+26,Anhydrite,2,26,null
+27,Breccia,2,27,null
+28,Conglomerate,2,28,null
+29,Arkose,2,29,null
+30,Greywacke,2,30,null
+31,Siltstone,2,31,null
+32,Sandstone,2,32,null
+33,Claystone,2,33,null
+34,Mudstone,2,34,null
+35,Shale,2,35,null
+36,Loess,2,36,null
+37,Limestone,2,37,null
+38,Sillimanite,3,38,null
+39,Kyanite,3,39,null
+40,Staurolite,3,40,null
+41,Talc,3,41,null
+42,Skarn,3,42,null
+43,Serpentinite,3,43,null
+44,Marble,3,44,null
+45,Hornfels,3,45,null
+46,Migmatite,3,46,null
+47,Slate,3,47,null
+48,Phyllite,3,48,null
+49,Quartzite,3,49,null
+50,Schist,3,50,null
+51,Gneiss,3,51,null
+52,Eclogite,3,52,null
+53,Granulite,3,53,null
+54,Amphibolite,3,54,null
+55,Mylonite,3,55,null
+56,Jadeitite,3,73,0
+57,Granite,4,56,null
+58,Pegmatite,4,57,null
+59,Grandiorite,4,58,null
+60,Dolerite,4,59,null
+61,Gabbro,4,60,null
+62,Diorite,4,61,null
+63,Lamprophyre,4,62,null
+64,Kimberlite,4,73,1
+65,Peridotite,4,73,2
+66,Basalt,4,63,null
+67,Dacite,4,64,null
+68,Obsidian,4,65,null
+69,Andesite,4,66,null
+70,Rhyolite,4,67,null
+71,Corundum ,5,73,3
+72,Flourite,5,73,4
+73,Halite,5,73,
+74,Dolomite,5,73,5
+75,Rhodochrosite,5,73,6
+76,Calcite,5,73,7
+77,Azurite,5,73,8
+78,Gypsum,5,73,9
+79,Turquoise,5,73,10
+80,Garnet vein,5,73,11
+81,Olivine vein,5,73,12
+82,Zircon vein,5,73,13
+83,Andalusite,5,73,14
+84,Topaz vein,5,73,15
+85,Epidote vein,5,73,16
+86,Beryl vein,5,73,17
+87,Pyroxene vein,5,73,18
+88,Amphibole vein,5,73,19
+89,Muscovite,5,73,20
+90,Quartz,5,73,21
+91,Tar,6,68,null
+92,Peat,6,69,null
+93,Anthracite,6,70,null
+94,Bituminous Coal,6,71,null
+95,Lignite,6,72,null
