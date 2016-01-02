@@ -6,23 +6,39 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.FileUtils;
+
 import utilities.noise.NoiseMap;
 import static utilities.ColourBank.*;
 
 public class World 
 {
 
-	int size;
+	int WORLD_SIZE;
+	String PATH;
+	
 	double[][] data;
 	Region[][] regions;
 
-	public World(int sizein)
+	public World(int sizein, String path)
 	{
 
-		size = sizein;
-		regions = new Region[size][size];
-		data = new NoiseMap(size).getResult();
+		WORLD_SIZE = sizein;
+		PATH = "worlds/" + path;
+		
+		try {
+			FileUtils.deleteDirectory(new File(PATH));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		new File(PATH).mkdirs();
+		
+		regions = new Region[WORLD_SIZE][WORLD_SIZE];
+		data = new NoiseMap(WORLD_SIZE).getResult();
+		
 		generateLand();
+		new BiomeMap(WORLD_SIZE, PATH);
 		drawImage();
 
 	}
@@ -30,11 +46,11 @@ public class World
 	private void generateLand()
 	{
 
-		for(int y = 0; y < size; y ++)
+		for(int y = 0; y < WORLD_SIZE; y ++)
 		{
 
 			int x = 0;
-			for(; x < size; x++)
+			for(; x < WORLD_SIZE; x++)
 			{
 
 				regions[x][y] = new Region();
@@ -74,14 +90,14 @@ public class World
 	private void drawImage()
 	{
 
-		BufferedImage image = new BufferedImage(size,size,BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(WORLD_SIZE,WORLD_SIZE,BufferedImage.TYPE_INT_RGB);
 
-		for ( int y = 0; y < size; y ++)
+		for ( int y = 0; y < WORLD_SIZE; y ++)
 		{
 
 			int x = 0;
 
-			for(; x < size; x ++)
+			for(; x < WORLD_SIZE; x ++)
 			{
 
 				if (regions[x][y].getSolid() == true)image.setRGB(x, y, LAND_COLOUR);
@@ -93,7 +109,7 @@ public class World
 
 		}
 
-		File f = new File("newmap.bmp");
+		File f = new File(PATH + "/newmap.bmp");
 		try { ImageIO.write(image, "BMP", f); }
 		catch(IOException e){System.out.println("Failed to print map");};
 

@@ -102,7 +102,7 @@ public class MainWindow extends JFrame implements ActionListener
 	{
 		
 		//makePlayer();
-		new world.World(400);
+		new world.World(400,"world");
 		
 	}
 	
