@@ -1,20 +1,11 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-
-import com.google.gson.Gson;
-
-import level.Region;
 
 import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
@@ -45,7 +36,6 @@ public class MainWindow extends JFrame implements ActionListener
 	int[] spawn = new int[2];
 	
 	//active entities
-	Region activeRegion;
 	
 	public static void main(String[] args) 
 	{
@@ -111,8 +101,8 @@ public class MainWindow extends JFrame implements ActionListener
 	public void playgame()
 	{
 		
-		makePlayer();
-		makeWorld();
+		//makePlayer();
+		new world.World(400);
 		
 	}
 	
@@ -127,42 +117,5 @@ public class MainWindow extends JFrame implements ActionListener
 		if(debug) textarea.append("Debug Mode Enabled");
 		
 	}
-	
-	private void makeWorld()
-	{
-		
-		WorldWindow worldGen = new WorldWindow();
-		textarea.append("Created world \n");
-		spawn = worldGen.getSpawn();
-		PATH = worldGen.getPath();
-		worldGen.dispose();
-		loadTile(spawn[0], spawn[1]);
-		player.setXY(spawn[0], spawn[1]);
-		textarea.append("Spawned at "+ spawn[0] + "," +spawn[1] +"\n");
-		textarea.append("Spawned in biome type " + activeRegion.getType() + "\n");
-				
-	}
-	
-	private void loadTile(int x, int y)
-	{
-		
-		BufferedReader br;
-		try {
-			
-			File f = new File(PATH + "/regions/" + x + "-" + y +".json");
-			br = new BufferedReader(new FileReader(f));
-			Gson gson = new Gson();
-			activeRegion = gson.fromJson(br,Region.class);
-			
-		} 
-		catch (FileNotFoundException e) 
-		{
-		
-			textarea.append("Failed to load tile. Please restart \n");
-			
-		}
-				
-	}
-
 
 }
