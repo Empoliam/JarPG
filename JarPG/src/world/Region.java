@@ -8,42 +8,54 @@ public class Region
 	boolean solid;
 	boolean mountain;
 	boolean snow;
-	
+
 	public Region()
 	{
-		
+
 	}
-	
+
 	public void setHeight(double heightin) {	
 		height = heightin;	
 	}
-	
+
 	public double getHeight() {		
 		return height;	
 	}
 
-	public boolean getSolid() {	
-		return solid;	
-	}
+	public boolean get(String tag)
+	{
 
-	public void setSolid(boolean solid){	
-		this.solid = solid;	
-	}
+		boolean val = false;
 
-	public boolean getMountain() {
-		return mountain;
-	}
+		switch(tag)
+		{
 
-	public void setMountain(boolean mountain) {
-		this.mountain = mountain;
-	}
+		case "solid" : val = solid;
+		break;
+		case "mountain" : val = mountain;
+		break;
+		case "snow" : val = snow;
+		break;
+		}
 
-	public boolean getSnow() {
-		return snow;
-	}
-
-	public void setSnow(boolean snow) {
-		this.snow = snow;
+		return val;
+		
 	}
 	
+	public void set(String tag, boolean val)
+	{
+
+		switch(tag)
+		{
+
+		case "solid" : solid = val;
+		break;
+		case "mountain" : mountain = val;
+		break;
+		case "snow" : snow = val;
+		break;
+		}
+	
+	}
+
 }

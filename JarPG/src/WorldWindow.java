@@ -31,6 +31,7 @@ public class WorldWindow extends JDialog
 	JTextField nameField = new JTextField(20);
 	
 	JButton newWorld = new JButton("New");
+	JButton useWorld = new JButton("Use this world");
 	
 	JLabel nameLabel = new JLabel("World Name: ");
 	JLabel mapPane = new JLabel();
@@ -64,7 +65,8 @@ public class WorldWindow extends JDialog
 		mainPanel.add(nameLabel);
 		mainPanel.add(nameField,"wrap");
 		mainPanel.add(mapPane,"span 2, wrap");
-		mainPanel.add(newWorld);
+		mainPanel.add(newWorld,"align center,span 2, split 2");
+		mainPanel.add(useWorld,"align center");
 		
 		add(mainPanel);
 		

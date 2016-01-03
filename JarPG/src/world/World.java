@@ -35,9 +35,12 @@ public class World
 		new File(PATH).mkdirs();
 		
 		regions = new Region[WORLD_SIZE][WORLD_SIZE];
-		data = new NoiseMap(WORLD_SIZE,0.64).getResult();
+		data = new NoiseMap(WORLD_SIZE,0.63).getResult();
 		
 		generateLand();
+		erode(1,"snow");
+		erode(1,"mountain");
+		erode(1,"solid");
 		new BiomeMap(WORLD_SIZE, PATH);
 		drawImage();
 
@@ -58,18 +61,19 @@ public class World
 
 				if(regions[x][y].getHeight() > 0.55)
 				{
-					regions[x][y].setSolid(true);
+					
+					regions[x][y].set("solid",true);
 
 					if(regions[x][y].getHeight() > 0.84)
 					{
 
-						regions[x][y].setSnow(true);
+						regions[x][y].set("snow",true);
 						
 					}
 					if(regions[x][y].getHeight() > 0.75)
 					{
 
-						regions[x][y].setMountain(true);
+						regions[x][y].set("mountain",true);
 
 					}
 
@@ -77,7 +81,7 @@ public class World
 				if(regions[x][y].getHeight() <= 0.55)
 				{
 
-					regions[x][y].setSolid(false);
+					regions[x][y].set("solid",false);
 
 				}
 
@@ -100,10 +104,10 @@ public class World
 			for(; x < WORLD_SIZE; x ++)
 			{
 
-				if (regions[x][y].getSolid() == true)image.setRGB(x, y, LAND_COLOUR);
-				if (regions[x][y].getMountain() == true)image.setRGB(x, y, MOUNTAIN_COLOUR);
-				if (regions[x][y].getSnow() == true)image.setRGB(x, y, SNOW_COLOUR);
-				if (regions[x][y].getSolid() == false)image.setRGB(x, y, SEA_COLOUR);
+				if (regions[x][y].get("solid") == true)image.setRGB(x, y, LAND_COLOUR);
+				if (regions[x][y].get("mountain") == true)image.setRGB(x, y, MOUNTAIN_COLOUR);
+				if (regions[x][y].get("snow") == true)image.setRGB(x, y, SNOW_COLOUR);
+				if (regions[x][y].get("solid") == false)image.setRGB(x, y, SEA_COLOUR);
 
 			}
 
@@ -115,4 +119,93 @@ public class World
 
 	}
 
+	private void erode(int times, String tag)
+	{
+		
+		for(int t = 0; t < times; t ++)
+		{
+			
+			for(int y = 0; y < WORLD_SIZE; y++)
+			{
+				
+				int x = 0;
+				for(; x < WORLD_SIZE; x ++)
+				{
+					
+					int count = countTag(x,y,tag);
+					if ( count < 3 ) regions[x][y].set(tag,true);
+					else if ( count >= 5 ) regions[x][y].set(tag,false);
+					
+				}
+				
+			}
+			
+		}
+			
+	}
+	
+	private int countTag(int x, int y, String tag)
+	{
+		int count = 0;
+		try 
+		{ 
+			Region active = regions[x-1][y-1];
+			if(active.get(tag) == false) count ++;			
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			Region active = regions[x][y-1];
+			if(active.get(tag) == false) count ++;		
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			Region active = regions[x+1][y-1];
+			if(active.get(tag) == false) count ++;		
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			Region active = regions[x-1][y];
+			if(active.get(tag) == false) count ++;			
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			Region active = regions[x+1][y];
+			if(active.get(tag) == false) count ++;			
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			Region active = regions[x-1][y+1];
+			if(active.get(tag) == false) count ++;			
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			Region active = regions[x][y+1];
+			if(active.get(tag) == false) count ++;				
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			Region active = regions[x+1][y+1];
+			if(active.get(tag) == false) count ++;			
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		return count;
+		
+	}
+	
 }
