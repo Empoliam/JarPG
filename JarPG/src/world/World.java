@@ -2,11 +2,15 @@ package world;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import utilities.noise.NoiseMap;
 import static utilities.ColourBank.*;
@@ -16,27 +20,28 @@ public class World
 
 	int WORLD_SIZE;
 	String PATH;
-	
+
 	double[][] data;
 	Region[][] regions;
+	SuperRegion[][] superRegions;
 
 	public World(int sizein, String path)
 	{
 
 		WORLD_SIZE = sizein;
 		PATH = "worlds/" + path;
-		
+
 		try {
 			FileUtils.deleteDirectory(new File(PATH));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		new File(PATH).mkdirs();
-		
+
 		regions = new Region[WORLD_SIZE][WORLD_SIZE];
 		data = new NoiseMap(WORLD_SIZE,0.63).getResult();
-		
+
 		generateLand();
 		erode(1,"snow");
 		erode(1,"mountain");
@@ -61,14 +66,14 @@ public class World
 
 				if(regions[x][y].getHeight() > 0.55)
 				{
-					
+
 					regions[x][y].set("solid",true);
 
 					if(regions[x][y].getHeight() > 0.84)
 					{
 
 						regions[x][y].set("snow",true);
-						
+
 					}
 					if(regions[x][y].getHeight() > 0.75)
 					{
@@ -103,20 +108,20 @@ public class World
 
 			for(; x < WORLD_SIZE; x ++)
 			{
-				
+
 				if (regions[x][y].get("mountain") == true)
 				{
-					
+
 					if(regions[x][y].get("snow")) image.setRGB(x, y, SNOW_COLOUR);
 					else image.setRGB(x, y, MOUNTAIN_COLOUR);
-					
+
 				}
 				else if (regions[x][y].get("solid") == true)
 				{
-					
+
 					switch(regions[x][y].getBiome())
 					{
-					
+
 					case 0:
 						image.setRGB(x, y, DESERT_COLOUR);
 						break;
@@ -147,9 +152,9 @@ public class World
 					case 9: 
 						image.setRGB(x, y, TUNDRA_COLOUR);
 						break;
-					
+
 					}
-					
+
 				}
 				else image.setRGB(x, y, SEA_COLOUR);
 
@@ -165,29 +170,29 @@ public class World
 
 	private void erode(int times, String tag)
 	{
-		
+
 		for(int t = 0; t < times; t ++)
 		{
-			
+
 			for(int y = 0; y < WORLD_SIZE; y++)
 			{
-				
+
 				int x = 0;
 				for(; x < WORLD_SIZE; x ++)
 				{
-					
+
 					int count = countTag(x,y,tag);
 					if ( count < 3 ) regions[x][y].set(tag,true);
 					else if ( count >= 5 ) regions[x][y].set(tag,false);
-					
+
 				}
-				
+
 			}
-			
+
 		}
-			
+
 	}
-	
+
 	private int countTag(int x, int y, String tag)
 	{
 		int count = 0;
@@ -249,28 +254,77 @@ public class World
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		return count;
-		
+
 	}
-	
+
 	private void createBiomes()
 	{
-		
+
 		BiomeMap biomes = new BiomeMap(WORLD_SIZE, PATH);
-		
+
 		for(int y = 0; y < WORLD_SIZE; y ++)
 		{
-			
+
 			int x = 0;
-			
+
 			for(; x < WORLD_SIZE; x ++)
 			{
-				
+
 				regions[x][y].setBiome(biomes.getData(x, y));
-				
+
 			}
-			
+
 		}
-		
+
 	}
+
+	public void save()
+	{
+		new File(PATH + "/regions").mkdir();
+		superRegions = new SuperRegion[WORLD_SIZE/10][WORLD_SIZE/10];
+
+		for(int Y = 0; Y < WORLD_SIZE/10; Y ++)
+		{
+			
+			for(int X = 0; X < WORLD_SIZE/10; X ++)
+			{
+				
+				superRegions[X][Y] = new SuperRegion();
+				
+				for(int y = 0; y < 10; y ++)
+				{
 	
+					int  x = 0;
+
+					for(; x < 10; x++)
+					{
+						
+						superRegions[X][Y].saveTile(x, y, regions[x+(X*10)][y+(Y*10)]);
+						
+					}
+
+				}
+
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				String json = gson.toJson(superRegions[X][Y]);
+
+				try 
+				{
+
+					FileWriter writer = new FileWriter(PATH + "/regions/" + (X) + "-" + (Y) +".json");
+					writer.write(json);
+					writer.close();
+
+				}
+				catch(IOException e)
+				{
+
+
+				}
+
+			}
+
+		}
+	}
+
 }

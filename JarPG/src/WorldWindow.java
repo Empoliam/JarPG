@@ -55,6 +55,17 @@ public class WorldWindow extends JDialog
 		}
 	};
 	
+	ActionListener aUseWorld = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			currentWorld.save();
+			dispose();
+			
+		}
+	};
+	
 	public WorldWindow(JFrame parent)
 	{
 		
@@ -72,6 +83,7 @@ public class WorldWindow extends JDialog
 		
 		nameField.setText("world");
 		newWorld.addActionListener(aNewWorld);
+		useWorld.addActionListener(aUseWorld);
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		pack();
