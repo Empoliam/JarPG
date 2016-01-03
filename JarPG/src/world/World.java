@@ -35,7 +35,7 @@ public class World
 		new File(PATH).mkdirs();
 		
 		regions = new Region[WORLD_SIZE][WORLD_SIZE];
-		data = new NoiseMap(WORLD_SIZE).getResult();
+		data = new NoiseMap(WORLD_SIZE,0.64).getResult();
 		
 		generateLand();
 		new BiomeMap(WORLD_SIZE, PATH);
@@ -109,7 +109,7 @@ public class World
 
 		}
 
-		File f = new File(PATH + "/newmap.bmp");
+		File f = new File(PATH + "/map.bmp");
 		try { ImageIO.write(image, "BMP", f); }
 		catch(IOException e){System.out.println("Failed to print map");};
 

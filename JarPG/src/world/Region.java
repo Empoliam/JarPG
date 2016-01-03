@@ -14,32 +14,20 @@ public class Region
 		
 	}
 	
-	public void setHeight(double heightin)
-	{
-		
-		height = heightin;
-		
+	public void setHeight(double heightin) {	
+		height = heightin;	
 	}
 	
-	public double getHeight()
-	{
-		
-		return height;
-		
+	public double getHeight() {		
+		return height;	
 	}
 
-	public boolean getSolid() 
-	{
-		
-		return solid;
-		
+	public boolean getSolid() {	
+		return solid;	
 	}
 
-	public void setSolid(boolean solid) 
-	{
-		
-		this.solid = solid;
-		
+	public void setSolid(boolean solid){	
+		this.solid = solid;	
 	}
 
 	public boolean getMountain() {

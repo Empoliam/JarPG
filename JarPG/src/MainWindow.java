@@ -101,8 +101,8 @@ public class MainWindow extends JFrame implements ActionListener
 	public void playgame()
 	{
 		
-		//makePlayer();
-		new world.World(400,"world");
+		makePlayer();
+		WorldWindow createWorld = new WorldWindow(this);
 		
 	}
 	
