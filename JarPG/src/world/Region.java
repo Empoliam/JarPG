@@ -9,10 +9,7 @@ public class Region
 	boolean mountain;
 	boolean snow;
 
-	public Region()
-	{
-
-	}
+	public Region()	{}
 
 	public void setHeight(double heightin) {	
 		height = heightin;	
@@ -20,6 +17,14 @@ public class Region
 
 	public double getHeight() {		
 		return height;	
+	}
+
+	public int getBiome() {
+		return biome;
+	}
+
+	public void setBiome(int biome) {
+		this.biome = biome;
 	}
 
 	public boolean get(String tag)

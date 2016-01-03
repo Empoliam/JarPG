@@ -41,7 +41,7 @@ public class World
 		erode(1,"snow");
 		erode(1,"mountain");
 		erode(1,"solid");
-		new BiomeMap(WORLD_SIZE, PATH);
+		createBiomes();
 		drawImage();
 
 	}
@@ -103,11 +103,55 @@ public class World
 
 			for(; x < WORLD_SIZE; x ++)
 			{
-
-				if (regions[x][y].get("solid") == true)image.setRGB(x, y, LAND_COLOUR);
-				if (regions[x][y].get("mountain") == true)image.setRGB(x, y, MOUNTAIN_COLOUR);
-				if (regions[x][y].get("snow") == true)image.setRGB(x, y, SNOW_COLOUR);
-				if (regions[x][y].get("solid") == false)image.setRGB(x, y, SEA_COLOUR);
+				
+				if (regions[x][y].get("mountain") == true)
+				{
+					
+					if(regions[x][y].get("snow")) image.setRGB(x, y, SNOW_COLOUR);
+					else image.setRGB(x, y, MOUNTAIN_COLOUR);
+					
+				}
+				else if (regions[x][y].get("solid") == true)
+				{
+					
+					switch(regions[x][y].getBiome())
+					{
+					
+					case 0:
+						image.setRGB(x, y, DESERT_COLOUR);
+						break;
+					case 1: 
+						image.setRGB(x, y, SAVANNA_COLOUR);
+						break;
+					case 2: 
+						image.setRGB(x, y, SEASONAL_FOREST_COLOUR);
+						break;
+					case 3: 
+						image.setRGB(x, y, RAINFOREST_COLOUR);
+						break;
+					case 4: 
+						image.setRGB(x, y, PLAINS_COLOUR);
+						break;
+					case 5: 
+						image.setRGB(x, y, WOODS_COLOUR);
+						break;
+					case 6: 
+						image.setRGB(x, y, FOREST_COLOUR);
+						break;
+					case 7: 
+						image.setRGB(x, y, SWAMP_COLOUR);
+						break;
+					case 8: 
+						image.setRGB(x, y, TAIGA_COLOUR);
+						break;
+					case 9: 
+						image.setRGB(x, y, TUNDRA_COLOUR);
+						break;
+					
+					}
+					
+				}
+				else image.setRGB(x, y, SEA_COLOUR);
 
 			}
 
@@ -205,6 +249,27 @@ public class World
 		catch(java.lang.ArrayIndexOutOfBoundsException e){};
 
 		return count;
+		
+	}
+	
+	private void createBiomes()
+	{
+		
+		BiomeMap biomes = new BiomeMap(WORLD_SIZE, PATH);
+		
+		for(int y = 0; y < WORLD_SIZE; y ++)
+		{
+			
+			int x = 0;
+			
+			for(; x < WORLD_SIZE; x ++)
+			{
+				
+				regions[x][y].setBiome(biomes.getData(x, y));
+				
+			}
+			
+		}
 		
 	}
 	

@@ -13,20 +13,22 @@ public class BiomeMap{
 
 	int size;
 	int data[][];
-
+	String PATH;
+	
 	public BiomeMap(int size, String PATH) 
 	{
 
+		this.PATH = PATH;
 		this.size = size;
 		data = new int[size][size];
 		populateLayer(PATH);
+		clean(2);
+		draw();
 
 	}
 
-	public void populateLayer(String PATH)
+	private void populateLayer(String PATH)
 	{
-
-		BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
 
 		NoiseMap temperature = new NoiseMap(size);
 		NoiseMap rainfall = new NoiseMap(size);
@@ -55,6 +57,126 @@ public class BiomeMap{
 				else if((vTemp <= 0.40 && vTemp > 0.25) && (vRain >= 0.25 && vRain <= 1)) data[x][y] = 8;
 				else if(vTemp <= 0.25 && vTemp >= 0) data[x][y] = 9;
 
+			}
+
+		}
+
+	}
+
+	public int getData(int x, int y)
+	{
+
+		return data[x][y];
+
+	}
+
+	private void clean(int q)
+	{
+		for(int p = 0; p < q; p ++)
+		{
+
+			for(int t = 0; t < 10; t ++)
+			{
+
+				for(int y = 0; y < size; y ++)
+				{
+
+					int x = 0;
+
+					for(; x < size; x ++)
+					{
+
+						int count = countSurround(x, y, t);
+
+						if (count >= 5) data[x][y] = t;
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	private int countSurround(int x, int y, int tag)
+	{
+
+		int count = 0;
+		try 
+		{ 
+			int active = data[x-1][y-1];
+			if(active == tag) count ++;			
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			int active = data[x][y-1];
+			if(active == tag) count ++;		
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+
+			int active = data[x+1][y-1];
+			if(active == tag) count ++;		
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			int active = data[x-1][y];
+			if(active == tag) count ++;				
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			int active = data[x+1][y];
+			if(active == tag) count ++;			
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			int active = data[x-1][y+1];
+			if(active == tag) count ++;			
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			int active = data[x][y+1];
+			if(active == tag) count ++;					
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		try 
+		{ 
+			int active = data[x+1][y+1];
+			if(active == tag) count ++;				
+		} 
+		catch(java.lang.ArrayIndexOutOfBoundsException e){};
+
+		return count;
+
+	}
+
+	private void draw()
+	{
+
+		BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
+		
+		for(int y = 0; y < size; y ++)
+		{
+			
+			int x = 0;
+			for(; x < size; x ++)
+			{
+				
 				switch(data[x][y])
 				{
 				case 0:
@@ -88,22 +210,15 @@ public class BiomeMap{
 					image.setRGB(x, y, TUNDRA_COLOUR);
 					break;
 				}
-
+				
 			}
-
+			
 		}
 
 		File f = new File(PATH + "/biomemap.bmp");
 		try { ImageIO.write(image, "BMP", f); }
 		catch(IOException e){System.out.println("Failed to print map");};
-
-	}
-
-	public int getData(int x, int y)
-	{
-
-		return data[x][y];
-
+		
 	}
 
 }
