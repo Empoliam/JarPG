@@ -3,6 +3,7 @@ package world;
 public class Region 
 {
 
+	int x, y;
 	double height;
 	int biome;
 	boolean solid;
@@ -11,6 +12,14 @@ public class Region
 
 	public Region()	{}
 
+	public Region(int x, int y)
+	{
+		
+		this.x = x;
+		this.y = y;
+		
+	}
+	
 	public void setHeight(double heightin) {	
 		height = heightin;	
 	}
@@ -63,4 +72,12 @@ public class Region
 	
 	}
 
+	public void setXY(int x, int y)
+	{
+		
+		this.x = x;
+		this.y = y;
+		
+	}
+	
 }

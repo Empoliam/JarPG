@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -19,6 +20,7 @@ public class World
 {
 
 	int WORLD_SIZE;
+	int spawnX, spawnY;
 	String PATH;
 
 	double[][] data;
@@ -48,6 +50,7 @@ public class World
 		erode(1,"solid");
 		createBiomes();
 		drawImage();
+		generateSpawn();
 
 	}
 
@@ -61,7 +64,7 @@ public class World
 			for(; x < WORLD_SIZE; x++)
 			{
 
-				regions[x][y] = new Region();
+				regions[x][y] = new Region(x,y);
 				regions[x][y].setHeight(data[x][y]);
 
 				if(regions[x][y].getHeight() > 0.55)
@@ -327,4 +330,40 @@ public class World
 		}
 	}
 
+	private void generateSpawn()
+	{
+		
+		Random rand = new Random(System.currentTimeMillis());
+		
+		do
+		{
+			
+			spawnX = rand.nextInt(400);
+			spawnY = rand.nextInt(400);
+			
+		}
+		while(regions[spawnX][spawnY].get("solid") == false);
+		
+	}
+	
+	public int getSpawn(char axis)
+	{
+	
+		int ret = 0;
+		
+		switch(axis)
+		{
+		
+		case 'x': 
+			ret =  spawnX;
+			break;
+		case 'y':
+			ret= spawnY;
+			break;
+		}
+		
+		return ret;
+		
+	}
+	
 }

@@ -82,7 +82,8 @@ public class MainWindow extends JFrame
 	{
 		
 		makePlayer();
-		new WorldWindow(this);
+		WorldWindow createWorld = new WorldWindow(this);
+		createWorld.dispose();
 		
 	}
 	

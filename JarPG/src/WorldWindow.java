@@ -24,6 +24,7 @@ public class WorldWindow extends JDialog
 	//Data
 	World currentWorld;
 	String PATH;
+	int spawnX, spawnY;
 	
 	//Components
 	JPanel mainPanel = new JPanel();
@@ -61,7 +62,9 @@ public class WorldWindow extends JDialog
 		public void actionPerformed(ActionEvent e) {
 			
 			currentWorld.save();
-			dispose();
+			spawnX = currentWorld.getSpawn('x');
+			spawnY = currentWorld.getSpawn('y');
+			setVisible(false);
 			
 		}
 	};
