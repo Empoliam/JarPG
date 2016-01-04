@@ -1,5 +1,3 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -12,7 +10,7 @@ import net.miginfocom.swing.MigLayout;
 
 import unit.*;
 
-public class MainWindow extends JFrame implements ActionListener
+public class MainWindow extends JFrame
 {
 
 	private static final long serialVersionUID = -3241273755265444600L;
@@ -49,8 +47,6 @@ public class MainWindow extends JFrame implements ActionListener
 
 		super("JarPG");
 
-		send.addActionListener(this);
-
 		textarea.setEditable(false);
 		textarea.setLineWrap(true);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -82,27 +78,11 @@ public class MainWindow extends JFrame implements ActionListener
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-
-		String text = inputfield.getText();
-
-		if(text.length() != 0)
-		{
-
-			textarea.append(text + "\n");
-			inputfield.setText("");
-
-		}
-
-	}
-
 	public void playgame()
 	{
 		
 		makePlayer();
-		WorldWindow createWorld = new WorldWindow(this);
+		new WorldWindow(this);
 		
 	}
 	
