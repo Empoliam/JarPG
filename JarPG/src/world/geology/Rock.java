@@ -1,4 +1,4 @@
-package geology;
+package world.geology;
 
 public class Rock 
 {

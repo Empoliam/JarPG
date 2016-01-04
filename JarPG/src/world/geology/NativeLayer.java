@@ -1,4 +1,4 @@
-package geology;
+package world.geology;
 
 import utilities.noise.NoiseMap;
 import static utilities.ColourBank.*;

@@ -1,4 +1,3 @@
-import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -8,335 +7,90 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import org.apache.commons.io.FileUtils;
-
-import level.World;
 import net.miginfocom.swing.MigLayout;
-import utilities.MScrollPane;
+import world.World;
 
-public class WorldWindow extends JDialog
+public class WorldWindow extends JDialog 
 {
 
-	private static final long serialVersionUID = -6672888944649399921L;
+	private static final long serialVersionUID = 3998702201167042838L;
 
-	String[] TEMPERATURES = { "Very Cold", "Cold", "Average", "Hot", "Very Hot" };
-	String[] SIZES = { "Small", "Medium", "Large" };
+	//Data
+	World currentWorld;
+	String PATH;
 	
-	String PATH = "worlds/";
-	String PATH_REGIONS;
+	//Components
+	JPanel mainPanel = new JPanel();
 	
-	int worldSize;
-	int nContinents;
-	boolean poles;
-	boolean beaches;
-	World world;	
-	int nGen;
-	int sTemp;
-	int mountains;
-	int sMountain;
-	int nLakes;
-	int sLakes;
-	int twistiness;
-	int nRivers;
-			
-	JTabbedPane mainpane = new JTabbedPane();
-	JTabbedPane imagepane = new JTabbedPane();
-	JTabbedPane geologyPane = new JTabbedPane();
-	JTabbedPane nativePane = new JTabbedPane();
-	JTabbedPane organicPane = new JTabbedPane();
-	JTabbedPane sedimentPane = new JTabbedPane();
+	JTextField nameField = new JTextField(20);
 	
-	JPanel countpanel = new JPanel();
-	JPanel parameterpanel = new JPanel();
-	
-	JPanel worldpanel = new JPanel();
-	
-	JLabel imgPane = new JLabel();
-	JLabel biomeImgPane = new JLabel();
-	JLabel native1ImgPane = new JLabel();
-	JLabel native2ImgPane = new JLabel();
-	JLabel native3ImgPane = new JLabel();
-	JLabel organic1ImgPane = new JLabel();
-	JLabel organic2ImgPane = new JLabel();
-	JLabel sediment1ImgPane = new JLabel();
-	JLabel sediment2ImgPane = new JLabel();
-	JLabel sediment3ImgPane = new JLabel();
-	JLabel sediment4ImgPane = new JLabel();
-	
-	
-	JLabel lWorldSize = new JLabel("World size (n*x): ");
-	JLabel lContinents = new JLabel("Continent seeds: ");
-	JLabel lPoles = new JLabel("Generate poles?");
-	JLabel lGen = new JLabel("Generation passes: ");
-	JLabel lBeach = new JLabel("Generate beaches?");
-	JLabel lTemperature = new JLabel("Temperature: ");
-	JLabel lMountains = new JLabel ("Mountains: ");
-	JLabel lMountainSize = new JLabel("Mountain size: ");
-	JLabel lLakes = new JLabel("Lakes: ");
-	JLabel lLakeSize = new JLabel("Lake size: ");
-	JLabel lRiverTwistiness = new JLabel("River twistiness: ");
-	JLabel lName = new JLabel("World Name: ");
-	JLabel lRivers = new JLabel("Rivers: ");
-	
-	JTextField fWorldSize = new JTextField(4);
-	JTextField fContinents = new JTextField(4);
-	JTextField fGen = new JTextField(4);
-	JTextField fMountains = new JTextField(4);
-	JTextField fLakes = new JTextField(4);
-	JTextField fName = new JTextField(20);
-	JTextField fRivers = new JTextField(4);
-	
-	JCheckBox cPoles = new JCheckBox();
-	JCheckBox cBeach = new JCheckBox();
-	
-	JComboBox<String> bTemperature = new JComboBox<>(TEMPERATURES);
-	JComboBox<String> bMountainSize = new JComboBox<>(SIZES);
-	JComboBox<String> bLakeSize = new JComboBox<>(SIZES);
-	
-	JButton newWorld = new JButton("Generate new");
+	JButton newWorld = new JButton("New");
 	JButton useWorld = new JButton("Use this world");
 	
-	JSlider slTwistiness = new JSlider(0, 18, 12);
-	
-	MScrollPane mapScroll = new MScrollPane(imgPane);
-	MScrollPane biomeScroll = new MScrollPane(biomeImgPane);
-	
-	MScrollPane native1Scroll = new MScrollPane(native1ImgPane);
-	MScrollPane native2Scroll = new MScrollPane(native2ImgPane);
-	MScrollPane native3Scroll = new MScrollPane(native3ImgPane);
-	
-	MScrollPane organic1Scroll = new MScrollPane(organic1ImgPane);
-	MScrollPane organic2Scroll = new MScrollPane(organic2ImgPane);
-	
-	MScrollPane sediment1Scroll = new MScrollPane(sediment1ImgPane);
-	MScrollPane sediment2Scroll = new MScrollPane(sediment2ImgPane);
-	MScrollPane sediment3Scroll = new MScrollPane(sediment3ImgPane);
-	MScrollPane sediment4Scroll = new MScrollPane(sediment4ImgPane);
-	
-	ActionListener aNewWorld = new ActionListener() 
-	{
+	JLabel nameLabel = new JLabel("World Name: ");
+	JLabel mapPane = new JLabel();
+		
+	ActionListener aNewWorld = new ActionListener() {
 		
 		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
+		public void actionPerformed(ActionEvent e) {
 			
-			PATH = "worlds/";
-			PATH = PATH + fName.getText();
-			
-			try {FileUtils.deleteDirectory(new File(PATH));} 
-			catch (IOException e1) {e1.printStackTrace();}
-			new File(PATH).mkdirs();
-			
-			worldSize = Integer.parseInt(fWorldSize.getText());
-			nContinents = Integer.parseInt(fContinents.getText());
-			nGen = Integer.parseInt(fGen.getText()); 
-			poles = cPoles.isSelected();
-			beaches = cBeach.isSelected();
-			sTemp = bTemperature.getSelectedIndex();
-			mountains = Integer.parseInt(fMountains.getText());
-			sMountain = bMountainSize.getSelectedIndex();
-			nLakes = Integer.parseInt(fLakes.getText());
-			sLakes = bLakeSize.getSelectedIndex();
-			twistiness = slTwistiness.getValue();
-			nRivers = Integer.parseInt(fRivers.getText());
-			
-			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			world = new World(PATH,worldSize,nContinents,nGen,sTemp,poles,beaches,mountains,sMountain,nLakes,sLakes,twistiness,nRivers);
-			world.imgOut();
-						
-			try 
-			{
+			PATH = nameField.getText();
+			currentWorld = new World(400,PATH);
+			try {
 				
-				BufferedImage mapImg = ImageIO.read(new File(PATH + "/map.bmp"));
+				BufferedImage mapImg = ImageIO.read(new File("worlds/" + PATH + "/map.bmp"));
 				ImageIcon mapIcon = new ImageIcon(mapImg);
-				imgPane.setIcon(mapIcon);
-				
-				BufferedImage biomeImg = ImageIO.read(new File(PATH + "/biomemap.bmp"));
-				ImageIcon biomeIcon = new ImageIcon(biomeImg);
-				biomeImgPane.setIcon(biomeIcon);
-				
-				BufferedImage native1Img = ImageIO.read(new File(PATH + "/NativeLayer01.bmp"));
-				ImageIcon native1Icon = new ImageIcon(native1Img);
-				native1ImgPane.setIcon(native1Icon);
-
-				BufferedImage native2Img = ImageIO.read(new File(PATH + "/NativeLayer02.bmp"));
-				ImageIcon native2Icon = new ImageIcon(native2Img);
-				native2ImgPane.setIcon(native2Icon);
-				
-				BufferedImage native3Img = ImageIO.read(new File(PATH + "/NativeLayer03.bmp"));
-				ImageIcon native3Icon = new ImageIcon(native3Img);
-				native3ImgPane.setIcon(native3Icon);
-				
-				BufferedImage organic1Img = ImageIO.read(new File(PATH + "/OrganicLayer01.bmp"));
-				ImageIcon organic1Icon = new ImageIcon(organic1Img);
-				organic1ImgPane.setIcon(organic1Icon);
-				
-				BufferedImage organic2Img = ImageIO.read(new File(PATH + "/OrganicLayer02.bmp"));
-				ImageIcon organic2Icon = new ImageIcon(organic2Img);
-				organic2ImgPane.setIcon(organic2Icon);
-				
-				BufferedImage sediment1Img = ImageIO.read(new File(PATH + "/SedimentLayer01.bmp"));
-				ImageIcon sediment1Icon = new ImageIcon(sediment1Img);
-				sediment1ImgPane.setIcon(sediment1Icon);
-				
-				BufferedImage sediment2Img = ImageIO.read(new File(PATH + "/SedimentLayer02.bmp"));
-				ImageIcon sediment2Icon = new ImageIcon(sediment2Img);
-				sediment2ImgPane.setIcon(sediment2Icon);
-				
-				BufferedImage sediment3Img = ImageIO.read(new File(PATH + "/SedimentLayer03.bmp"));
-				ImageIcon sediment3Icon = new ImageIcon(sediment3Img);
-				sediment3ImgPane.setIcon(sediment3Icon);
-				
-				BufferedImage sediment4Img = ImageIO.read(new File(PATH + "/SedimentLayer04.bmp"));
-				ImageIcon sediment4Icon = new ImageIcon(sediment4Img);
-				sediment4ImgPane.setIcon(sediment4Icon);
-				
-				pack();
-				
-			} 
-			catch (IOException e1){e1.printStackTrace();}
-			
-			setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			
+				mapPane.setIcon(mapIcon);			
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			pack();
 		}
 	};
 	
-	ActionListener aUseWorld = new ActionListener() 
-	{
+	ActionListener aUseWorld = new ActionListener() {
 		
 		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
+		public void actionPerformed(ActionEvent e) {
 			
-			setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			saveWorld();
-			setVisible(false);
+			currentWorld.save();
+			dispose();
 			
 		}
 	};
 	
-	WorldWindow()
+	public WorldWindow(JFrame parent)
 	{
 		
-		setLayout(new MigLayout());
-		worldpanel.setLayout(new MigLayout());
-		countpanel.setLayout(new MigLayout());
-		parameterpanel.setLayout(new MigLayout());
+		super(parent,true);
 		
-		countpanel.add(lWorldSize,"align right, push");
-		countpanel.add(fWorldSize,"align left, push, wrap");
-		countpanel.add(lContinents,"align right, push");
-		countpanel.add(fContinents,"align left, push, wrap");
-		countpanel.add(lGen,"align right, push");
-		countpanel.add(fGen,"align left, push, wrap");
-		countpanel.add(lMountains,"align right, push");
-		countpanel.add(fMountains,"align left, push, wrap");
-		countpanel.add(lLakes,"align right, push");
-		countpanel.add(fLakes,"align left, push, wrap");
-		countpanel.add(lRivers,"align right, push");
-		countpanel.add(fRivers,"align left, push, wrap");
-				
-		parameterpanel.add(lTemperature, "align right, push");
-		parameterpanel.add(bTemperature, "align left, push, wrap");
-		parameterpanel.add(lMountainSize, "align right, push");
-		parameterpanel.add(bMountainSize, "align left, push, wrap");
-		parameterpanel.add(lLakeSize, "align right, push");
-		parameterpanel.add(bLakeSize, "align left, push, wrap");
-		parameterpanel.add(lRiverTwistiness, "align right, push");
-		parameterpanel.add(slTwistiness, "align left, push, wrap");
+		mainPanel.setLayout(new MigLayout());
 		
-		parameterpanel.add(lPoles, "align right, push");
-		parameterpanel.add(cPoles, "align left, push, wrap");
-		parameterpanel.add(lBeach, "align right, push");
-		parameterpanel.add(cBeach, "align left, push, wrap");
-				
-		//Map panel
-		imagepane.addTab("Map",mapScroll);
-		imagepane.addTab("Biomes",biomeScroll);
-		imagepane.addTab("Geology", geologyPane);
+		mainPanel.add(nameLabel);
+		mainPanel.add(nameField,"wrap");
+		mainPanel.add(mapPane,"span 2, wrap");
+		mainPanel.add(newWorld,"align center,span 2, split 2");
+		mainPanel.add(useWorld,"align center");
 		
-		geologyPane.addTab("Sedimentary", sedimentPane);
-		geologyPane.addTab("Organic", organicPane);
-		geologyPane.addTab("Native", nativePane);
+		add(mainPanel);
 		
-		organicPane.addTab("Layer 1", organic1Scroll);
-		organicPane.addTab("Layer 2", organic2Scroll);
-		
-		nativePane.addTab("Layer 1",native1Scroll);
-		nativePane.addTab("Layer 2",native2Scroll);
-		nativePane.addTab("Layer 3",native3Scroll);
-		
-		sedimentPane.addTab("Layer 1", sediment1Scroll);
-		sedimentPane.addTab("Layer 2", sediment2Scroll);
-		sedimentPane.addTab("Layer 3", sediment3Scroll);
-		sedimentPane.addTab("Layer 4", sediment4Scroll);
-		
-		//set component defaults
-		fWorldSize.setText("400");
-		fContinents.setText("6");
-		fGen.setText("100");
-		fMountains.setText("5");
-		fLakes.setText("10");
-		fRivers.setText("5");
-		cBeach.setSelected(true);
-		cPoles.setSelected(true);
-		bTemperature.setSelectedIndex(2);
-		bMountainSize.setSelectedIndex(1);
-		bLakeSize.setSelectedIndex(1);
-		fName.setText("world");
-		
-		//add tabs		
-		mainpane.addTab("Counts",countpanel);
-		mainpane.addTab("Parameters", parameterpanel);
-		
-		//add panels
-		add(lName,"split 2, align center");
-		add(fName,"align center, wrap");
-		add(mainpane,"align center, wrap, push");
-		add(imagepane,"wrap, align center");
-		add(newWorld, "align center, split 2");
-		add(useWorld, "align center");
-		
+		nameField.setText("world");
 		newWorld.addActionListener(aNewWorld);
 		useWorld.addActionListener(aUseWorld);
 		
-		pack();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		pack();
 		setLocationRelativeTo(null);
-		setResizable(false);
-		setModal(true);
 		setVisible(true);
+		setModal(true);
 		
 	}
 	
-	private void saveWorld()
-	{
-		
-		world.generateJSON();
-		
-	}
-	
-	public int[] getSpawn()
-	{
-		
-		return world.getSpawn();
-		
-	}
-	
-	public String getPath()
-	{
-		
-		return PATH;
-		
-	}
-		
 }
