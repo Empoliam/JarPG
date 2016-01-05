@@ -1,3 +1,4 @@
+package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -16,6 +17,13 @@ public class MainWindow extends JFrame
 	private static final long serialVersionUID = -3241273755265444600L;
 	
 	String PATH;
+
+	//various constants
+	boolean debug;
+	int[] spawn = new int[2];
+
+	//active entities
+	Player player;
 	
 	//UI
 	JPanel mainpanel = new JPanel();
@@ -27,26 +35,14 @@ public class MainWindow extends JFrame
 	JButton inv = new JButton("Inventory");
 	JButton stat = new JButton("Status");
 	JButton map = new JButton("Map");
-
-	//various constants
-	Player player;
-	boolean debug;
-	int[] spawn = new int[2];
 	
-	//active entities
-	
-	public static void main(String[] args) 
-	{
-
-		new MainWindow();
-
-	}
-
-	MainWindow()
+	public MainWindow(String PATH)
 	{
 
 		super("JarPG");
 
+		this.PATH = PATH;
+		
 		textarea.setEditable(false);
 		textarea.setLineWrap(true);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -70,33 +66,10 @@ public class MainWindow extends JFrame
 
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
 
-		playgame();
-
-	}
-
-	public void playgame()
-	{
-		
-		makePlayer();
-		WorldWindow createWorld = new WorldWindow(this);
-		createWorld.dispose();
-		
-	}
-	
-	private void makePlayer()
-	{
-		
-		CreateWindow create = new CreateWindow(this);
-		player = create.generate();
-		debug = create.Debug();
-		create.dispose();
-		textarea.append("Created player: " + player.getFName() + " " + player.getLName() + "\n");
-		if(debug) textarea.append("Debug Mode Enabled");
-		
 	}
 
 }

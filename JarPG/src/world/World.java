@@ -31,7 +31,7 @@ public class World
 	{
 
 		WORLD_SIZE = sizein;
-		PATH = "worlds/" + path;
+		PATH = path;
 
 		try {
 			FileUtils.deleteDirectory(new File(PATH));
