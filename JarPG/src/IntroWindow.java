@@ -12,19 +12,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import gui.CreateWindow;
+import gui.LoadWindow;
 import gui.MainWindow;
 import gui.WorldWindow;
 import net.miginfocom.swing.MigLayout;
-import unit.Player;
 
 public class IntroWindow extends JFrame
 {
 
 	private static final long serialVersionUID = -7226369558478098514L;
-
+	static IntroWindow titlePage;
+	
 	String PATH;
 	
-	Player player;
 	boolean debug;
 	int[] spawn = new int[2];
 	
@@ -43,6 +43,22 @@ public class IntroWindow extends JFrame
 			makeWorld();
 			makePlayer();
 			new MainWindow(PATH);
+			dispose();
+			
+		}
+		
+	};
+	
+	ActionListener aUse = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		
+			LoadWindow loadSave = new LoadWindow(titlePage);
+			PATH = loadSave.getPath();
+			loadSave.dispose();
+			new MainWindow(PATH);
+			dispose();
 			
 		}
 	};
@@ -50,8 +66,8 @@ public class IntroWindow extends JFrame
 	public static void main(String[] args)
 	{
 		
-		new IntroWindow();
-		
+		titlePage = new IntroWindow();
+				
 	}
 	
 	public IntroWindow()
@@ -61,10 +77,14 @@ public class IntroWindow extends JFrame
 
 			BufferedImage titleImg = ImageIO.read(new File("resources/title.png"));
 			ImageIcon titleIcon = new ImageIcon(titleImg);
-			titleImage.setIcon(titleIcon);			
+			titleImage.setIcon(titleIcon);	
+			
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
+		newButton.addActionListener(aNew);
+		useButton.addActionListener(aUse);
 		
 		mainPane.setLayout(new MigLayout());
 		mainPane.add(titleImage,"wrap");
@@ -73,7 +93,7 @@ public class IntroWindow extends JFrame
 		
 		add(mainPane);
 		
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -83,8 +103,7 @@ public class IntroWindow extends JFrame
 	private void makePlayer()
 	{
 
-		CreateWindow create = new CreateWindow(this);
-		player = create.generate();
+		CreateWindow create = new CreateWindow(this,PATH,spawn[0],spawn[1]);
 		debug = create.Debug();
 		create.dispose();
 
@@ -94,6 +113,7 @@ public class IntroWindow extends JFrame
 	{
 
 		WorldWindow createWorld = new WorldWindow(this);
+		PATH = createWorld.getPath();
 		spawn = createWorld.getSpawn();
 		createWorld.dispose();
 

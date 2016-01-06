@@ -22,7 +22,7 @@ public class BiomeMap{
 		this.size = size;
 		data = new int[size][size];
 		populateLayer(PATH);
-		clean(2);
+		clean(3);
 		draw();
 
 	}

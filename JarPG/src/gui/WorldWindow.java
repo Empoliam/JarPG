@@ -103,5 +103,13 @@ public class WorldWindow extends JDialog
 		return new int[]{spawnX, spawnY};
 
 	}
+	
+	public String getPath()
+	{
+		
+		return PATH;
+		
+	}
+	
 }
 

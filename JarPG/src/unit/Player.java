@@ -6,12 +6,14 @@ public class Player extends Unit
 	String fName, lName;
 	int x, y;
 	
-	public Player(String ifName, String ilName, int HPi, int MPi, int ATTi, int DEFi)
+	public Player(String ifName, String ilName, int HPi, int MPi, int ATTi, int DEFi, int x, int y)
 	{
 		
 		super(HPi, MPi, ATTi, DEFi);
 		fName = ifName;
 		lName = ilName;
+		this.x = x;
+		this.y = y;
 		
 	}
 	

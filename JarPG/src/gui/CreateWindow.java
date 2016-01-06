@@ -1,6 +1,8 @@
 package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -11,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import net.miginfocom.swing.MigLayout;
 import statComponents.*;
 import unit.Player;
@@ -19,14 +24,18 @@ public class CreateWindow extends JDialog
 {
 
 	private static final long serialVersionUID = 8218447679269415077L;
+	String PATH;
+
 	private int MAX_POINTS = 30;
 	private int HP_MULT = 3;
 	private int MP_MULT = 5;
-	
+
 	JPanel panel = new JPanel();
 
 	String fName, lName;
-	int HP, MP, ATT, DEF;
+	int HP, MP, ATT, DEF, x, y;
+
+	Player player;
 
 	JLabel head = new JLabel("Character Creation");
 	JLabel fNameLabel = new JLabel("First Name: ");
@@ -37,7 +46,7 @@ public class CreateWindow extends JDialog
 	JLabel DEFLabel = new JLabel("Defence: ");
 	JLabel PointLabel = new JLabel("Points left: " + MAX_POINTS);
 	JLabel debugLabel = new JLabel("Debug Mode:");
-	
+
 	JTextField fNameField = new JTextField(10);
 	JTextField lNameField = new JTextField(10);
 	STextField HPField = new STextField();
@@ -55,7 +64,7 @@ public class CreateWindow extends JDialog
 	SButton DEFm = new SButton("-");
 
 	JButton go = new JButton("Go!");
-	
+
 	JCheckBox debug = new JCheckBox();
 
 	ActionListener HPa = new ActionListener() 
@@ -162,26 +171,29 @@ public class CreateWindow extends JDialog
 
 		}
 	};
-	
+
 	ActionListener GOa = new ActionListener() 
 	{
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-		
+
+			generate();
+			save();
 			setVisible(false);
-			
-			
+
+
 		}
 	};
-	
-	
-	public CreateWindow(JFrame parent)
+
+
+	public CreateWindow(JFrame parent, String PATH, int x, int y)
 	{
 
 		super(parent, true);
-		
+		this.PATH = PATH;
+
 		panel.setLayout(new MigLayout());
 
 		panel.add(head,"span 2, wrap, align center");
@@ -193,7 +205,7 @@ public class CreateWindow extends JDialog
 		panel.add(lNameField,"wrap");
 
 		panel.add(PointLabel,"span 2,wrap,align center");
-		
+
 		panel.add(HPLabel,"align right");
 		panel.add(HPm,"split 3, align center");
 		panel.add(HPField);
@@ -216,7 +228,7 @@ public class CreateWindow extends JDialog
 
 		panel.add(debugLabel,"align right");
 		panel.add(debug,"wrap,align center");
-		
+
 		panel.add(go,"span 2, align center");
 
 		HPp.addActionListener(HPa);
@@ -232,20 +244,20 @@ public class CreateWindow extends JDialog
 		DEFm.addActionListener(DEFa);
 
 		go.addActionListener(GOa);
-		
+
 		HPField.setText("30");
 		MPField.setText("30");
 		ATTField.setText("7");
 		DEFField.setText("7");
-		
+
 		add(panel);
-		
+
 		pack();
 		setResizable(false);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
 		setLocationRelativeTo(null);
-		
+
 		new Timer(10, new ActionListener() 
 		{
 
@@ -260,50 +272,64 @@ public class CreateWindow extends JDialog
 				if(MP <= 0) MPm.setEnabled(false); else MPm.setEnabled(true);
 				if(ATT <= 0) ATTm.setEnabled(false); else ATTm.setEnabled(true);
 				if(DEF <= 0) DEFm.setEnabled(false); else DEFm.setEnabled(true);
-				
+
 				if((HP/HP_MULT)+(MP/MP_MULT)+ATT+DEF >= MAX_POINTS)	allButtonState(false);
 				else allButtonState(true);
-				
+
 				int pointsLeft = MAX_POINTS-((HP/HP_MULT)+(MP/MP_MULT)+ATT+DEF);
-				
+
 				PointLabel.setText("Points remaining: " + pointsLeft); 
-				
+
 				if(fNameField.getText().length() != 0 && lNameField.getText().length() != 0) go.setEnabled(true && pointsLeft == 0);
 				else go.setEnabled(false);
 
 			}
 		}).start();
-		
+
 		setVisible(true);
 
 	}
 
 	private void allButtonState(boolean state)
 	{
-		
+
 		HPp.setEnabled(state);
 		MPp.setEnabled(state);
 		ATTp.setEnabled(state);
 		DEFp.setEnabled(state);
-		
+
 	}
-	
-	public Player generate()
+
+	private void generate()
 	{
-		
+
 		fName = fNameField.getText();
 		lName = lNameField.getText();
-		
-		Player player = new Player(fName, lName, HP, MP, ATT, DEF);
-		return player;
-		
+
+		player = new Player(fName, lName, HP, MP, ATT, DEF, x, y);
+
 	}
-	
+
 	public boolean Debug()
 	{
-		
+
 		return debug.isSelected();
-		
+
 	}
-	
+
+	private void save()
+	{
+
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(player);
+		FileWriter writer;
+		try {
+			writer = new FileWriter(PATH + "/player.json");
+			writer.write(json);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
