@@ -9,6 +9,8 @@ import javax.swing.ScrollPaneConstants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -52,6 +54,29 @@ public class MainWindow extends JFrame
 	JButton stat = new JButton("Status");
 	JButton map = new JButton("Map");
 	
+	ActionListener aMap = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		
+			new MapWindow(PATH, currentx, currenty);
+			
+		}
+	};
+	
+	ActionListener aSend = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			String command = inputfield.getText();
+			textarea.append(">: " + command + "\n");
+			inputfield.setText("");
+			command(command);
+			
+		}
+	};
+	
 	public MainWindow(String PATH)
 	{
 
@@ -76,8 +101,9 @@ public class MainWindow extends JFrame
 		log.setEnabled(false);
 		inv.setEnabled(false);
 		stat.setEnabled(false);
-		map.setEnabled(false);
-
+		map.addActionListener(aMap);
+		send.addActionListener(aSend);
+		
 		add(mainpanel);
 
 		pack();
@@ -126,6 +152,13 @@ public class MainWindow extends JFrame
 			e.printStackTrace();
 		
 		}
+		
+	}
+	
+	private void command(String in)
+	{
+		
+		
 		
 	}
 
