@@ -6,10 +6,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
-
-import unit.*;
+import unit.Player;
+import world.Region;
+import world.SuperRegion;
 
 public class MainWindow extends JFrame
 {
@@ -18,12 +26,20 @@ public class MainWindow extends JFrame
 	
 	String PATH;
 
+	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	
 	//various constants
 	boolean debug;
 	int[] spawn = new int[2];
 
-	//active entities
+	//variables
+	int currentx, currentX;
+	int currenty, currentY;
+	
+	//active stuff
 	Player player;
+	SuperRegion activeSuperRegion;
+	Region activeRegion;
 	
 	//UI
 	JPanel mainpanel = new JPanel();
@@ -69,7 +85,48 @@ public class MainWindow extends JFrame
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setVisible(true);
-
+		
+		loadPlayer();
+		currentx = player.getX();
+		currenty = player.getY();
+		loadRegion();
+					
+	}
+	
+	private void loadPlayer()
+	{
+		
+		try {
+			
+			BufferedReader r = new BufferedReader(new FileReader(PATH + "/player.json"));
+			player = gson.fromJson(r, Player.class);
+			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
+	private void loadRegion()
+	{
+				
+		currentX = (int) Math.floor(currentx/10);
+		currentY = (int) Math.floor(currenty/10);
+		
+		try {
+			
+			BufferedReader r = new BufferedReader(new FileReader(PATH + "/regions/" + currentX + "-" + currentY + ".json"));
+			activeSuperRegion = gson.fromJson(r, SuperRegion.class);
+			activeRegion = activeSuperRegion.getTile(currentx%10, currenty%10);
+			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		
+		}
+		
 	}
 
 }

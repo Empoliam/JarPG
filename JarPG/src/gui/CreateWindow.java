@@ -193,7 +193,9 @@ public class CreateWindow extends JDialog
 
 		super(parent, true);
 		this.PATH = PATH;
-
+		this.x = x;
+		this.y = y;
+		
 		panel.setLayout(new MigLayout());
 
 		panel.add(head,"span 2, wrap, align center");
