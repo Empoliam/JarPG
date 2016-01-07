@@ -338,8 +338,8 @@ public class World
 		do
 		{
 			
-			spawnX = rand.nextInt(400);
-			spawnY = rand.nextInt(400);
+			spawnX = rand.nextInt(WORLD_SIZE);
+			spawnY = rand.nextInt(WORLD_SIZE);
 			
 		}
 		while(regions[spawnX][spawnY].get("solid") == false);
