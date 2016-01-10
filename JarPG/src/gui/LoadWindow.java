@@ -61,7 +61,7 @@ public class LoadWindow extends JDialog
 		
 		add(mainPanel);
 		
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);

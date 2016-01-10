@@ -158,8 +158,74 @@ public class MainWindow extends JFrame
 	private void command(String in)
 	{
 		
+		in = in.toLowerCase();
+		
+		switch(in)
+		{
+		
+		case "north" :
+			move(0);
+			textarea.append("You walk north.\n");
+			break;
+		case "west" :
+			move(1);
+			textarea.append("You walk west.\n");
+			break;	
+		case "south" :
+			move(2);
+			textarea.append("You walk south.\n");
+			break;
+		case "east" :
+			move(3);
+			textarea.append("You walk east.\n");
+			break;
+		default :
+			textarea.append("Command not recognised.\n");
+			break;
+		}
 		
 		
 	}
 
+	/*	0: north
+	*	1: west
+	*	2: south
+	*	3: east
+	*/
+	private void move(int direction)
+	{
+		
+		switch(direction)
+		{
+		
+		case 0:
+			if(currenty != 0)
+			{				
+				currenty --;				
+			}
+			break;
+		case 1:
+			if(currentx != 0)
+			{
+				currentx --;				
+			}
+			break;
+		case 2:
+			if(currenty != 399)
+			{				
+				currenty ++;				
+			}
+			break;
+		case 3:
+			if(currentx != 399)
+			{
+				currentx ++;				
+			}
+			break;
+		
+		}
+		loadRegion();
+		
+	}
+	
 }
