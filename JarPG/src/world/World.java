@@ -286,6 +286,14 @@ public class World
 		new File(PATH + "/regions").mkdir();
 		superRegions = new SuperRegion[WORLD_SIZE/10][WORLD_SIZE/10];
 
+		try {
+			FileWriter writer = new FileWriter(PATH + "/params.dat");
+			writer.write("WORLD_SIZE:" + Integer.toString(WORLD_SIZE));
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		for(int Y = 0; Y < WORLD_SIZE/10; Y ++)
 		{
 			
@@ -321,13 +329,13 @@ public class World
 				}
 				catch(IOException e)
 				{
-
-
+					e.printStackTrace();
 				}
 
 			}
 
 		}
+				
 	}
 
 	private void generateSpawn()

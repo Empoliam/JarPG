@@ -26,6 +26,7 @@ public class WorldWindow extends JDialog
 	World currentWorld;
 	String PATH;
 	int spawnX, spawnY;
+	int WORLD_SIZE = 400;
 
 	//Components
 	JPanel mainPanel = new JPanel();
@@ -44,7 +45,7 @@ public class WorldWindow extends JDialog
 		public void actionPerformed(ActionEvent e) {
 
 			PATH = "worlds/" + nameField.getText();
-			currentWorld = new World(400,PATH);
+			currentWorld = new World(WORLD_SIZE,PATH);
 			try {
 
 				BufferedImage mapImg = ImageIO.read(new File(PATH + "/map.bmp"));
@@ -108,6 +109,13 @@ public class WorldWindow extends JDialog
 	{
 		
 		return PATH;
+		
+	}
+	
+	public int getWorldSize()
+	{
+		
+		return WORLD_SIZE;
 		
 	}
 	

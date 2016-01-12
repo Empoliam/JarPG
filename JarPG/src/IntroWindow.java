@@ -24,8 +24,8 @@ public class IntroWindow extends JFrame
 	static IntroWindow titlePage;
 	
 	String PATH;
+	int WORLD_SIZE;
 	
-	boolean debug;
 	int[] spawn = new int[2];
 	
 	JPanel mainPane = new JPanel();
@@ -42,7 +42,7 @@ public class IntroWindow extends JFrame
 			
 			makeWorld();
 			makePlayer();
-			new MainWindow(PATH);
+			new MainWindow(PATH,WORLD_SIZE);
 			dispose();
 			
 		}
@@ -57,7 +57,7 @@ public class IntroWindow extends JFrame
 			LoadWindow loadSave = new LoadWindow(titlePage);
 			PATH = loadSave.getPath();
 			loadSave.dispose();
-			new MainWindow(PATH);
+			new MainWindow(PATH,WORLD_SIZE);
 			dispose();
 			
 		}
@@ -104,7 +104,6 @@ public class IntroWindow extends JFrame
 	{
 
 		CreateWindow create = new CreateWindow(this,PATH,spawn[0],spawn[1]);
-		debug = create.Debug();
 		create.dispose();
 
 	}
@@ -115,6 +114,7 @@ public class IntroWindow extends JFrame
 		WorldWindow createWorld = new WorldWindow(this);
 		PATH = createWorld.getPath();
 		spawn = createWorld.getSpawn();
+		WORLD_SIZE = 0;
 		createWorld.dispose();
 
 	}

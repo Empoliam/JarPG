@@ -27,6 +27,7 @@ public class MainWindow extends JFrame
 	private static final long serialVersionUID = -3241273755265444600L;
 	
 	String PATH;
+	int WORLD_SIZE;
 
 	Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	
@@ -77,12 +78,13 @@ public class MainWindow extends JFrame
 		}
 	};
 	
-	public MainWindow(String PATH)
+	public MainWindow(String PATH, int WORLD_SIZE)
 	{
 
 		super("JarPG");
 
 		this.PATH = PATH;
+		this.WORLD_SIZE = WORLD_SIZE;
 		
 		textarea.setEditable(false);
 		textarea.setLineWrap(true);
