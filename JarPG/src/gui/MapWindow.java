@@ -93,7 +93,7 @@ public class MapWindow extends JDialog
 
 		Graphics2D g =  mapImg.createGraphics();
 		g.setColor(new Color(255,0,255));
-		g.drawOval(x, y, 4, 4);
+		g.drawOval(x-1, y-1, 2, 2);
 		
 		ImageIcon mapIcon = new ImageIcon(mapImg);
 		mapPane.setIcon(mapIcon);

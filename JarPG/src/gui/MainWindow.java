@@ -161,32 +161,20 @@ public class MainWindow extends JFrame
 	{
 		
 		in = in.toLowerCase();
+		String[] command = in.split(" ");
 		
-		switch(in)
+		switch(command[0])
 		{
 		
-		case "north" :
-			move(0);
-			textarea.append("You walk north.\n");
-			break;
-		case "west" :
-			move(1);
-			textarea.append("You walk west.\n");
-			break;	
-		case "south" :
-			move(2);
-			textarea.append("You walk south.\n");
-			break;
-		case "east" :
-			move(3);
-			textarea.append("You walk east.\n");
+		case "move" :
+			move(command[1]);
 			break;
 		default :
 			textarea.append("Command not recognised.\n");
 			break;
+			
 		}
-		
-		
+				
 	}
 
 	/*	0: north
@@ -194,39 +182,58 @@ public class MainWindow extends JFrame
 	*	2: south
 	*	3: east
 	*/
-	private void move(int direction)
+	private void move(String direction)
 	{
+		
+		String reverse = null; 
 		
 		switch(direction)
 		{
 		
-		case 0:
+		case "north":
 			if(currenty != 0)
 			{				
-				currenty --;				
+				currenty --;	
+				textarea.append("You walk north.\n");
+				reverse = "south";
 			}
 			break;
-		case 1:
+		case "west":
 			if(currentx != 0)
 			{
-				currentx --;				
+				currentx --;	
+				textarea.append("You walk west.\n");
+				reverse = "east";
 			}
 			break;
-		case 2:
-			if(currenty != 399)
+		case "south":
+			if(currenty != WORLD_SIZE-1)
 			{				
-				currenty ++;				
+				currenty ++;	
+				textarea.append("You walk south.\n");
+				reverse = "north";
 			}
 			break;
-		case 3:
-			if(currentx != 399)
+		case "east":
+			if(currentx != WORLD_SIZE-1)
 			{
+				textarea.append("You walk east.\n");
 				currentx ++;				
+				reverse = "west";
 			}
 			break;
+		default:
+			textarea.append("'" + direction + "'" + " is not a direction.");
 		
 		}
+		
 		loadRegion();
+				
+		if(activeRegion.getBiome() == -1)
+		{
+			textarea.append("You find an expanse of water, and can proceed no further. ");
+			move(reverse);
+		}
 		
 	}
 	

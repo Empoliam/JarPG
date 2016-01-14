@@ -111,7 +111,7 @@ public class World
 
 			for(; x < WORLD_SIZE; x ++)
 			{
-
+			
 				if (regions[x][y].get("mountain") == true)
 				{
 
@@ -119,15 +119,18 @@ public class World
 					else image.setRGB(x, y, MOUNTAIN_COLOUR);
 
 				}
-				else if (regions[x][y].get("solid") == true)
+				else
 				{
 
 					switch(regions[x][y].getBiome())
 					{
 
+					case -1:
+						image.setRGB(x, y, SEA_COLOUR);
+						break;
 					case 0:
 						image.setRGB(x, y, DESERT_COLOUR);
-						break;
+						
 					case 1: 
 						image.setRGB(x, y, SAVANNA_COLOUR);
 						break;
@@ -159,7 +162,6 @@ public class World
 					}
 
 				}
-				else image.setRGB(x, y, SEA_COLOUR);
 
 			}
 
@@ -272,8 +274,15 @@ public class World
 
 			for(; x < WORLD_SIZE; x ++)
 			{
-
-				regions[x][y].setBiome(biomes.getData(x, y));
+				
+				if(regions[x][y].get("solid") == false)
+				{
+					regions[x][y].setBiome(-1);					
+				}
+				else
+				{
+					regions[x][y].setBiome(biomes.getData(x, y));
+				}
 
 			}
 
