@@ -220,5 +220,5 @@ public class BiomeMap{
 		catch(IOException e){System.out.println("Failed to print map");};
 		
 	}
-
+	
 }

@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import utilities.noise.NoiseMap;
+
 import static utilities.ColourBank.*;
 
 public class World 
@@ -26,6 +27,7 @@ public class World
 	double[][] data;
 	Region[][] regions;
 	SuperRegion[][] superRegions;
+	BiomeMap biomes;
 
 	public World(int sizein, String path)
 	{
@@ -111,7 +113,7 @@ public class World
 
 			for(; x < WORLD_SIZE; x ++)
 			{
-			
+
 				if (regions[x][y].get("mountain") == true)
 				{
 
@@ -130,7 +132,7 @@ public class World
 						break;
 					case 0:
 						image.setRGB(x, y, DESERT_COLOUR);
-						
+
 					case 1: 
 						image.setRGB(x, y, SAVANNA_COLOUR);
 						break;
@@ -265,8 +267,8 @@ public class World
 	private void createBiomes()
 	{
 
-		BiomeMap biomes = new BiomeMap(WORLD_SIZE, PATH);
-
+		biomes = new BiomeMap(WORLD_SIZE, PATH);
+		
 		for(int y = 0; y < WORLD_SIZE; y ++)
 		{
 
@@ -274,7 +276,7 @@ public class World
 
 			for(; x < WORLD_SIZE; x ++)
 			{
-				
+
 				if(regions[x][y].get("solid") == false)
 				{
 					regions[x][y].setBiome(-1);					
@@ -302,25 +304,25 @@ public class World
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		for(int Y = 0; Y < WORLD_SIZE/10; Y ++)
 		{
-			
+
 			for(int X = 0; X < WORLD_SIZE/10; X ++)
 			{
-				
+
 				superRegions[X][Y] = new SuperRegion();
-				
+
 				for(int y = 0; y < 10; y ++)
 				{
-	
+
 					int  x = 0;
 
 					for(; x < 10; x++)
 					{
-						
+
 						superRegions[X][Y].saveTile(x, y, regions[x+(X*10)][y+(Y*10)]);
-						
+
 					}
 
 				}
@@ -344,33 +346,33 @@ public class World
 			}
 
 		}
-				
+
 	}
 
 	private void generateSpawn()
 	{
-		
+
 		Random rand = new Random(System.currentTimeMillis());
-		
+
 		do
 		{
-			
+
 			spawnX = rand.nextInt(WORLD_SIZE);
 			spawnY = rand.nextInt(WORLD_SIZE);
-			
+
 		}
 		while(regions[spawnX][spawnY].get("solid") == false);
-		
+
 	}
-	
+
 	public int getSpawn(char axis)
 	{
-	
+
 		int ret = 0;
-		
+
 		switch(axis)
 		{
-		
+
 		case 'x': 
 			ret =  spawnX;
 			break;
@@ -378,9 +380,9 @@ public class World
 			ret= spawnY;
 			break;
 		}
-		
+
 		return ret;
-		
+
 	}
 	
 }
