@@ -221,4 +221,11 @@ public class BiomeMap{
 		
 	}
 	
+	public int[][] getArray()
+	{
+		
+		return data;
+		
+	}
+	
 }

@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import utilities.noise.NoiseMap;
+import world.CC.RegionLabel;
 
 import static utilities.ColourBank.*;
 
@@ -53,6 +54,7 @@ public class World
 		createBiomes();
 		drawImage();
 		generateSpawn();
+		labelRegions();
 
 	}
 
@@ -383,6 +385,13 @@ public class World
 
 		return ret;
 
+	}
+	
+	private void labelRegions()
+	{
+		
+		new RegionLabel(biomes.getArray(), WORLD_SIZE);
+		
 	}
 	
 }

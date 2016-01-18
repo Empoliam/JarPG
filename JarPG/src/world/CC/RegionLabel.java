@@ -50,9 +50,17 @@ public class RegionLabel
 					outputLabels[x][y] = outputLabels[x-1][y];
 					if(north == true && currentType == northval)
 					{
-						
+												
 						labels.get(outputLabels[x][y-1]).addNeigbour(outputLabels[x][y]);
-						
+						for(Integer n : labels.get(outputLabels[x][y-1]).getAllNeighbours())
+						{
+							
+							labels.get(n).addNeigbour(outputLabels[x][y]);
+							labels.get(n).addNeigbours(labels.get(outputLabels[x][y-1]).getAllNeighbours());
+							System.out.println(n);
+							
+						}
+											
 					}
 					
 				}
