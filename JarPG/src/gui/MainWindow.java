@@ -140,14 +140,14 @@ public class MainWindow extends JFrame
 	private void loadRegion()
 	{
 				
-		currentX = (int) Math.floor(currentx/10);
-		currentY = (int) Math.floor(currenty/10);
-		
+		currentX = (int) Math.floor(currentx/40);
+		currentY = (int) Math.floor(currenty/40);
+							
 		try {
 			
 			BufferedReader r = new BufferedReader(new FileReader(PATH + "/regions/" + currentX + "-" + currentY + ".json"));
 			activeSuperRegion = gson.fromJson(r, SuperRegion.class);
-			activeRegion = activeSuperRegion.getTile(currentx%10, currenty%10);
+			activeRegion = activeSuperRegion.getTile((int)Math.floor(currentx/10),(int) Math.floor(currenty/10));
 			
 		} catch (FileNotFoundException e) {
 			
@@ -193,10 +193,11 @@ public class MainWindow extends JFrame
 		case "north":
 			if(currenty != 0)
 			{				
-				currenty --;	
+				currenty --;
 				textarea.append("You walk north.\n");
 				reverse = "south";
 			}
+			else textarea.append("You can go no further in this direction.\n");
 			break;
 		case "west":
 			if(currentx != 0)
@@ -204,7 +205,9 @@ public class MainWindow extends JFrame
 				currentx --;	
 				textarea.append("You walk west.\n");
 				reverse = "east";
+				break;
 			}
+			else textarea.append("You can go no further in this direction.\n");
 			break;
 		case "south":
 			if(currenty != WORLD_SIZE-1)
@@ -213,6 +216,7 @@ public class MainWindow extends JFrame
 				textarea.append("You walk south.\n");
 				reverse = "north";
 			}
+			else textarea.append("You can go no further in this direction.\n");
 			break;
 		case "east":
 			if(currentx != WORLD_SIZE-1)
@@ -221,14 +225,13 @@ public class MainWindow extends JFrame
 				currentx ++;				
 				reverse = "west";
 			}
+			else textarea.append("You can go no further in this direction.\n");
 			break;
 		default:
 			textarea.append("'" + direction + "'" + " is not a direction.");
-		
+			
 		}
-		
-		loadRegion();
-				
+		loadRegion();	
 		if(activeRegion.getBiome() == -1)
 		{
 			textarea.append("You find an expanse of water, and can proceed no further. ");

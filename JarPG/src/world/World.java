@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import utilities.noise.NoiseMap;
-import world.CC.RegionLabel;
 
 import static utilities.ColourBank.*;
 
@@ -54,7 +53,6 @@ public class World
 		createBiomes();
 		drawImage();
 		generateSpawn();
-		labelRegions();
 
 	}
 
@@ -297,7 +295,7 @@ public class World
 	public void save()
 	{
 		new File(PATH + "/regions").mkdir();
-		superRegions = new SuperRegion[WORLD_SIZE/10][WORLD_SIZE/10];
+		superRegions = new SuperRegion[WORLD_SIZE/40][WORLD_SIZE/40];
 
 		try {
 			FileWriter writer = new FileWriter(PATH + "/params.dat");
@@ -307,23 +305,23 @@ public class World
 			e.printStackTrace();
 		}
 
-		for(int Y = 0; Y < WORLD_SIZE/10; Y ++)
+		for(int Y = 0; Y < WORLD_SIZE/40; Y ++)
 		{
 
-			for(int X = 0; X < WORLD_SIZE/10; X ++)
+			for(int X = 0; X < WORLD_SIZE/40; X ++)
 			{
 
 				superRegions[X][Y] = new SuperRegion();
 
-				for(int y = 0; y < 10; y ++)
+				for(int y = 0; y < 40; y ++)
 				{
 
 					int  x = 0;
 
-					for(; x < 10; x++)
+					for(; x < 40; x++)
 					{
 
-						superRegions[X][Y].saveTile(x, y, regions[x+(X*10)][y+(Y*10)]);
+						superRegions[X][Y].saveTile(x, y, regions[x+(X*40)][y+(Y*40)]);
 
 					}
 
@@ -385,13 +383,6 @@ public class World
 
 		return ret;
 
-	}
-	
-	private void labelRegions()
-	{
-		
-		new RegionLabel(biomes.getArray(), WORLD_SIZE);
-		
 	}
 	
 }

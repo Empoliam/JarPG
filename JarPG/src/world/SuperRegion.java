@@ -3,7 +3,7 @@ package world;
 public class SuperRegion 
 {
 
-	Region[][] regions = new Region[10][10];
+	Region[][] regions = new Region[40][40];
 	
 	SuperRegion(){}
 	
