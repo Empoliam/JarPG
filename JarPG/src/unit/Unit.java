@@ -2,17 +2,27 @@ package unit;
 
 public class Unit {
 
-	int HP, cHP, MP, cMP, ATT, DEF;
+	String fName, lName;
+	int HP, cHP, MP, cMP;
 	
-	Unit(int HPi, int MPi, int ATTi, int DEFi)
+	Unit(int HPi, int MPi)
 	{
 		
 		HP = HPi;
 		cHP = HPi;
 		MP = MPi;
 		cMP = MPi;
-		ATT = ATTi;
-		DEF = DEFi;
+		
+	}
+	
+	Unit(String fName, String lName ,int HP, int MP)
+	{
+		
+		this.HP = HP;
+		this.cHP = HP;
+		this.MP = MP;
+		this.cMP = MP;
+
 		
 	}
 	
@@ -20,7 +30,5 @@ public class Unit {
 	public int getcHP(){ return cHP; }
 	public int getMP(){ return MP; }
 	public int getcMP(){ return cMP; }
-	public int getATT(){ return ATT; }
-	public int getDEF(){ return DEF; }
 	
 }

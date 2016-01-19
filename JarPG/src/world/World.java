@@ -14,6 +14,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import utilities.noise.NoiseMap;
+import world.geology.NativeLayer;
+import world.geology.Rock;
+import world.geology.SedimentLayer;
 
 import static utilities.ColourBank.*;
 
@@ -28,7 +31,7 @@ public class World
 	Region[][] regions;
 	SuperRegion[][] superRegions;
 	BiomeMap biomes;
-
+	
 	public World(int sizein, String path)
 	{
 
@@ -52,6 +55,7 @@ public class World
 		erode(1,"solid");
 		createBiomes();
 		drawImage();
+		generateGeology();
 		generateSpawn();
 
 	}
@@ -327,7 +331,7 @@ public class World
 
 				}
 
-				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				Gson gson = new GsonBuilder().create();
 				String json = gson.toJson(superRegions[X][Y]);
 
 				try 
@@ -383,6 +387,35 @@ public class World
 
 		return ret;
 
+	}
+	
+	private void generateGeology()
+	{
+		
+		Rock.getList();
+		
+		SedimentLayer sediment01 = new SedimentLayer(WORLD_SIZE, PATH, "Sediment01");
+		SedimentLayer sediment02 = new SedimentLayer(WORLD_SIZE, PATH, "Sediment02");
+		SedimentLayer sediment03 = new SedimentLayer(WORLD_SIZE, PATH, "Sediment03");
+		NativeLayer native01 = new NativeLayer(WORLD_SIZE, PATH, "Native01");
+		NativeLayer native02 = new NativeLayer(WORLD_SIZE, PATH, "Native02");
+		
+		for(int y = 0; y < WORLD_SIZE; y ++)
+		{
+			
+			for(int x = 0; x < WORLD_SIZE; x ++)
+			{
+				
+				regions[x][y].setRock("sediment", 0, new Rock(sediment01.getData(x, y)));
+				regions[x][y].setRock("sediment", 1, new Rock(sediment02.getData(x, y)));
+				regions[x][y].setRock("sediment", 2, new Rock(sediment03.getData(x, y)));
+				regions[x][y].setRock("native", 0, new Rock(native01.getData(x, y)));
+				regions[x][y].setRock("native", 1, new Rock(native02.getData(x, y)));
+				
+			}
+			
+		}
+		
 	}
 	
 }

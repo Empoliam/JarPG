@@ -104,7 +104,9 @@ public class MainWindow extends JFrame
 		inv.setEnabled(false);
 		stat.setEnabled(false);
 		map.addActionListener(aMap);
+		
 		send.addActionListener(aSend);
+		inputfield.addActionListener(aSend);
 		
 		add(mainpanel);
 
@@ -147,7 +149,7 @@ public class MainWindow extends JFrame
 			
 			BufferedReader r = new BufferedReader(new FileReader(PATH + "/regions/" + currentX + "-" + currentY + ".json"));
 			activeSuperRegion = gson.fromJson(r, SuperRegion.class);
-			activeRegion = activeSuperRegion.getTile((int)Math.floor(currentx/10),(int) Math.floor(currenty/10));
+			activeRegion = activeSuperRegion.getTile((currentx-(currentX*40)),(currenty-(currentY*40)));
 			
 		} catch (FileNotFoundException e) {
 			

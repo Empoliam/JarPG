@@ -1,5 +1,7 @@
 package world;
 
+import world.geology.Rock;
+
 public class Region 
 {
 
@@ -10,16 +12,19 @@ public class Region
 	boolean mountain;
 	boolean snow;
 
+	Rock[] sediment = new Rock[3];
+	Rock[] nativemetal = new Rock[2];
+
 	public Region()	{}
 
 	public Region(int x, int y)
 	{
-		
+
 		this.x = x;
 		this.y = y;
-		
+
 	}
-	
+
 	public void setHeight(double heightin) {	
 		height = heightin;	
 	}
@@ -53,9 +58,9 @@ public class Region
 		}
 
 		return val;
-		
+
 	}
-	
+
 	public void set(String tag, boolean val)
 	{
 
@@ -69,15 +74,32 @@ public class Region
 		case "snow" : snow = val;
 		break;
 		}
-	
+
 	}
 
 	public void setXY(int x, int y)
 	{
-		
+
 		this.x = x;
 		this.y = y;
-		
+
 	}
-	
+
+	public void setRock(String layer, int number, Rock rock)
+	{
+
+		switch(layer)
+		{
+
+		case "sediment":
+			sediment[number] = rock;
+			break;
+		case "native":
+			nativemetal[number] = rock;
+			break;
+			
+		}
+
+	}
+
 }

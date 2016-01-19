@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,7 +32,7 @@ public class CreateWindow extends JDialog
 	JPanel panel = new JPanel();
 
 	String fName, lName;
-	int HP, MP, ATT, DEF, x, y;
+	int HP, MP, x, y;
 
 	Player player;
 
@@ -42,30 +41,19 @@ public class CreateWindow extends JDialog
 	JLabel lNameLabel = new JLabel("Last Name: ");
 	JLabel HPLabel = new JLabel("HP: ");
 	JLabel MPLabel = new JLabel("MP: ");
-	JLabel ATTLabel = new JLabel("Attack: ");
-	JLabel DEFLabel = new JLabel("Defence: ");
 	JLabel PointLabel = new JLabel("Points left: " + MAX_POINTS);
-	JLabel debugLabel = new JLabel("Debug Mode:");
 
 	JTextField fNameField = new JTextField(10);
 	JTextField lNameField = new JTextField(10);
 	STextField HPField = new STextField();
 	STextField MPField = new STextField();
-	STextField ATTField = new STextField();
-	STextField DEFField = new STextField();
 
 	SButton HPp = new SButton("+");
-	SButton MPp = new SButton("+");
-	SButton ATTp = new SButton("+");
-	SButton DEFp = new SButton("+");	
+	SButton MPp = new SButton("+");	
 	SButton HPm = new SButton("-");
 	SButton MPm = new SButton("-");
-	SButton ATTm = new SButton("-");
-	SButton DEFm = new SButton("-");
 
 	JButton go = new JButton("Go!");
-
-	JCheckBox debug = new JCheckBox();
 
 	ActionListener HPa = new ActionListener() 
 	{
@@ -93,6 +81,7 @@ public class CreateWindow extends JDialog
 
 		}
 	};
+	
 	ActionListener MPa = new ActionListener() 
 	{
 
@@ -119,58 +108,6 @@ public class CreateWindow extends JDialog
 
 		}
 	};
-	ActionListener ATTa = new ActionListener() 
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-
-			int value = Integer.parseInt(ATTField.getText());
-
-			switch( e.getActionCommand() )
-			{
-
-			case "+" :
-				value ++;
-				break;
-
-			case "-" :
-				value --;
-				break;
-
-			}
-
-			ATTField.setText(Integer.toString(value));
-
-		}
-	};
-	ActionListener DEFa = new ActionListener() 
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-
-			int value = Integer.parseInt(DEFField.getText());
-
-			switch( e.getActionCommand() )
-			{
-
-			case "+" :
-				value ++;
-				break;
-
-			case "-" :
-				value --;
-				break;
-
-			}
-
-			DEFField.setText(Integer.toString(value));
-
-		}
-	};
 
 	ActionListener GOa = new ActionListener() 
 	{
@@ -186,7 +123,6 @@ public class CreateWindow extends JDialog
 
 		}
 	};
-
 
 	public CreateWindow(JFrame parent, String PATH, int x, int y)
 	{
@@ -218,19 +154,6 @@ public class CreateWindow extends JDialog
 		panel.add(MPField);
 		panel.add(MPp,"wrap");
 
-		panel.add(ATTLabel, "align right");
-		panel.add(ATTm,"split 3, align center");
-		panel.add(ATTField);
-		panel.add(ATTp,"wrap");
-
-		panel.add(DEFLabel, "align right");
-		panel.add(DEFm,"split 3, align center");
-		panel.add(DEFField);
-		panel.add(DEFp,"wrap");
-
-		panel.add(debugLabel,"align right");
-		panel.add(debug,"wrap,align center");
-
 		panel.add(go,"span 2, align center");
 
 		HPp.addActionListener(HPa);
@@ -239,18 +162,10 @@ public class CreateWindow extends JDialog
 		MPp.addActionListener(MPa);
 		MPm.addActionListener(MPa);
 
-		ATTp.addActionListener(ATTa);
-		ATTm.addActionListener(ATTa);
-
-		DEFp.addActionListener(DEFa);
-		DEFm.addActionListener(DEFa);
-
 		go.addActionListener(GOa);
 
 		HPField.setText("30");
 		MPField.setText("30");
-		ATTField.setText("7");
-		DEFField.setText("7");
 
 		add(panel);
 
@@ -267,18 +182,14 @@ public class CreateWindow extends JDialog
 
 				HP = Integer.parseInt(HPField.getText());
 				MP = Integer.parseInt(MPField.getText());
-				ATT = Integer.parseInt(ATTField.getText());
-				DEF = Integer.parseInt(DEFField.getText());
-
+				
 				if(HP <= 0) HPm.setEnabled(false); else HPm.setEnabled(true);
 				if(MP <= 0) MPm.setEnabled(false); else MPm.setEnabled(true);
-				if(ATT <= 0) ATTm.setEnabled(false); else ATTm.setEnabled(true);
-				if(DEF <= 0) DEFm.setEnabled(false); else DEFm.setEnabled(true);
 
-				if((HP/HP_MULT)+(MP/MP_MULT)+ATT+DEF >= MAX_POINTS)	allButtonState(false);
+				if((HP/HP_MULT)+(MP/MP_MULT) >= MAX_POINTS)	allButtonState(false);
 				else allButtonState(true);
 
-				int pointsLeft = MAX_POINTS-((HP/HP_MULT)+(MP/MP_MULT)+ATT+DEF);
+				int pointsLeft = MAX_POINTS-((HP/HP_MULT)+(MP/MP_MULT));
 
 				PointLabel.setText("Points remaining: " + pointsLeft); 
 
@@ -297,8 +208,6 @@ public class CreateWindow extends JDialog
 
 		HPp.setEnabled(state);
 		MPp.setEnabled(state);
-		ATTp.setEnabled(state);
-		DEFp.setEnabled(state);
 
 	}
 
@@ -308,14 +217,7 @@ public class CreateWindow extends JDialog
 		fName = fNameField.getText();
 		lName = lNameField.getText();
 
-		player = new Player(fName, lName, HP, MP, ATT, DEF, x, y);
-
-	}
-
-	public boolean Debug()
-	{
-
-		return debug.isSelected();
+		player = new Player(fName, lName, HP, MP, x, y);
 
 	}
 

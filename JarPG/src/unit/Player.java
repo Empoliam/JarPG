@@ -3,23 +3,17 @@ package unit;
 public class Player extends Unit
 {
 
-	String fName, lName;
 	int x, y;
 	
-	public Player(String ifName, String ilName, int HPi, int MPi, int ATTi, int DEFi, int x, int y)
+	public Player(String fName, String lName, int HP, int MP, int x, int y)
 	{
 		
-		super(HPi, MPi, ATTi, DEFi);
-		fName = ifName;
-		lName = ilName;
+		super(fName, lName, HP, MP);
 		this.x = x;
 		this.y = y;
 		
 	}
 	
-	public String getFName(){ return fName; }
-	public String getLName(){ return lName; }
-
 	public int getX() {
 		return x;
 	}
