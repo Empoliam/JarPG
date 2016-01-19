@@ -1,8 +1,12 @@
 package world;
 
-public class SuperRegion 
+import java.io.Serializable;
+
+public class SuperRegion implements Serializable
 {
 
+	private static final long serialVersionUID = 1L;
+	
 	Region[][] regions = new Region[40][40];
 	
 	SuperRegion(){}

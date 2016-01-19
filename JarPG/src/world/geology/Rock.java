@@ -3,11 +3,14 @@ package world.geology;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rock 
+public class Rock implements Serializable
 {
+
+	private static final long serialVersionUID = 1L;
 
 	final static List<String> allrocks = new ArrayList<String>();
 	

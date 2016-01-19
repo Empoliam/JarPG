@@ -1,10 +1,14 @@
 package world;
 
+import java.io.Serializable;
+
 import world.geology.Rock;
 
-public class Region 
+public class Region implements Serializable
 {
 
+	private static final long serialVersionUID = 1L;
+	
 	int x, y;
 	double height;
 	int biome;

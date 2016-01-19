@@ -1,8 +1,9 @@
 package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,9 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import net.miginfocom.swing.MigLayout;
 import statComponents.*;
@@ -224,13 +222,10 @@ public class CreateWindow extends JDialog
 	private void save()
 	{
 
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json = gson.toJson(player);
-		FileWriter writer;
 		try {
-			writer = new FileWriter(PATH + "/player.json");
-			writer.write(json);
-			writer.close();
+			ObjectOutputStream  os = new ObjectOutputStream(new FileOutputStream(PATH + "/player.dat"));
+			os.writeObject(player);
+			os.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
