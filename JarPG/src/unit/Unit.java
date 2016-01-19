@@ -1,7 +1,12 @@
 package unit;
 
-public class Unit {
+import java.io.Serializable;
 
+public class Unit implements Serializable 
+{
+
+	final static long serialVersionUID = 1L;
+	
 	String fName, lName;
 	int HP, cHP, MP, cMP;
 	

@@ -2,16 +2,15 @@ package world;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import utilities.noise.NoiseMap;
 import world.geology.NativeLayer;
@@ -331,15 +330,13 @@ public class World
 
 				}
 
-				Gson gson = new GsonBuilder().create();
-				String json = gson.toJson(superRegions[X][Y]);
-
 				try 
 				{
 
-					FileWriter writer = new FileWriter(PATH + "/regions/" + (X) + "-" + (Y) +".json");
-					writer.write(json);
-					writer.close();
+					ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(PATH + "/regions/" + (X) + "-" + (Y) +".region"));
+					os.writeObject(superRegions[X][Y]);
+					os.close();
+
 
 				}
 				catch(IOException e)

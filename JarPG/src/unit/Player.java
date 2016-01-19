@@ -3,6 +3,8 @@ package unit;
 public class Player extends Unit
 {
 
+	final static long serialVersionUID = 1L;
+	
 	int x, y;
 	
 	public Player(String fName, String lName, int HP, int MP, int x, int y)
