@@ -15,7 +15,7 @@ public class Rock implements Serializable
 	final static List<String> allrocks = new ArrayList<String>();
 	
 	int id;
-	String name;
+	public String name;
 	int yeild;
 	int meta;
 	

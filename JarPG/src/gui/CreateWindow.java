@@ -162,8 +162,8 @@ public class CreateWindow extends JDialog
 
 		go.addActionListener(GOa);
 
-		HPField.setText("30");
-		MPField.setText("30");
+		HPField.setText("60");
+		MPField.setText("50");
 
 		add(panel);
 

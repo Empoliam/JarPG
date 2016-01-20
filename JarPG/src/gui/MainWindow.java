@@ -17,12 +17,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Random;
 
 import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
 import unit.Player;
 import world.Region;
 import world.SuperRegion;
+import world.geology.Rock;
 
 public class MainWindow extends JFrame
 {
@@ -95,7 +97,7 @@ public class MainWindow extends JFrame
 				e1.printStackTrace();
 				textarea.append("Save failed.");
 			}
-			
+
 		}
 	};
 
@@ -190,7 +192,10 @@ public class MainWindow extends JFrame
 		{
 
 		case "move" :
-			move(command[1]);
+			move(in);
+			break;
+		case "dig" :
+			dig(in);
 			break;
 		default :
 			textarea.append("Command not recognised.\n");
@@ -205,64 +210,143 @@ public class MainWindow extends JFrame
 	 *	2: south
 	 *	3: east
 	 */
-	private void move(String direction)
+	private void move(String in)
 	{
 
 		String reverse = null; 
 
-		switch(direction)
+		try
 		{
 
-		case "north":
-			if(currenty != 0)
-			{				
-				currenty --;
-				textarea.append("You walk north.\n");
-				reverse = "south";
-			}
-			else textarea.append("You can go no further in this direction.\n");
-			break;
-		case "west":
-			if(currentx != 0)
+			String direction = in.split(" ")[1];
+
+			switch(direction)
 			{
-				currentx --;	
-				textarea.append("You walk west.\n");
-				reverse = "east";
+
+			case "north":
+				if(currenty != 0)
+				{				
+					currenty --;
+					textarea.append("You walk north.\n");
+					reverse = "south";
+				}
+				else textarea.append("You can go no further in this direction.\n");
 				break;
+			case "west":
+				if(currentx != 0)
+				{
+					currentx --;	
+					textarea.append("You walk west.\n");
+					reverse = "east";
+					break;
+				}
+				else textarea.append("You can go no further in this direction.\n");
+				break;
+			case "south":
+				if(currenty != WORLD_SIZE-1)
+				{				
+					currenty ++;	
+					textarea.append("You walk south.\n");
+					reverse = "north";
+				}
+				else textarea.append("You can go no further in this direction.\n");
+				break;
+			case "east":
+				if(currentx != WORLD_SIZE-1)
+				{
+					textarea.append("You walk east.\n");
+					currentx ++;				
+					reverse = "west";
+				}
+				else textarea.append("You can go no further in this direction.\n");
+				break;
+			default:
+				textarea.append("'" + direction + "'" + " is not a direction.\n");
+
 			}
-			else textarea.append("You can go no further in this direction.\n");
-			break;
-		case "south":
-			if(currenty != WORLD_SIZE-1)
-			{				
-				currenty ++;	
-				textarea.append("You walk south.\n");
-				reverse = "north";
-			}
-			else textarea.append("You can go no further in this direction.\n");
-			break;
-		case "east":
-			if(currentx != WORLD_SIZE-1)
+			loadRegion();	
+			if(activeRegion.getBiome() == -1)
 			{
-				textarea.append("You walk east.\n");
-				currentx ++;				
-				reverse = "west";
+				textarea.append("You find an expanse of water, and can proceed no further. ");
+				move(reverse);
 			}
-			else textarea.append("You can go no further in this direction.\n");
-			break;
-		default:
-			textarea.append("'" + direction + "'" + " is not a direction.\n");
+
+			player.setXY(currentx, currenty);
 
 		}
-		loadRegion();	
-		if(activeRegion.getBiome() == -1)
+		catch(ArrayIndexOutOfBoundsException e)
 		{
-			textarea.append("You find an expanse of water, and can proceed no further. ");
-			move(reverse);
+
+			textarea.append("Format unrecognised. Use 'move [direction]'.\n");
+
+		}
+
+	}
+
+	private void dig(String in)
+	{
+
+		Rock mined = null;
+		boolean hit = true;
+
+		try
+		{
+
+			String layer = in.split(" ")[1];
+
+			if(player.getMining() >= 5)
+			{
+
+				textarea.append("You dig into the " + layer + " layers.\n");
+				
+				switch(layer)
+				{
+
+				case "sediment": 
+					mined = activeRegion.getRock("sediment", new Random().nextInt(3));
+					break;
+				case "native":
+					mined = activeRegion.getRock("native", new Random().nextInt(2));
+					break;
+				default:
+					textarea.append("Such a layer does not exist.\n");
+					hit = false;
+					break;
+				}
+
+			}
+			else
+			{
+
+				textarea.append("You are not skilled enough to locate a specific layer.\n");
+
+				int ranLayer = new Random().nextInt(2);
+
+				switch(ranLayer)
+				{
+
+				case 0: 
+					mined = activeRegion.getRock("sediment", new Random().nextInt(3));
+					break;
+				case 1:
+					mined = activeRegion.getRock("native", new Random().nextInt(2));
+					break;
+
+				}
+
+			}
+
+			if(hit == true) textarea.append("You strike " + mined.name + "!\n");
+
+		}
+
+		catch(ArrayIndexOutOfBoundsException e)
+		{
+			
+			textarea.append("Format unrecognised. Use 'dig [sediment/native]'.\n");
+			
 		}
 		
-		player.setXY(currentx, currenty);
-
 	}
 
 }

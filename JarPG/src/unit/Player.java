@@ -3,9 +3,12 @@ package unit;
 public class Player extends Unit
 {
 
-	final static long serialVersionUID = 1L;
+	final static long serialVersionUID = 2L;
 	
 	int x, y;
+	
+	//Player Skills
+	int mining = 5;
 	
 	public Player(String fName, String lName, int HP, int MP, int x, int y)
 	{
@@ -37,6 +40,13 @@ public class Player extends Unit
 		
 		this.x = x;
 		this.y = y;
+		
+	}
+	
+	public int getMining()
+	{
+		
+		return mining;
 		
 	}
 	

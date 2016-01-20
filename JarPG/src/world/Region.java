@@ -105,5 +105,24 @@ public class Region implements Serializable
 		}
 
 	}
+	
+	public Rock getRock(String layer, int number)
+	{
+
+		Rock output = null;
+		
+		switch(layer)
+		{
+		case "sediment":
+			output = sediment[number];
+			break;
+		case "native":
+			output = nativemetal[number];
+			break;
+		}
+
+		return output;
+		
+	}
 
 }
