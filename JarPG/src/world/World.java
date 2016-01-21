@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 
 import utilities.noise.NoiseMap;
+import world.CC.RegionLabel;
 import world.geology.NativeLayer;
 import world.geology.Rock;
 import world.geology.SedimentLayer;
@@ -30,6 +31,7 @@ public class World
 	Region[][] regions;
 	SuperRegion[][] superRegions;
 	BiomeMap biomes;
+	int[][] biomedata;
 	
 	public World(int sizein, String path)
 	{
@@ -56,6 +58,8 @@ public class World
 		drawImage();
 		generateGeology();
 		generateSpawn();
+		
+		new RegionLabel(biomes.getArray(), WORLD_SIZE);
 
 	}
 
@@ -271,6 +275,7 @@ public class World
 	{
 
 		biomes = new BiomeMap(WORLD_SIZE, PATH);
+		biomedata = biomes.getArray();
 		
 		for(int y = 0; y < WORLD_SIZE; y ++)
 		{
@@ -282,11 +287,12 @@ public class World
 
 				if(regions[x][y].get("solid") == false)
 				{
-					regions[x][y].setBiome(-1);					
+					regions[x][y].setBiome(-1);
+					biomedata[x][y] = -1;
 				}
 				else
 				{
-					regions[x][y].setBiome(biomes.getData(x, y));
+					regions[x][y].setBiome(biomedata[x][y]);
 				}
 
 			}

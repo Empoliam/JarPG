@@ -35,34 +35,37 @@ public class RegionLabel
 			{
 								
 				int currentType = inputData[x][y];
-				
-				boolean north = true, west = true;
-				int northval = 0, westval = 0;
+								
+				boolean north = true, west = true, ne = true;
+				int northval = 0, westval = 0, neval = 0;
 				
 				try { northval = inputData[x][y-1];	}
-				catch(ArrayIndexOutOfBoundsException e){ north = false; }
+				catch(ArrayIndexOutOfBoundsException e){ north = false;}
 				try { westval = inputData[x-1][y];	}
 				catch(ArrayIndexOutOfBoundsException e){ west = false; }
+				try { neval = inputData[x+1][y-1];	}
+				catch(ArrayIndexOutOfBoundsException e){ ne = false; }
 								
 				if(west == true && currentType == westval)
 				{
 					
 					outputLabels[x][y] = outputLabels[x-1][y];
+					
 					if(north == true && currentType == northval)
 					{
-												
+											
 						labels.get(outputLabels[x][y-1]).addNeigbour(outputLabels[x][y]);
+						
 						for(Integer n : labels.get(outputLabels[x][y-1]).getAllNeighbours())
 						{
 							
 							labels.get(n).addNeigbour(outputLabels[x][y]);
 							labels.get(n).addNeigbours(labels.get(outputLabels[x][y-1]).getAllNeighbours());
-							System.out.println(n);
 							
 						}
 											
 					}
-					
+										
 				}
 				else if(north == true && currentType == northval)
 				{
@@ -70,9 +73,15 @@ public class RegionLabel
 					outputLabels[x][y] = outputLabels[x][y-1];
 					
 				}
-				else
+				else if(ne == true && currentType == neval)
 				{
 					
+					outputLabels[x][y] = outputLabels[x+1][y-1];
+					
+				}
+				else
+				{
+
 					currentLabel++;
 					labels.add(new Label(currentLabel));
 					outputLabels[x][y] = currentLabel;
