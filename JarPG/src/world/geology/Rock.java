@@ -10,13 +10,13 @@ import java.util.List;
 public class Rock implements Serializable
 {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	final static List<String> allrocks = new ArrayList<String>();
 	
-	int id;
+	public int id;
 	public String name;
-	int yeild;
+	public int yeild;
 	int meta;
 	
 	public Rock(int id)
@@ -27,8 +27,8 @@ public class Rock implements Serializable
 		String[] line = allrocks.get(id).split(",");	
 				
 		name = line[1];
-		yeild = Integer.parseInt(line[2]);
-		meta = Integer.parseInt(line[3]);
+		yeild = Integer.parseInt(line[3]);
+		meta = Integer.parseInt(line[4]);
 		
 	}
 	

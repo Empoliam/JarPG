@@ -2,8 +2,6 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,41 +17,13 @@ import net.miginfocom.swing.MigLayout;
 public class MapWindow extends JDialog
 {
 
-	private static final long serialVersionUID = -2296207505468419981L;
+	private static final long serialVersionUID = 1L;
 
 	String PATH;
 	int x, y;
 	
 	JPanel mainPane = new JPanel();
 	JLabel mapPane = new JLabel();
-
-	MouseListener mListener = new MouseListener() {
-		
-		@Override
-		public void mouseReleased(MouseEvent e) {
-				
-		}
-		
-		@Override
-		public void mousePressed(MouseEvent e) {	
-			
-		}
-		
-		@Override
-		public void mouseExited(MouseEvent e) {
-			
-		}
-		
-		@Override
-		public void mouseEntered(MouseEvent e) {
-						
-		}
-		
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			
-		}
-	};
 	
 	public MapWindow(String PATH, int x, int y)
 	{
@@ -66,7 +36,6 @@ public class MapWindow extends JDialog
 
 		drawPlayer();
 
-		mapPane.addMouseListener(mListener);
 		mainPane.add(mapPane);
 
 		add(mainPane);

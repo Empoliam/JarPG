@@ -20,7 +20,7 @@ import unit.Player;
 public class CreateWindow extends JDialog
 {
 
-	private static final long serialVersionUID = 8218447679269415077L;
+	private static final long serialVersionUID = 1L;
 	String PATH;
 
 	private int MAX_POINTS = 30;

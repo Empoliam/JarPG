@@ -3,6 +3,11 @@ package items;
 public class Gemstone extends Item
 {
 
-	String prefix;
+	Gemstone(int id, int metaid) 
+	{
+		
+		super(id);
+		
+	}
 	
 }

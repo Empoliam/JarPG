@@ -15,7 +15,9 @@ import gui.CreateWindow;
 import gui.LoadWindow;
 import gui.MainWindow;
 import gui.WorldWindow;
+import items.Item;
 import net.miginfocom.swing.MigLayout;
+import world.geology.Rock;
 
 public class IntroWindow extends JFrame
 {
@@ -66,6 +68,8 @@ public class IntroWindow extends JFrame
 	public static void main(String[] args)
 	{
 		
+		Rock.getList();
+		Item.getList();
 		titlePage = new IntroWindow();
 				
 	}

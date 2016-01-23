@@ -2,7 +2,7 @@ package unit;
 
 import java.io.Serializable;
 
-public class Unit implements Serializable 
+public abstract class Unit implements Serializable 
 {
 
 	final static long serialVersionUID = 1L;

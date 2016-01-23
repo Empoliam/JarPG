@@ -20,7 +20,7 @@ import world.World;
 public class WorldWindow extends JDialog 
 {
 
-	private static final long serialVersionUID = 3998702201167042838L;
+	private static final long serialVersionUID = 1L;
 
 	//Data
 	World currentWorld;

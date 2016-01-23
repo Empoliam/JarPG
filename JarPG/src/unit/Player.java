@@ -1,14 +1,21 @@
 package unit;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import items.Item;
+
 public class Player extends Unit
 {
 
 	final static long serialVersionUID = 2L;
 	
+	public List<Item> inventory = new ArrayList<Item>();
+	
 	int x, y;
 	
 	//Player Skills
-	int mining = 5;
+	public int mining = 5;
 	
 	public Player(String fName, String lName, int HP, int MP, int x, int y)
 	{
@@ -42,12 +49,33 @@ public class Player extends Unit
 		this.y = y;
 		
 	}
-	
-	public int getMining()
+		
+	public void addItem(Item in)
 	{
 		
-		return mining;
+		boolean newItem = true;
+		
+		for(Item i : inventory)
+		{
+			
+			if(i.id == in.id && i.stacksize < i.maxstacksize)
+			{
+				
+				i.stacksize ++;
+				newItem = false;
+				break;
+				
+			}
+						
+		}
+		
+		if(newItem == true)
+		{
+			
+			inventory.add(in);
+			
+		}
 		
 	}
-	
+		
 }

@@ -15,7 +15,7 @@ import statComponents.SButton;
 public class LoadWindow extends JDialog 
 {
 
-	private static final long serialVersionUID = 4792387293446509940L;
+	private static final long serialVersionUID = 1L;
 
 	String PATH;
 	File[] directories = new File("worlds").listFiles(File::isDirectory);

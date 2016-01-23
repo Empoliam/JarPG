@@ -25,11 +25,12 @@ import unit.Player;
 import world.Region;
 import world.SuperRegion;
 import world.geology.Rock;
+import items.Item;
 
 public class MainWindow extends JFrame
 {
 
-	private static final long serialVersionUID = -3241273755265444600L;
+	private static final long serialVersionUID = 1L;
 
 	String PATH;
 	int WORLD_SIZE;
@@ -101,6 +102,16 @@ public class MainWindow extends JFrame
 		}
 	};
 
+	ActionListener aInv = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			new InventoryWindow(player.inventory);
+
+		}
+	};
+
 	public MainWindow(String PATH, int WORLD_SIZE)
 	{
 
@@ -124,7 +135,7 @@ public class MainWindow extends JFrame
 		mainpanel.add(map, "pushx");
 
 		save.addActionListener(aSave);
-		inv.setEnabled(false);
+		inv.addActionListener(aInv);
 		stat.setEnabled(false);
 		map.addActionListener(aMap);
 
@@ -156,7 +167,7 @@ public class MainWindow extends JFrame
 			is.close();
 
 		}
-		catch (FileNotFoundException e) {  e.printStackTrace();	}
+		catch (FileNotFoundException e) {  e.printStackTrace();	textarea.append("Failed to load save. Please restart.\n");}
 		catch (IOException e) { e.printStackTrace(); }
 		catch (ClassNotFoundException e) { e.printStackTrace(); }
 
@@ -177,7 +188,11 @@ public class MainWindow extends JFrame
 
 		} 
 		catch (FileNotFoundException e) {  e.printStackTrace();	}
-		catch (IOException e) { e.printStackTrace(); }
+		catch (IOException e) 
+		{ 
+			e.printStackTrace();
+			textarea.append("Save out of date and no longer compatible. Please create a new world.");
+		}
 		catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 	}
@@ -294,11 +309,11 @@ public class MainWindow extends JFrame
 
 			String layer = in.split(" ")[1];
 
-			if(player.getMining() >= 5)
+			if(player.mining >= 5 && !layer.equals("any"))
 			{
 
 				textarea.append("You dig into the " + layer + " layers.\n");
-				
+
 				switch(layer)
 				{
 
@@ -307,6 +322,9 @@ public class MainWindow extends JFrame
 					break;
 				case "native":
 					mined = activeRegion.getRock("native", new Random().nextInt(2));
+					break;
+				case "organic":
+					mined = activeRegion.getRock("organics", new Random().nextInt(2));
 					break;
 				default:
 					textarea.append("Such a layer does not exist.\n");
@@ -318,9 +336,7 @@ public class MainWindow extends JFrame
 			else
 			{
 
-				textarea.append("You are not skilled enough to locate a specific layer.\n");
-
-				int ranLayer = new Random().nextInt(2);
+				int ranLayer = new Random().nextInt(3);
 
 				switch(ranLayer)
 				{
@@ -331,22 +347,28 @@ public class MainWindow extends JFrame
 				case 1:
 					mined = activeRegion.getRock("native", new Random().nextInt(2));
 					break;
+				case 2:
+					mined = activeRegion.getRock("organics", new Random().nextInt(2));
 
 				}
 
 			}
 
-			if(hit == true) textarea.append("You strike " + mined.name + "!\n");
+			if(hit == true)
+			{
+				textarea.append("You strike " + mined.name + "!\n");
+				player.addItem(new Item(mined.yeild));
+			}
 
 		}
 
 		catch(ArrayIndexOutOfBoundsException e)
 		{
-			
-			textarea.append("Format unrecognised. Use 'dig [sediment/native]'.\n");
-			
+
+			textarea.append("Format unrecognised. Use 'dig [sediment/native/organic/any]'.\n");
+
 		}
-		
+
 	}
 
 }

@@ -13,8 +13,8 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 
 import utilities.noise.NoiseMap;
-import world.CC.RegionLabel;
 import world.geology.NativeLayer;
+import world.geology.OrganicsLayer;
 import world.geology.Rock;
 import world.geology.SedimentLayer;
 
@@ -58,8 +58,6 @@ public class World
 		drawImage();
 		generateGeology();
 		generateSpawn();
-		
-		new RegionLabel(biomes.getArray(), WORLD_SIZE);
 
 	}
 
@@ -394,14 +392,14 @@ public class World
 	
 	private void generateGeology()
 	{
-		
-		Rock.getList();
-		
+				
 		SedimentLayer sediment01 = new SedimentLayer(WORLD_SIZE, PATH, "Sediment01");
 		SedimentLayer sediment02 = new SedimentLayer(WORLD_SIZE, PATH, "Sediment02");
 		SedimentLayer sediment03 = new SedimentLayer(WORLD_SIZE, PATH, "Sediment03");
 		NativeLayer native01 = new NativeLayer(WORLD_SIZE, PATH, "Native01");
 		NativeLayer native02 = new NativeLayer(WORLD_SIZE, PATH, "Native02");
+		OrganicsLayer organic01 = new OrganicsLayer(WORLD_SIZE, PATH, "Organic01");
+		OrganicsLayer organic02 = new OrganicsLayer(WORLD_SIZE, PATH, "Organic02");
 		
 		for(int y = 0; y < WORLD_SIZE; y ++)
 		{
@@ -414,6 +412,8 @@ public class World
 				regions[x][y].setRock("sediment", 2, new Rock(sediment03.getData(x, y)));
 				regions[x][y].setRock("native", 0, new Rock(native01.getData(x, y)));
 				regions[x][y].setRock("native", 1, new Rock(native02.getData(x, y)));
+				regions[x][y].setRock("organics", 0, new Rock(organic01.getData(x, y)));
+				regions[x][y].setRock("organics", 1, new Rock(organic02.getData(x, y)));
 				
 			}
 			
