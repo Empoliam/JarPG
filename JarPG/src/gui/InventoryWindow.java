@@ -19,6 +19,8 @@ public class InventoryWindow extends JDialog
 	InventoryWindow(List<Item> in)
 	{
 		
+		setTitle("Inventory");
+		
 		mainPane.setLayout(new MigLayout());
 		
 		for(Item i : in)

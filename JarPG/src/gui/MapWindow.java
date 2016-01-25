@@ -32,6 +32,8 @@ public class MapWindow extends JDialog
 		this.x = x;
 		this.y = y;
 		
+		setTitle("Map");
+		
 		mainPane.setLayout(new MigLayout());
 
 		drawPlayer();

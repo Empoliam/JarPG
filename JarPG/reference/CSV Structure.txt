@@ -1,0 +1,18 @@
+items.csv:
+0: id
+1: name
+2: weight
+3: value
+4: max stack size
+
+rocks.csv:
+0: id
+1: name
+2: layer
+3: yeild
+4: meta
+
+gemstones.csv
+0: id
+1: name
+2: base value
