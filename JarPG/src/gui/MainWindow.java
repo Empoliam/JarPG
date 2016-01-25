@@ -25,6 +25,7 @@ import unit.Player;
 import world.Region;
 import world.SuperRegion;
 import world.geology.Rock;
+import items.Gemstone;
 import items.Item;
 
 public class MainWindow extends JFrame
@@ -154,7 +155,7 @@ public class MainWindow extends JFrame
 		currentx = player.getX();
 		currenty = player.getY();
 		loadRegion();
-
+			
 	}
 
 	private void loadPlayer()
@@ -357,7 +358,8 @@ public class MainWindow extends JFrame
 			if(hit == true)
 			{
 				textarea.append("You strike " + mined.name + "!\n");
-				player.addItem(new Item(mined.yeild));
+				if(mined.yeild == 73) player.addItem(new Gemstone(mined.meta,new Random().nextInt(3)));
+				else player.addItem(new Item(mined.yeild));
 			}
 
 		}

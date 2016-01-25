@@ -15,6 +15,7 @@ import gui.CreateWindow;
 import gui.LoadWindow;
 import gui.MainWindow;
 import gui.WorldWindow;
+import items.Gemstone;
 import items.Item;
 import net.miginfocom.swing.MigLayout;
 import world.geology.Rock;
@@ -70,6 +71,8 @@ public class IntroWindow extends JFrame
 		
 		Rock.getList();
 		Item.getList();
+		Item.getPrefixes();
+		Gemstone.getList();
 		titlePage = new IntroWindow();
 				
 	}

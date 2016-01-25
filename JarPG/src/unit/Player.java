@@ -61,10 +61,13 @@ public class Player extends Unit
 			if(i.id == in.id && i.stacksize < i.maxstacksize)
 			{
 				
-				i.stacksize ++;
-				newItem = false;
-				break;
-				
+				if(i.meta == in.meta && i.prefix == in.prefix)
+				{
+					i.stacksize ++;
+					newItem = false;
+					break;
+				}
+					
 			}
 						
 		}

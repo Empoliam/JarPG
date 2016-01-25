@@ -12,6 +12,7 @@ public class Item implements Serializable
 
 	final static long serialVersionUID = 2L;
 	final static List<String> allitems = new ArrayList<String>();
+	final static List<String> prefixes = new ArrayList<String>();
 		
 	public String name;
 	public final int id;
@@ -19,6 +20,8 @@ public class Item implements Serializable
 	int basevalue;
 	public final int maxstacksize;
 	public int stacksize;
+	public int meta;
+	public int prefix;
 	
 	public Item(int id)
 	{
@@ -32,9 +35,18 @@ public class Item implements Serializable
 		basevalue = Integer.parseInt(load[3]);
 		maxstacksize = Integer.parseInt(load[4]);
 		stacksize = 1;
+		prefix = 0;
 		
 	}
 		
+	public void setPrefix(int id)
+	{
+		
+		prefix = id;
+		name = prefixes.get(id).split(",")[1] + " " + name;
+		
+	}
+	
 	public static void getList()
 	{
 		
@@ -60,4 +72,28 @@ public class Item implements Serializable
 		
 	}
 	
+	public static void getPrefixes()
+	{
+		
+		try
+		{
+			BufferedReader br = new BufferedReader(new FileReader("resources/prefixes.csv"));
+			
+			String line = br.readLine();
+			
+			while(line != null)
+			{
+				
+				prefixes.add(line);
+				line = br.readLine();
+				
+			}
+			
+			br.close();
+			
+		}
+		catch(java.io.FileNotFoundException e){}
+		catch(IOException e2){};
+	}
+
 }

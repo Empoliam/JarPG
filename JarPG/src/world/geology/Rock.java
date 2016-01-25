@@ -17,7 +17,7 @@ public class Rock implements Serializable
 	public int id;
 	public String name;
 	public int yeild;
-	int meta;
+	public int meta;
 	
 	public Rock(int id)
 	{
