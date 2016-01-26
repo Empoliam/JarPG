@@ -7,7 +7,6 @@ import java.io.ObjectOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -122,10 +121,10 @@ public class CreateWindow extends JDialog
 		}
 	};
 
-	public CreateWindow(JFrame parent, String PATH, int x, int y)
+	public CreateWindow(IntroWindow introWindow, String PATH, int x, int y)
 	{
 
-		super(parent, true);
+		super(introWindow, true);
 		this.PATH = PATH;
 		this.x = x;
 		this.y = y;

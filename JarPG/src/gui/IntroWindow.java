@@ -1,3 +1,4 @@
+package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -7,20 +8,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import gui.CreateWindow;
-import gui.LoadWindow;
-import gui.MainWindow;
-import gui.WorldWindow;
-import items.Stone;
-import items.Item;
+import main.Main;
 import net.miginfocom.swing.MigLayout;
-import world.geology.Rock;
 
-public class IntroWindow extends JFrame
+public class IntroWindow extends JDialog
 {
 
 	private static final long serialVersionUID = 1L;
@@ -45,7 +40,8 @@ public class IntroWindow extends JFrame
 			
 			makeWorld();
 			makePlayer();
-			new MainWindow(PATH,WORLD_SIZE);
+			Main.PATH = PATH;
+			Main.WORLD_SIZE = WORLD_SIZE;
 			dispose();
 			
 		}
@@ -58,28 +54,16 @@ public class IntroWindow extends JFrame
 		public void actionPerformed(ActionEvent e) {
 		
 			LoadWindow loadSave = new LoadWindow(titlePage);
-			PATH = loadSave.getPath();
+			Main.PATH = loadSave.getPath();
 			loadSave.dispose();
-			new MainWindow(PATH,WORLD_SIZE);
 			dispose();
 			
 		}
 	};
-	
-	public static void main(String[] args)
-	{
 		
-		Rock.getList();
-		Item.getList();
-		Item.getPrefixes();
-		Stone.getList();
-		titlePage = new IntroWindow();
-				
-	}
-	
 	public IntroWindow()
 	{
-		
+				
 		try {
 
 			BufferedImage titleImg = ImageIO.read(new File("resources/title.png"));
@@ -103,6 +87,7 @@ public class IntroWindow extends JFrame
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
+		setModal(true);
 		setVisible(true);
 				
 	}

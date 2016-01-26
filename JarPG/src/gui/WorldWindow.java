@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -71,10 +70,10 @@ public class WorldWindow extends JDialog
 		}
 	};
 
-	public WorldWindow(JFrame parent)
+	public WorldWindow(IntroWindow introWindow)
 	{
 
-		super(parent,true);
+		super(introWindow,true);
 
 		mainPanel.setLayout(new MigLayout());
 
