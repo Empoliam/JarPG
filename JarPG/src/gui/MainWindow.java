@@ -1,72 +1,67 @@
 package gui;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import net.miginfocom.swing.MigLayout;
 import main.Main;
+import net.miginfocom.swing.MigLayout;
 
 public class MainWindow extends JFrame
 {
 
 	private static final long serialVersionUID = 1L;
 
-	//UI
 	JPanel mainpanel = new JPanel();
-	public JTextArea textarea = new JTextArea(16,50);
-	JTextField inputfield = new JTextField();
+
+	JPanel topPanel = new JPanel();
+	JLabel mapLabel = new JLabel();
+
+	JPanel movementPanel = new JPanel();
+	JButton buttonUp = new JButton("↑");
+	JButton buttonLeft = new JButton("←");
+	JButton buttonRight = new JButton("→");
+	JButton buttonDown = new JButton("↓");
+
+	public JTextArea textarea = new JTextArea(24,50);
 	JScrollPane scroll = new JScrollPane(textarea);
-	JButton send = new JButton("Send");
-	JButton save = new JButton("Save");
-	JButton inv = new JButton("Inventory");
-	JButton stat = new JButton("Status");
-	JButton map = new JButton("Map");
 
-	ActionListener aMap = new ActionListener() {
+	ActionListener aMove = new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			new MapWindow(Main.PATH, Main.currentx, Main.currenty);
+			switch(e.getActionCommand())
+			{
 
-		}
-	};
-
-	ActionListener aSend = new ActionListener() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-			String command = inputfield.getText();
-			textarea.append(">: " + command + "\n");
-			inputfield.setText("");
-			command(command);
-
-		}
-	};
-
-	ActionListener aSave = new ActionListener() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-			Main.savePlayer();
-
-		}
-	};
-
-	ActionListener aInv = new ActionListener() {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-
-			new InventoryWindow(Main.player.inventory);
+			case "↑":
+				Main.move(0);
+				break;
+			case "←":
+				Main.move(1);
+				break;
+			case "↓":
+				Main.move(2);
+				break;
+			case "→":
+				Main.move(3);
+				break;
+			}
 
 		}
 	};
@@ -79,24 +74,28 @@ public class MainWindow extends JFrame
 		textarea.setEditable(false);
 		textarea.setLineWrap(true);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		drawPlayer();
 
 		mainpanel.setLayout(new MigLayout());
+		topPanel.setLayout(new MigLayout());
+		movementPanel.setLayout(new MigLayout());
 
-		mainpanel.add(scroll,"push,grow,wrap");
-		mainpanel.add(send, "split 2");
-		mainpanel.add(inputfield, "pushx,growx,wrap");
-		mainpanel.add(save,"split 4,pushx,align center");
-		mainpanel.add(inv, "pushx");
-		mainpanel.add(stat, "pushx");
-		mainpanel.add(map, "pushx");
+		topPanel.add(scroll);
+		topPanel.add(mapLabel);
+		topPanel.setBorder(BorderFactory.createEtchedBorder());
 
-		save.addActionListener(aSave);
-		inv.addActionListener(aInv);
-		stat.setEnabled(false);
-		map.addActionListener(aMap);
-
-		send.addActionListener(aSend);
-		inputfield.addActionListener(aSend);
+		movementPanel.add(buttonUp,"span 2, align center, wrap");
+		movementPanel.add(buttonLeft,"align left");
+		movementPanel.add(buttonRight, "align right,wrap");
+		movementPanel.add(buttonDown, "span 2, align center");
+		movementPanel.setBorder(BorderFactory.createEtchedBorder());
+		buttonUp.addActionListener(aMove);
+		buttonLeft.addActionListener(aMove);
+		buttonDown.addActionListener(aMove);
+		buttonRight.addActionListener(aMove);
+		
+		mainpanel.add(topPanel,"wrap");
+		mainpanel.add(movementPanel);
 
 		add(mainpanel);
 
@@ -109,28 +108,25 @@ public class MainWindow extends JFrame
 
 	}
 
-	private void command(String in)
+	public void drawPlayer()
 	{
 
-		in = in.toLowerCase();
-		String[] command = in.split(" ");
+		BufferedImage mapImg = null;
 
-		switch(command[0])
-		{
+		try {
 
-		case "move" :
-			Main.move(in);
-			break;
-		case "dig" :
-			Main.dig(in);
-			break;
-		default :
-			textarea.append("Command not recognised.\n");
-			break;
-
+			mapImg = ImageIO.read(new File(Main.PATH + "/map.bmp"));			
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 
-	}
+		Graphics2D g =  mapImg.createGraphics();
+		g.setColor(new Color(255,0,255));
+		g.drawOval(Main.currentx-1, Main.currenty-1, 2, 2);
 
+		ImageIcon mapIcon = new ImageIcon(mapImg);
+		mapLabel.setIcon(mapIcon);
+
+	}
 
 }

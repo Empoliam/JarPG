@@ -64,65 +64,64 @@ public abstract class Main
 		
 	}
 	
-	public static void move(String in)
+	/*
+	 * 0:north
+	 * 1:west 
+	 * 2:south
+	 * 3:east
+	 */
+	 
+	public static void move(int direction)
 	{
 
-		String reverse = null; 
+		int reverse = 0; 
 
 		try
 		{
 
-			String direction = in.split(" ")[1];
 
 			switch(direction)
 			{
 
-			case "north":
+			case 0:
 				if(currenty != 0)
 				{				
 					currenty --;
-					mainWindow.textarea.append("You walk north.\n");
-					reverse = " south";
+					reverse = 2;
 				}
 				else mainWindow.textarea.append("You can go no further in this direction.\n");
 				break;
-			case "west":
+			case 1:
 				if(currentx != 0)
 				{
 					currentx --;	
-					mainWindow.textarea.append("You walk west.\n");
-					reverse = " east";
+					reverse = 3;
 					break;
 				}
 				else mainWindow.textarea.append("You can go no further in this direction.\n");
 				break;
-			case "south":
+			case 2:
 				if(currenty != WORLD_SIZE-1)
 				{				
 					currenty ++;	
-					mainWindow.textarea.append("You walk south.\n");
-					reverse = " north";
+					reverse = 0;
 				}
 				else mainWindow.textarea.append("You can go no further in this direction.\n");
 				break;
-			case "east":
+			case 3:
 				if(currentx != WORLD_SIZE-1)
 				{
-					mainWindow.textarea.append("You walk east.\n");
 					currentx ++;				
-					reverse = " west";
+					reverse = 1;
 				}
 				else mainWindow.textarea.append("You can go no further in this direction.\n");
-				break;
-			default:
-				mainWindow.textarea.append("'" + direction + "'" + " is not a direction.\n");
 				break;
 
 			}
 			loadRegion();	
 			if(activeRegion.getBiome() == -1)
 			{
-				mainWindow.textarea.append("You find an expanse of water, and can proceed no further. ");
+				mainWindow.textarea.append("You find an expanse of water, and can proceed no further.\n");
 				move(reverse);
 			}
 
@@ -135,6 +134,8 @@ public abstract class Main
 			mainWindow.textarea.append("Format unrecognised. Use 'move [direction]'.\n");
 
 		}
+		
+		mainWindow.drawPlayer();
 
 	}
 
@@ -226,7 +227,6 @@ public abstract class Main
 			if(oldX != currentX || oldY != currentY)
 			{
 				
-				System.out.println("Loading new region.");
 				ObjectInputStream is = new ObjectInputStream(new FileInputStream(PATH + "/regions/" + currentX + "-" + currentY + ".region"));
 				activeSuperRegion = (SuperRegion) is.readObject();
 				is.close();
