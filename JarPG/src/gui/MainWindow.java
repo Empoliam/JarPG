@@ -25,7 +25,7 @@ import unit.Player;
 import world.Region;
 import world.SuperRegion;
 import world.geology.Rock;
-import items.Gemstone;
+import items.Stone;
 import items.Item;
 
 public class MainWindow extends JFrame
@@ -155,7 +155,7 @@ public class MainWindow extends JFrame
 		currentx = player.getX();
 		currenty = player.getY();
 		loadRegion();
-			
+
 	}
 
 	private void loadPlayer()
@@ -177,14 +177,23 @@ public class MainWindow extends JFrame
 	private void loadRegion()
 	{
 
+		int oldX = currentX;
+		int oldY = currentY;
+
 		currentX = (int) Math.floor(currentx/40);
 		currentY = (int) Math.floor(currenty/40);
 
 		try {
 
-			ObjectInputStream is = new ObjectInputStream(new FileInputStream(PATH + "/regions/" + currentX + "-" + currentY + ".region"));
-			activeSuperRegion = (SuperRegion) is.readObject();
-			is.close();
+			if(oldX != currentX || oldY != currentY)
+			{
+				
+				System.out.println("Loading new region.");
+				ObjectInputStream is = new ObjectInputStream(new FileInputStream(PATH + "/regions/" + currentX + "-" + currentY + ".region"));
+				activeSuperRegion = (SuperRegion) is.readObject();
+				is.close();
+				
+			}
 			activeRegion = activeSuperRegion.getTile((currentx-(currentX*40)),(currenty-(currentY*40)));
 
 		} 
@@ -244,7 +253,7 @@ public class MainWindow extends JFrame
 				{				
 					currenty --;
 					textarea.append("You walk north.\n");
-					reverse = "south";
+					reverse = " south";
 				}
 				else textarea.append("You can go no further in this direction.\n");
 				break;
@@ -253,7 +262,7 @@ public class MainWindow extends JFrame
 				{
 					currentx --;	
 					textarea.append("You walk west.\n");
-					reverse = "east";
+					reverse = " east";
 					break;
 				}
 				else textarea.append("You can go no further in this direction.\n");
@@ -263,7 +272,7 @@ public class MainWindow extends JFrame
 				{				
 					currenty ++;	
 					textarea.append("You walk south.\n");
-					reverse = "north";
+					reverse = " north";
 				}
 				else textarea.append("You can go no further in this direction.\n");
 				break;
@@ -272,12 +281,13 @@ public class MainWindow extends JFrame
 				{
 					textarea.append("You walk east.\n");
 					currentx ++;				
-					reverse = "west";
+					reverse = " west";
 				}
 				else textarea.append("You can go no further in this direction.\n");
 				break;
 			default:
 				textarea.append("'" + direction + "'" + " is not a direction.\n");
+				break;
 
 			}
 			loadRegion();	
@@ -358,7 +368,7 @@ public class MainWindow extends JFrame
 			if(hit == true)
 			{
 				textarea.append("You strike " + mined.name + "!\n");
-				if(mined.yeild == 73) player.addItem(new Gemstone(mined.meta,new Random().nextInt(3)));
+				if(mined.yeild == 10) player.addItem(new Stone(mined.meta,new Random().nextInt(6)));
 				else player.addItem(new Item(mined.yeild));
 			}
 

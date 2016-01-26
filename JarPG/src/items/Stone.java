@@ -6,17 +6,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gemstone extends Item
+public class Stone extends Item
 {
 
 	final static List<String> allgems = new ArrayList<String>();
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3L;
 	
-	public Gemstone(int metaid) 
+	int sharpness;
+	
+	public Stone(int metaid) 
 	{
 		
-		super(73);	
+		super(10);	
 		meta = metaid;
 		
 		String[] load = allgems.get(meta).split(",");
@@ -26,11 +28,12 @@ public class Gemstone extends Item
 			
 	}
 	
-	public Gemstone(int metaid, int prefix)
+	public Stone(int metaid, int sharpness)
 	{
 		
 		this(metaid);
-		setPrefix(prefix);
+		this.sharpness = sharpness;
+		setPrefix(getSharpnessPrefix());
 		
 	}
 
@@ -57,6 +60,20 @@ public class Gemstone extends Item
 		catch(java.io.FileNotFoundException e){}
 		catch(IOException e2){};
 		
+	}
+	
+	private int getSharpnessPrefix()
+	{		
+		
+		int out = 0;
+		
+		if(sharpness <= 2) out = 4;
+		else if(sharpness <= 4) out = 3;
+		else if(sharpness <= 6) out = 2;
+		else if(sharpness <= 8) out = 1;
+		else if(sharpness <= 10) out = 0;
+		
+		return out;
 	}
 	
 }

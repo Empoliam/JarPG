@@ -10,7 +10,7 @@ import java.util.List;
 public class Item implements Serializable 
 {
 
-	final static long serialVersionUID = 2L;
+	final static long serialVersionUID = 3L;
 	final static List<String> allitems = new ArrayList<String>();
 	final static List<String> prefixes = new ArrayList<String>();
 		
