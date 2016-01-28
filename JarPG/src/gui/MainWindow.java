@@ -19,7 +19,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
+import main.Dig;
 import main.Main;
+import main.Move;
+
 import net.miginfocom.swing.MigLayout;
 
 public class MainWindow extends JFrame
@@ -38,6 +41,9 @@ public class MainWindow extends JFrame
 	JButton buttonRight = new JButton("→");
 	JButton buttonDown = new JButton("↓");
 
+	JPanel actionPanel = new JPanel();
+	JButton digButton = new JButton("Dig");
+	
 	public JTextArea textarea = new JTextArea(24,50);
 	JScrollPane scroll = new JScrollPane(textarea);
 
@@ -50,22 +56,37 @@ public class MainWindow extends JFrame
 			{
 
 			case "↑":
-				Main.move(0);
+				Move.move(0);
 				break;
 			case "←":
-				Main.move(1);
+				Move.move(1);
 				break;
 			case "↓":
-				Main.move(2);
+				Move.move(2);
 				break;
 			case "→":
-				Main.move(3);
+				Move.move(3);
 				break;
 			}
 
 		}
 	};
 
+	ActionListener aAction = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			switch(e.getActionCommand())
+			{
+			
+			case "Dig" : Dig.dig("any");
+			
+			}
+			
+		}
+	};
+	
 	public MainWindow()
 	{
 
@@ -79,7 +100,8 @@ public class MainWindow extends JFrame
 		mainpanel.setLayout(new MigLayout());
 		topPanel.setLayout(new MigLayout());
 		movementPanel.setLayout(new MigLayout());
-
+		actionPanel.setLayout(new MigLayout());
+		
 		topPanel.add(scroll);
 		topPanel.add(mapLabel);
 		topPanel.setBorder(BorderFactory.createEtchedBorder());
@@ -94,8 +116,13 @@ public class MainWindow extends JFrame
 		buttonDown.addActionListener(aMove);
 		buttonRight.addActionListener(aMove);
 		
+		actionPanel.add(digButton,"aligny top");
+		digButton.addActionListener(aAction);
+		actionPanel.setBorder(BorderFactory.createEtchedBorder());		
+		
 		mainpanel.add(topPanel,"wrap");
-		mainpanel.add(movementPanel);
+		mainpanel.add(movementPanel,"split 2");
+		mainpanel.add(actionPanel, "growy");
 
 		add(mainpanel);
 
