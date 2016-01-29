@@ -19,7 +19,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
-import main.Dig;
 import main.Main;
 import main.Move;
 
@@ -80,7 +79,7 @@ public class MainWindow extends JFrame
 			switch(e.getActionCommand())
 			{
 			
-			case "Dig" : Dig.dig("any");
+			case "Dig" : new DigWindow();
 			
 			}
 			

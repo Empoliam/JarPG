@@ -11,74 +11,68 @@ import static main.Main.*;
 public class Dig 
 {
 
-	public static void dig(String in)
+	public static void digSpecific(String in)
 	{
 
 		Rock mined = null;
 		boolean hit = true;
 
-		try
+		mainWindow.textarea.append("You dig into the " + in + " layers.\n");
+
+		switch(in)
 		{
 
-			if(player.mining >= 5 && !in.equals("any"))
-			{
+		case "Aediment": 
+			mined = activeRegion.getRock("sediment", new Random().nextInt(3));
+			break;
+		case "Native":
+			mined = activeRegion.getRock("native", new Random().nextInt(2));
+			break;
+		case "Organic":
+			mined = activeRegion.getRock("organics", new Random().nextInt(2));
+			break;
+		default:
+			mainWindow.textarea.append("Such a layer does not exist.\n");
+			hit = false;
+			break;
+		}
 
-				mainWindow.textarea.append("You dig into the " + in + " layers.\n");
 
-				switch(in)
-				{
+		if(hit == true)
+		{
+			mainWindow.textarea.append("You strike " + mined.name + "!\n");
+			if(mined.yeild == 10) player.addItem(new Stone(mined.meta,new Random().nextInt(6)));
+			else player.addItem(new Item(mined.yeild));
+		}
 
-				case "sediment": 
-					mined = activeRegion.getRock("sediment", new Random().nextInt(3));
-					break;
-				case "native":
-					mined = activeRegion.getRock("native", new Random().nextInt(2));
-					break;
-				case "organic":
-					mined = activeRegion.getRock("organics", new Random().nextInt(2));
-					break;
-				default:
-					mainWindow.textarea.append("Such a layer does not exist.\n");
-					hit = false;
-					break;
-				}
+	}
 
-			}
-			else
-			{
+	public static void digRandom()
+	{
 
-				int ranLayer = new Random().nextInt(3);
+		int ranLayer = new Random().nextInt(3);
+		Rock mined = null;
+		boolean hit = true;
 
-				switch(ranLayer)
-				{
+		switch(ranLayer)
+		{
 
-				case 0: 
-					mined = activeRegion.getRock("sediment", new Random().nextInt(3));
-					break;
-				case 1:
-					mined = activeRegion.getRock("native", new Random().nextInt(2));
-					break;
-				case 2:
-					mined = activeRegion.getRock("organics", new Random().nextInt(2));
-
-				}
-
-			}
-
-			if(hit == true)
-			{
-				mainWindow.textarea.append("You strike " + mined.name + "!\n");
-				if(mined.yeild == 10) player.addItem(new Stone(mined.meta,new Random().nextInt(6)));
-				else player.addItem(new Item(mined.yeild));
-			}
+		case 0: 
+			mined = activeRegion.getRock("sediment", new Random().nextInt(3));
+			break;
+		case 1:
+			mined = activeRegion.getRock("native", new Random().nextInt(2));
+			break;
+		case 2:
+			mined = activeRegion.getRock("organics", new Random().nextInt(2));
 
 		}
 
-		catch(ArrayIndexOutOfBoundsException e)
+		if(hit == true)
 		{
-
-			mainWindow.textarea.append("Format unrecognised. Use 'dig [sediment/native/organic/any]'.\n");
-
+			mainWindow.textarea.append("You strike " + mined.name + "!\n");
+			if(mined.yeild == 10) player.addItem(new Stone(mined.meta,new Random().nextInt(6)));
+			else player.addItem(new Item(mined.yeild));
 		}
 
 	}

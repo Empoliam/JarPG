@@ -48,7 +48,7 @@ public abstract class Main
 		Item.getList();
 		Item.getPrefixes();
 		Stone.getList();
-		
+						
 		loadGame();
 		
 	}
