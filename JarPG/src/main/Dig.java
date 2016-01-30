@@ -22,7 +22,7 @@ public class Dig
 		switch(in)
 		{
 
-		case "Aediment": 
+		case "Sediment": 
 			mined = activeRegion.getRock("sediment", new Random().nextInt(3));
 			break;
 		case "Native":

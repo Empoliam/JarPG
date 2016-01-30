@@ -42,6 +42,7 @@ public class MainWindow extends JFrame
 
 	JPanel actionPanel = new JPanel();
 	JButton digButton = new JButton("Dig");
+	JButton invButton = new JButton("Inventory");
 	
 	public JTextArea textarea = new JTextArea(24,50);
 	JScrollPane scroll = new JScrollPane(textarea);
@@ -79,7 +80,8 @@ public class MainWindow extends JFrame
 			switch(e.getActionCommand())
 			{
 			
-			case "Dig" : new DigWindow();
+			case "Dig" : new DigWindow(); break;
+			case "Inventory" : new InventoryWindow(); break;
 			
 			}
 			
@@ -115,7 +117,10 @@ public class MainWindow extends JFrame
 		buttonDown.addActionListener(aMove);
 		buttonRight.addActionListener(aMove);
 		
-		actionPanel.add(digButton,"aligny top");
+		actionPanel.add(digButton,"aligny top, alignx center, wrap");
+		actionPanel.add(invButton, "aligny top, alignx center");
+		
+		invButton.addActionListener(aAction);
 		digButton.addActionListener(aAction);
 		actionPanel.setBorder(BorderFactory.createEtchedBorder());		
 		

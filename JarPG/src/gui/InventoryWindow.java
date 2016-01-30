@@ -1,13 +1,13 @@
 package gui;
 
-import java.util.List;
-
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import items.Item;
 import net.miginfocom.swing.MigLayout;
+
+import static main.Main.player;
 
 public class InventoryWindow extends JDialog 
 {
@@ -16,14 +16,14 @@ public class InventoryWindow extends JDialog
 	
 	JPanel mainPane = new JPanel();
 	
-	InventoryWindow(List<Item> in)
+	InventoryWindow()
 	{
 		
 		setTitle("Inventory");
 		
 		mainPane.setLayout(new MigLayout());
 		
-		for(Item i : in)
+		for(Item i : player.inventory)
 		{
 			
 			mainPane.add(new JLabel(i.stacksize + " " + i.name),"wrap");
