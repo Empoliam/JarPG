@@ -39,7 +39,7 @@ public abstract class Main
 	public static SuperRegion activeSuperRegion;
 	public static Region activeRegion;
 	
-	static MainWindow mainWindow;
+	public static MainWindow mainWindow;
 	
 	public static void main(String[] args) 
 	{

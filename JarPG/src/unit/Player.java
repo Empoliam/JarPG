@@ -12,7 +12,7 @@ public class Player extends Unit
 	
 	public List<Item> inventory = new ArrayList<Item>();
 	
-	int x, y;
+	public int x, y;
 	
 	//Player Skills
 	public int mining = 5;
