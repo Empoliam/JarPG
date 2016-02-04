@@ -17,8 +17,6 @@ public class Dig
 		Rock mined = null;
 		boolean hit = true;
 
-		mainWindow.textarea.append("You dig into the " + in + " layers.\n");
-
 		switch(in)
 		{
 
