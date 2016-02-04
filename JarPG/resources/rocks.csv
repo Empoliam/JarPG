@@ -1,96 +1,96 @@
-0,Native Gold,0,0,-1
-1,Native Silver,0,1,-1
-2,Native Copper,0,2,-1
-3,Native Iron,0,3,-1
-4,Sulphur,0,4,-1
-5,Pyrite,1,10,22
-6,Chalcopyrite,1,10,23
-7,Sphalerite,1,10,24
-8,Stibnite,1,10,25
-9,Cinnabar,1,10,26
-10,Realgar,1,10,27
-11,Galena,1,10,28
-12,Hematite,1,10,29
-13,Spinel,1,10,30
-14,Magnetite,1,10,31
-15,Illmenite,1,10,32
-16,Chromite,1,10,33
-17,Cassiterite,1,10,34
-18,Rutile,1,10,35
-19,Uraninite,1,10,36
-20,Goethite,1,10,37
-21,Malachite,1,10,38
-22,Wolframite,1,10,39
-23,Wulfenite,1,10,40
-24,Carnotite,1,10,41
-25,Borax,2,10,42
-26,Anhydrite,2,10,43
-27,Breccia,2,10,44
-28,Conglomerate,2,10,45
-29,Arkose,2,10,46
-30,Greywacke,2,10,47
-31,Siltstone,2,10,48
-32,Sandstone,2,10,49
-33,Claystone,2,10,50
-34,Mudstone,2,10,51
-35,Shale,2,10,52
-36,Loess,2,10,53
-37,Limestone,2,10,54
-38,Sillimanite,3,10,55
-39,Kyanite,3,10,56
-40,Staurolite,3,10,57
-41,Talc,3,10,58
-42,Skarn,3,10,59
-43,Serpentinite,3,10,60
-44,Marble,3,10,61
-45,Hornfels,3,10,62
-46,Migmatite,3,10,63
-47,Slate,3,10,64
-48,Phyllite,3,10,65
-49,Quartzite,3,10,66
-50,Schist,3,10,67
-51,Gneiss,3,10,68
-52,Eclogite,3,10,69
-53,Granulite,3,10,70
-54,Amphibolite,3,10,71
-55,Mylonite,3,10,72
-56,Jadeitite,3,10,0
-57,Granite,4,10,73
-58,Pegmatite,4,10,74
-59,Grandiorite,4,10,75
-60,Dolerite,4,10,76
-61,Gabbro,4,10,77
-62,Diorite,4,10,78
-63,Lamprophyre,4,10,79
-64,Kimberlite,4,10,1
-65,Peridotite,4,10,2
-66,Basalt,4,10,80
-67,Dacite,4,10,81
-68,Obsidian,4,10,82
-69,Andesite,4,10,83
-70,Rhyolite,4,10,84
-71,Corundum ,5,10,3
-72,Flourite,5,10,4
-73,Halite,5,11,-1
-74,Dolomite,5,10,5
-75,Rhodochrosite,5,10,6
-76,Calcite,5,10,7
-77,Azurite,5,10,8
-78,Gypsum,5,10,9
-79,Turquoise,5,10,10
-80,Garnet vein,5,10,11
-81,Olivine vein,5,10,12
-82,Zircon vein,5,10,13
-83,Andalusite,5,10,14
-84,Topaz vein,5,10,15
-85,Epidote vein,5,10,16
-86,Beryl vein,5,10,17
-87,Pyroxene vein,5,10,18
-88,Amphibole vein,5,10,19
-89,Muscovite,5,10,20
-90,Quartz,5,10,21
-91,Tar,6,5,-1
-92,Peat,6,6,-1
-93,Anthracite,6,7,-1
-94,Bituminous Coal,6,8,-1
-95,Lignite,6,9,-1
+0,Native Gold,0,0,-1,0xffcc00
+1,Native Silver,0,1,-1,0xcccccc
+2,Native Copper,0,2,-1,0xcc9900
+3,Native Iron,0,3,-1,0x801900
+4,Sulphur,0,4,-1,0xffff66
+5,Pyrite,1,10,22,0x2f1700
+6,Chalcopyrite,1,10,23,
+7,Sphalerite,1,10,24,
+8,Stibnite,1,10,25,
+9,Cinnabar,1,10,26,
+10,Realgar,1,10,27,
+11,Galena,1,10,28,
+12,Hematite,1,10,29,
+13,Spinel,1,10,30,
+14,Magnetite,1,10,31,
+15,Illmenite,1,10,32,
+16,Chromite,1,10,33,
+17,Cassiterite,1,10,34,
+18,Rutile,1,10,35,
+19,Uraninite,1,10,36,
+20,Goethite,1,10,37,
+21,Malachite,1,10,38,
+22,Wolframite,1,10,39,
+23,Wulfenite,1,10,40,
+24,Carnotite,1,10,41,
+25,Borax,2,10,42,0xe6e6e6
+26,Anhydrite,2,10,43,0x73655a
+27,Breccia,2,10,44,0x918d82
+28,Conglomerate,2,10,45,0xbaa578
+29,Arkose,2,10,46,0xce6b29
+30,Greywacke,2,10,47,0x7a7b9b
+31,Siltstone,2,10,48,0xc6a08b
+32,Sandstone,2,10,49,0xf0b54d
+33,Claystone,2,10,50,0x83744b
+34,Mudstone,2,10,51,0xd2c4a9
+35,Shale,2,10,52,0x675c60
+36,Loess,2,10,53,0xe0b356
+37,Limestone,2,10,54,0xd4cac8
+38,Sillimanite,3,10,55,
+39,Kyanite,3,10,56,
+40,Staurolite,3,10,57,
+41,Talc,3,10,58,
+42,Skarn,3,10,59,
+43,Serpentinite,3,10,60,
+44,Marble,3,10,61,
+45,Hornfels,3,10,62,
+46,Migmatite,3,10,63,
+47,Slate,3,10,64,
+48,Phyllite,3,10,65,
+49,Quartzite,3,10,66,
+50,Schist,3,10,67,
+51,Gneiss,3,10,68,
+52,Eclogite,3,10,69,
+53,Granulite,3,10,70,
+54,Amphibolite,3,10,71,
+55,Mylonite,3,10,72,
+56,Jadeitite,3,10,0,
+57,Granite,4,10,73,
+58,Pegmatite,4,10,74,
+59,Grandiorite,4,10,75,
+60,Dolerite,4,10,76,
+61,Gabbro,4,10,77,
+62,Diorite,4,10,78,
+63,Lamprophyre,4,10,79,
+64,Kimberlite,4,10,1,
+65,Peridotite,4,10,2,
+66,Basalt,4,10,80,
+67,Dacite,4,10,81,
+68,Obsidian,4,10,82,
+69,Andesite,4,10,83,
+70,Rhyolite,4,10,84,
+71,Corundum ,5,10,3,
+72,Flourite,5,10,4,
+73,Halite,5,11,-1,
+74,Dolomite,5,10,5,
+75,Rhodochrosite,5,10,6,
+76,Calcite,5,10,7,
+77,Azurite,5,10,8,
+78,Gypsum,5,10,9,
+79,Turquoise,5,10,10,
+80,Garnet vein,5,10,11,
+81,Olivine vein,5,10,12,
+82,Zircon vein,5,10,13,
+83,Andalusite,5,10,14,
+84,Topaz vein,5,10,15,
+85,Epidote vein,5,10,16,
+86,Beryl vein,5,10,17,
+87,Pyroxene vein,5,10,18,
+88,Amphibole vein,5,10,19,
+89,Muscovite,5,10,20,
+90,Quartz,5,10,21,
+91,Tar,6,5,-1,0x000000
+92,Peat,6,6,-1,0x2f1700
+93,Anthracite,6,7,-1,0x252525
+94,Bituminous Coal,6,8,-1,0x565656
+95,Lignite,6,9,-1,0xbc3a26

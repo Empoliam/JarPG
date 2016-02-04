@@ -15,13 +15,14 @@ public class Item implements Serializable
 	final static List<String> prefixes = new ArrayList<String>();
 		
 	public String name;
+	public String prefix = "";
 	public final int id;
-	int baseweight;
-	int basevalue;
+	public int baseweight;
+	public int basevalue;
 	public final int maxstacksize;
 	public int stacksize;
 	public int meta;
-	public int prefix;
+	public int prefixid;
 	
 	public Item(int id)
 	{
@@ -35,15 +36,15 @@ public class Item implements Serializable
 		basevalue = Integer.parseInt(load[3]);
 		maxstacksize = Integer.parseInt(load[4]);
 		stacksize = 1;
-		prefix = 0;
+		prefixid = 0;
 		
 	}
 		
 	public void setPrefix(int id)
 	{
 		
-		prefix = id;
-		name = prefixes.get(id).split(",")[1] + " " + name;
+		prefixid = id;
+		prefix = prefixes.get(id).split(",")[1];
 		
 	}
 	

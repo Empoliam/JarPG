@@ -6,7 +6,6 @@ import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
@@ -34,10 +33,10 @@ public class LoadWindow extends JDialog
 		}
 	};
 	
-	public LoadWindow(JFrame parent)
+	public LoadWindow(IntroWindow titlePage)
 	{
 		
-		super(parent, true);
+		super(titlePage, true);
 		
 		mainPanel.setLayout(new MigLayout());
 		worldsPanel.setLayout(new MigLayout());

@@ -14,24 +14,20 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 
+import static main.Main.player;
+import static main.Main.PATH;
+
 public class MapWindow extends JDialog
 {
 
 	private static final long serialVersionUID = 1L;
-
-	String PATH;
-	int x, y;
 	
 	JPanel mainPane = new JPanel();
 	JLabel mapPane = new JLabel();
 	
-	public MapWindow(String PATH, int x, int y)
+	public MapWindow()
 	{
-
-		this.PATH = PATH;
-		this.x = x;
-		this.y = y;
-		
+				
 		setTitle("Map");
 		
 		mainPane.setLayout(new MigLayout());
@@ -46,7 +42,6 @@ public class MapWindow extends JDialog
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
-		setModal(true);
 
 	}
 
@@ -64,7 +59,7 @@ public class MapWindow extends JDialog
 
 		Graphics2D g =  mapImg.createGraphics();
 		g.setColor(new Color(255,0,255));
-		g.drawOval(x-1, y-1, 2, 2);
+		g.drawOval(player.x-1, player.y-1, 2, 2);
 		
 		ImageIcon mapIcon = new ImageIcon(mapImg);
 		mapPane.setIcon(mapIcon);
