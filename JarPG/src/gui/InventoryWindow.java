@@ -81,7 +81,7 @@ public class InventoryWindow extends JDialog
 
 		model.addColumn("Quantity");
 		model.addColumn("Item");
-		model.addColumn("Prefix");
+		model.addColumn("Quality");
 		model.addColumn("Weight");
 		model.addColumn("Basic Value");
 		model.addColumn("Total Value");
