@@ -11,73 +11,61 @@ public class Move
 	 * 2:south
 	 * 3:east
 	 */
-	 
+
 	public static void move(int direction)
 	{
 
 		int reverse = 0; 
 
-		try
+		switch(direction)
 		{
 
-
-			switch(direction)
-			{
-
-			case 0:
-				if(currenty != 0)
-				{				
-					currenty --;
-					reverse = 2;
-				}
-				else mainWindow.textarea.append("You can go no further in this direction.\n");
-				break;
-			case 1:
-				if(currentx != 0)
-				{
-					currentx --;	
-					reverse = 3;
-					break;
-				}
-				else mainWindow.textarea.append("You can go no further in this direction.\n");
-				break;
-			case 2:
-				if(currenty != WORLD_SIZE-1)
-				{				
-					currenty ++;	
-					reverse = 0;
-				}
-				else mainWindow.textarea.append("You can go no further in this direction.\n");
-				break;
-			case 3:
-				if(currentx != WORLD_SIZE-1)
-				{
-					currentx ++;				
-					reverse = 1;
-				}
-				else mainWindow.textarea.append("You can go no further in this direction.\n");
-				break;
-
+		case 0:
+			if(currenty != 0)
+			{				
+				currenty --;
+				reverse = 2;
 			}
-			loadRegion();	
-			if(activeRegion.getBiome() == -1)
+			else mainWindow.textarea.append("You can go no further in this direction.\n");
+			break;
+		case 1:
+			if(currentx != 0)
 			{
-				mainWindow.textarea.append("You find an expanse of water, and can proceed no further.\n");
-				move(reverse);
+				currentx --;	
+				reverse = 3;
+				break;
 			}
-
-			player.setXY(currentx, currenty);
+			else mainWindow.textarea.append("You can go no further in this direction.\n");
+			break;
+		case 2:
+			if(currenty != WORLD_SIZE-1)
+			{				
+				currenty ++;	
+				reverse = 0;
+			}
+			else mainWindow.textarea.append("You can go no further in this direction.\n");
+			break;
+		case 3:
+			if(currentx != WORLD_SIZE-1)
+			{
+				currentx ++;				
+				reverse = 1;
+			}
+			else mainWindow.textarea.append("You can go no further in this direction.\n");
+			break;
 
 		}
-		catch(ArrayIndexOutOfBoundsException e)
+		loadRegion();	
+		if(activeRegion.getBiome() == -1)
 		{
-
-			mainWindow.textarea.append("Format unrecognised. Use 'move [direction]'.\n");
-
+			mainWindow.textarea.append("You find an expanse of water, and can proceed no further.\n");
+			move(reverse);
 		}
-		
+
+		player.setXY(currentx, currenty);
+
 		mainWindow.drawPlayer();
-
+		
 	}
-	
+
 }

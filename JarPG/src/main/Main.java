@@ -59,7 +59,7 @@ public abstract class Main
 		new IntroWindow();
 		loadPlayer();
 		loadRegion();
-		new MainWindow();
+		mainWindow = new MainWindow();
 		
 	}
 

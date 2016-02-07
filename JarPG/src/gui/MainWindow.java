@@ -175,16 +175,16 @@ public class MainWindow extends JFrame
 
 	public void drawPlayer()
 	{
-
+		
 		BufferedImage mapImg = null;
-
+		
 		try {
-
 			mapImg = ImageIO.read(new File(Main.PATH + "/map.bmp"));			
 		} catch (IOException e1) {
 			e1.printStackTrace();
+			System.out.println("CATCH");
 		}
-
+		
 		Graphics2D g =  mapImg.createGraphics();
 		g.setColor(new Color(255,0,255));
 		g.drawOval(Main.currentx-1, Main.currenty-1, 2, 2);
