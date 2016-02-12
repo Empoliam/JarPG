@@ -4,8 +4,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,32 +41,42 @@ public abstract class Main
 	public static Player player;
 	public static SuperRegion activeSuperRegion;
 	public static Region activeRegion;
-	
+
 	public static MainWindow mainWindow;
-	
+
 	public static void main(String[] args) 
 	{
-		
+
 		Rock.getList();
+		Rock.populateRockList();
 		Item.getList();
 		Item.getPrefixes();
 		Stone.getList();
-						
+
 		loadGame();
-		
+
 	}
 
 	static private void loadGame()
 	{
-		
+
 		new IntroWindow();
-		loadPlayer();
-		loadRegion();
-		mainWindow = new MainWindow();
-		
+		try
+		{
+			loadPlayer();
+			loadRegion();
+			mainWindow = new MainWindow();
+		}
+		catch(InvalidClassException e)
+		{
+
+			JOptionPane.showMessageDialog(null, "World out of date.\nPlease create a new world.");
+
+		}
+
 	}
 
-	static void loadRegion()
+	static void loadRegion() throws InvalidClassException
 	{
 
 		int oldX = currentX;
@@ -76,11 +89,11 @@ public abstract class Main
 
 			if(oldX != currentX || oldY != currentY)
 			{
-				
+
 				ObjectInputStream is = new ObjectInputStream(new FileInputStream(PATH + "/regions/" + currentX + "-" + currentY + ".region"));
 				activeSuperRegion = (SuperRegion) is.readObject();
 				is.close();
-				
+
 			}
 			activeRegion = activeSuperRegion.getTile((currentx-(currentX*40)),(currenty-(currentY*40)));
 
@@ -94,8 +107,8 @@ public abstract class Main
 		catch (ClassNotFoundException e) { e.printStackTrace(); }
 
 	}
-	
-	private static void loadPlayer()
+
+	private static void loadPlayer() throws InvalidClassException
 	{
 
 		try {
@@ -115,7 +128,7 @@ public abstract class Main
 
 	public static void savePlayer()
 	{
-		
+
 		try {
 			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(Main.PATH + "/player.dat"));
 			os.writeObject(Main.player);
@@ -125,7 +138,7 @@ public abstract class Main
 			e1.printStackTrace();
 			mainWindow.textarea.append("Save failed.");
 		}
-		
+
 	}
-	
+
 }

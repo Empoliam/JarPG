@@ -2,6 +2,8 @@ package main;
 
 import static main.Main.*;
 
+import java.io.InvalidClassException;
+
 public class Move 
 {
 
@@ -55,7 +57,11 @@ public class Move
 			break;
 
 		}
-		loadRegion();	
+		try {
+			loadRegion();
+		} catch (InvalidClassException e) {
+			e.printStackTrace();
+		}	
 		if(activeRegion.getBiome() == -1)
 		{
 			mainWindow.textarea.append("You find an expanse of water, and can proceed no further.\n");
@@ -65,7 +71,7 @@ public class Move
 		player.setXY(currentx, currenty);
 
 		mainWindow.drawPlayer();
-		
+
 	}
 
 }

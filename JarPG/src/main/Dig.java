@@ -29,6 +29,9 @@ public class Dig
 		case "Organic":
 			mined = activeRegion.getRock("organics", new Random().nextInt(2));
 			break;
+		case "Ore":
+			mined = activeRegion.getRock("ore", new Random().nextInt(4));
+			break;
 		default:
 			mainWindow.textarea.append("Such a layer does not exist.\n");
 			hit = false;
@@ -48,7 +51,7 @@ public class Dig
 	public static void digRandom()
 	{
 
-		int ranLayer = new Random().nextInt(3);
+		int ranLayer = new Random().nextInt(4);
 		Rock mined = null;
 		boolean hit = true;
 
@@ -63,7 +66,10 @@ public class Dig
 			break;
 		case 2:
 			mined = activeRegion.getRock("organics", new Random().nextInt(2));
-
+			break;
+		case 3:
+			mined = activeRegion.getRock("ore", new Random().nextInt(4));
+			break;
 		}
 
 		if(hit == true)

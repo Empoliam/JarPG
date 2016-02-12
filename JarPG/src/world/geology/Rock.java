@@ -11,9 +11,10 @@ import java.util.List;
 public class Rock implements Serializable
 {
 
-	private static final long serialVersionUID = 4L;
+	private static final long serialVersionUID = 5L;
 
-	final static List<String> allrocks = new ArrayList<String>();
+	final static List<String> allrockstrings = new ArrayList<String>();
+	public final static List<Rock> allrocks = new ArrayList<Rock>();
 	
 	public int id;
 	public String name;
@@ -21,12 +22,12 @@ public class Rock implements Serializable
 	public int meta;
 	public Color colour;
 	
-	public Rock(int id)
+	private Rock(int id)
 	{
 		
 		this.id = id;
 		
-		String[] line = allrocks.get(id).split(",");	
+		String[] line = allrockstrings.get(id).split(",");	
 				
 		name = line[1];
 		yeild = Integer.parseInt(line[3]);
@@ -37,7 +38,7 @@ public class Rock implements Serializable
 	
 	public static void getList()
 	{
-		
+				
 		try
 		{
 			BufferedReader br = new BufferedReader(new FileReader("resources/rocks.csv"));
@@ -47,7 +48,7 @@ public class Rock implements Serializable
 			while(line != null)
 			{
 				
-				allrocks.add(line);
+				allrockstrings.add(line);
 				line = br.readLine();
 				
 			}
@@ -57,6 +58,18 @@ public class Rock implements Serializable
 		}
 		catch(java.io.FileNotFoundException e){}
 		catch(IOException e2){};
+		
+	}
+	
+	public static void populateRockList()
+	{
+				
+		for(int id = 0; id < allrockstrings.size(); id ++)
+		{
+			
+			allrocks.add(new Rock(id));
+			
+		}
 		
 	}
 	

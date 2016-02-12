@@ -412,17 +412,17 @@ public class World
 			for(int x = 0; x < WORLD_SIZE; x ++)
 			{
 				
-				regions[x][y].setRock("sediment", 0, new Rock(sediment01.getData(x, y)));
-				regions[x][y].setRock("sediment", 1, new Rock(sediment02.getData(x, y)));
-				regions[x][y].setRock("sediment", 2, new Rock(sediment03.getData(x, y)));
-				regions[x][y].setRock("native", 0, new Rock(native01.getData(x, y)));
-				regions[x][y].setRock("native", 1, new Rock(native02.getData(x, y)));
-				regions[x][y].setRock("organics", 0, new Rock(organic01.getData(x, y)));
-				regions[x][y].setRock("organics", 1, new Rock(organic02.getData(x, y)));
-				regions[x][y].setRock("ore", 0, new Rock(ore01.getData(x, y)));
-				regions[x][y].setRock("ore", 1, new Rock(ore02.getData(x, y)));
-				regions[x][y].setRock("ore", 2, new Rock(ore03.getData(x, y)));
-				regions[x][y].setRock("ore", 3, new Rock(ore04.getData(x, y)));
+				regions[x][y].setRock("sediment", 0, Rock.allrocks.get(sediment01.getData(x, y)));
+				regions[x][y].setRock("sediment", 1, Rock.allrocks.get(sediment02.getData(x, y)));
+				regions[x][y].setRock("sediment", 2, Rock.allrocks.get(sediment03.getData(x, y)));
+				regions[x][y].setRock("native", 0, Rock.allrocks.get(native01.getData(x, y)));
+				regions[x][y].setRock("native", 1, Rock.allrocks.get(native02.getData(x, y)));
+				regions[x][y].setRock("organics", 0, Rock.allrocks.get(organic01.getData(x, y)));
+				regions[x][y].setRock("organics", 1, Rock.allrocks.get(organic02.getData(x, y)));
+				regions[x][y].setRock("ore", 0, Rock.allrocks.get(ore01.getData(x, y)));
+				regions[x][y].setRock("ore", 1, Rock.allrocks.get(ore02.getData(x, y)));
+				regions[x][y].setRock("ore", 2, Rock.allrocks.get(ore03.getData(x, y)));
+				regions[x][y].setRock("ore", 3, Rock.allrocks.get(ore04.getData(x, y)));
 				
 			}
 			

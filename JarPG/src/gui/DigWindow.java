@@ -35,6 +35,7 @@ public class DigWindow extends JFrame
 	JRadioButtonMenuItem rOrganic = new JRadioButtonMenuItem("Organic");
 	JRadioButtonMenuItem rSediment = new JRadioButtonMenuItem("Sediment");
 	JRadioButtonMenuItem rNative = new JRadioButtonMenuItem("Native");
+	JRadioButtonMenuItem rOre = new JRadioButtonMenuItem("Ore");
 
 	ActionListener aDig = new ActionListener() {
 
@@ -45,6 +46,7 @@ public class DigWindow extends JFrame
 			else if(rOrganic.isSelected()) Dig.digSpecific("Organic");		
 			else if(rSediment.isSelected()) Dig.digSpecific("Sediment");
 			else if(rNative.isSelected()) Dig.digSpecific("Native");
+			else if(rOre.isSelected()) Dig.digSpecific("Ore");
 
 		}
 	};
@@ -69,12 +71,14 @@ public class DigWindow extends JFrame
 		bLayers.add(rOrganic);
 		bLayers.add(rSediment);
 		bLayers.add(rNative);
+		bLayers.add(rOre);
 
 		selectPane.add(bDig, "align center, wrap");
 		selectPane.add(rAny,"wrap");
 		selectPane.add(rOrganic,"wrap");
 		selectPane.add(rSediment,"wrap");
 		selectPane.add(rNative,"wrap");
+		selectPane.add(rOre,"wrap");
 
 		rAny.setSelected(true);
 		bDig.addActionListener(aDig);
@@ -98,6 +102,7 @@ public class DigWindow extends JFrame
 			rOrganic.setEnabled(false);
 			rSediment.setEnabled(false);
 			rNative.setEnabled(false);
+			rOre.setEnabled(false);
 			selectPane.add(new JLabel("<html><div style=\"text-align:center;\">You aren't skilled enough <br> to dig a certain layer yet</div></html>"), "align center");
 
 		}
