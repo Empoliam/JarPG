@@ -1,5 +1,6 @@
 package world.geology;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.List;
 public class Rock implements Serializable
 {
 
-	private static final long serialVersionUID = 3L;
+	private static final long serialVersionUID = 4L;
 
 	final static List<String> allrocks = new ArrayList<String>();
 	
@@ -18,7 +19,7 @@ public class Rock implements Serializable
 	public String name;
 	public int yeild;
 	public int meta;
-	public String colour;
+	public Color colour;
 	
 	public Rock(int id)
 	{
@@ -30,7 +31,7 @@ public class Rock implements Serializable
 		name = line[1];
 		yeild = Integer.parseInt(line[3]);
 		meta = Integer.parseInt(line[4]);
-		colour = line[5];
+		colour = Color.decode(line[5]);
 		
 	}
 	

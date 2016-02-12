@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 
 import utilities.noise.NoiseMap;
 import world.geology.NativeLayer;
+import world.geology.OreLayer;
 import world.geology.OrganicsLayer;
 import world.geology.Rock;
 import world.geology.SedimentLayer;
@@ -400,6 +401,10 @@ public class World
 		NativeLayer native02 = new NativeLayer(WORLD_SIZE, PATH, "Native02");
 		OrganicsLayer organic01 = new OrganicsLayer(WORLD_SIZE, PATH, "Organic01");
 		OrganicsLayer organic02 = new OrganicsLayer(WORLD_SIZE, PATH, "Organic02");
+		OreLayer ore01 = new OreLayer(WORLD_SIZE, PATH, "Ore1");
+		OreLayer ore02 = new OreLayer(WORLD_SIZE, PATH, "Ore2");
+		OreLayer ore03 = new OreLayer(WORLD_SIZE, PATH, "Ore3");
+		OreLayer ore04 = new OreLayer(WORLD_SIZE, PATH, "Ore4");
 		
 		for(int y = 0; y < WORLD_SIZE; y ++)
 		{
@@ -414,6 +419,10 @@ public class World
 				regions[x][y].setRock("native", 1, new Rock(native02.getData(x, y)));
 				regions[x][y].setRock("organics", 0, new Rock(organic01.getData(x, y)));
 				regions[x][y].setRock("organics", 1, new Rock(organic02.getData(x, y)));
+				regions[x][y].setRock("ore", 0, new Rock(ore01.getData(x, y)));
+				regions[x][y].setRock("ore", 1, new Rock(ore02.getData(x, y)));
+				regions[x][y].setRock("ore", 2, new Rock(ore03.getData(x, y)));
+				regions[x][y].setRock("ore", 3, new Rock(ore04.getData(x, y)));
 				
 			}
 			

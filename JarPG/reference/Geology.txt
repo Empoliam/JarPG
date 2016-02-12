@@ -14,9 +14,9 @@ Cinnabar		- Mercury
 Realgar			- Arsenic
 Galena			- Lead
 Hematite		- Iron
-Spinel			- Zinc
+Spinel			- Magnesium
 Magnetite		- Iron
-Illmenite		- Titanium
+Ilmenite		- Titanium
 Chromite		- Chromium
 Cassiterite		- Tin
 Rutile			- Titanium
@@ -26,6 +26,11 @@ Malachite		- Copper
 Wolframite		- Tungsten
 Wulfenite		- Lead
 Carnotite		- Uranium
+Bauxite			- Aluminium
+Sperrylite		- Platinum
+Bornite			- Copper
+Cobaltite		- Cobalt
+Scheelite		- Tungsten
 
 //Sediments : 2
 Borax

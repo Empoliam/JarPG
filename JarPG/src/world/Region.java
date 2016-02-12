@@ -7,7 +7,7 @@ import world.geology.Rock;
 public class Region implements Serializable
 {
 
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
 	
 	int x, y;
 	double height;
@@ -19,6 +19,7 @@ public class Region implements Serializable
 	Rock[] sediment = new Rock[3];
 	Rock[] nativemetal = new Rock[2];
 	Rock[] organics = new Rock[2];
+	Rock[] ore = new Rock[4];
 
 	public Region()	{}
 
@@ -104,7 +105,10 @@ public class Region implements Serializable
 			break;
 		case "organics":
 			organics[number] = rock;
-			
+			break;
+		case "ore":
+			ore[number] = rock;
+			break;
 		}
 
 	}
@@ -124,8 +128,11 @@ public class Region implements Serializable
 			break;
 		case "organics":
 			output = organics[number];
+			break;
+		case "ore":
+			output = ore[number];
+			break;
 		}
-
 		return output;
 		
 	}

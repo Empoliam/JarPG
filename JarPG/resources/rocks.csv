@@ -3,26 +3,26 @@
 2,Native Copper,0,2,-1,0xcc9900
 3,Native Iron,0,3,-1,0x801900
 4,Sulphur,0,4,-1,0xffff66
-5,Pyrite,1,10,22,0x2f1700
-6,Chalcopyrite,1,10,23,
-7,Sphalerite,1,10,24,
-8,Stibnite,1,10,25,
-9,Cinnabar,1,10,26,
-10,Realgar,1,10,27,
-11,Galena,1,10,28,
-12,Hematite,1,10,29,
-13,Spinel,1,10,30,
-14,Magnetite,1,10,31,
-15,Illmenite,1,10,32,
-16,Chromite,1,10,33,
-17,Cassiterite,1,10,34,
-18,Rutile,1,10,35,
-19,Uraninite,1,10,36,
-20,Goethite,1,10,37,
-21,Malachite,1,10,38,
-22,Wolframite,1,10,39,
-23,Wulfenite,1,10,40,
-24,Carnotite,1,10,41,
+5,Pyrite,1,10,22,0x675d51
+6,Chalcopyrite,1,10,23,0x785e11
+7,Sphalerite,1,10,24,0x3c4242
+8,Stibnite,1,10,25,0x94a6a1
+9,Cinnabar,1,10,26,0xb94142
+10,Realgar,1,10,27,0x951218
+11,Galena,1,10,28,0x7d88a4
+12,Hematite,1,10,29,0x43433f
+13,Spinel,1,10,30,0xdb566f
+14,Magnetite,1,10,31,0x767877
+15,Ilmenite,1,10,32,0x97969e
+16,Chromite,1,10,33,0x71686d
+17,Cassiterite,1,10,34,0x353334
+18,Rutile,1,10,35,0x5f4642
+19,Uraninite,1,10,36,0x06092a
+20,Goethite,1,10,37,0x0c2f1f
+21,Malachite,1,10,38,0x087645
+22,Wolframite,1,10,39,0xa9876b
+23,Wulfenite,1,10,40,0xd97d00
+24,Carnotite,1,10,41,0x8eb052
 25,Borax,2,10,42,0xe6e6e6
 26,Anhydrite,2,10,43,0x73655a
 27,Breccia,2,10,44,0x918d82
@@ -94,3 +94,8 @@
 93,Anthracite,6,7,-1,0x252525
 94,Bituminous Coal,6,8,-1,0x565656
 95,Lignite,6,9,-1,0xbc3a26
+96,Bauxite,1,10,85,0xab6b45
+97,Sperrylite,1,10,86,0xa2a6e1
+98,Bornite,1,10,87,0xc2ba7c
+99,Cobaltite,1,10,88,0x5b6583
+100,Scheelite,1,10,89,0xb06c09

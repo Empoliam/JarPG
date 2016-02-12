@@ -27,11 +27,11 @@ public final class ColourBank {
 	public static final int TUNDRA_COLOUR = new Color (102, 153, 153).getRGB();
 	
 	//Native rocks
-	public static final int GOLD_COLOUR = new Color (255, 204, 0).getRGB();
-	public static final int SILVER_COLOUR = new Color (204, 204, 204).getRGB();
-	public static final int COPPER_COLOUR = new Color (204, 153, 0).getRGB();
-	public static final int IRON_COLOUR = new Color (128, 25, 0).getRGB();
-	public static final int SULPHUR_COLOUR = new Color (255, 255, 102).getRGB();
+	public static final int GOLD_COLOUR = new Color (0xffcc00).getRGB();
+	public static final int SILVER_COLOUR = new Color (0xcccccc).getRGB();
+	public static final int COPPER_COLOUR = new Color (0xcc9900).getRGB();
+	public static final int IRON_COLOUR = new Color (0x801900).getRGB();
+	public static final int SULPHUR_COLOUR = new Color (0xffff66).getRGB();
 	
 	//Organics
 	public static final int PEAT_COLOUR = new Color (47,23,0).getRGB();
@@ -41,19 +41,46 @@ public final class ColourBank {
 	public static final int BITUMINOUS_COAL_COLOUR = new Color(86,86,86).getRGB();
 	
 	//Sediments
-	public static final int BORAX_COLOUR = new Color(230,230,230).getRGB();
-	public static final int BRECCIA_COLOUR = new Color(145,141,130).getRGB();
-	public static final int CONGLOMERATE_COLOUR = new Color(186,165,120).getRGB();
-	public static final int ARKOSE_COLOUR = new Color(206,107,41).getRGB();
-	public static final int GREYWACKE_COLOUR = new Color(122,123,155).getRGB();
-	public static final int SILTSTONE_COLOUR = new Color(198,160,139).getRGB();
-	public static final int SANDSTONE_COLOUR = new Color(240,181,77).getRGB();
-	public static final int CLAYSTONE_COLOUR = new Color(131,116,75).getRGB();
-	public static final int MUDSTONE_COLOUR = new Color(210,196,169).getRGB();
-	public static final int SHALE_COLOUR = new Color(103,92,96).getRGB();
-	public static final int LOESS_COLOUR = new Color(224,179,86).getRGB();
-	public static final int LIMESTONE_COLOUR = new Color(212,202,200).getRGB();
-	public static final int ANHYDRITE_COLOUR = new Color(115,101,90).getRGB();
+	public static final int BORAX_COLOUR = new Color(0xe6e6e6).getRGB();
+	public static final int ANHYDRITE_COLOUR = new Color(0x73655a).getRGB();
+	public static final int BRECCIA_COLOUR = new Color(0x918d82).getRGB();
+	public static final int CONGLOMERATE_COLOUR = new Color(0xbaa578).getRGB();
+	public static final int ARKOSE_COLOUR = new Color(0xce6b29).getRGB();
+	public static final int GREYWACKE_COLOUR = new Color(0x7a7b9b).getRGB();
+	public static final int SILTSTONE_COLOUR = new Color(0xc6a08b).getRGB();
+	public static final int SANDSTONE_COLOUR = new Color(0xf0b54d).getRGB();
+	public static final int CLAYSTONE_COLOUR = new Color(0x83744b).getRGB();
+	public static final int MUDSTONE_COLOUR = new Color(0xd2c4a9).getRGB();
+	public static final int SHALE_COLOUR = new Color(0x675c60).getRGB();
+	public static final int LOESS_COLOUR = new Color(0xe0b356).getRGB();
+	public static final int LIMESTONE_COLOUR = new Color(0xd4cac8).getRGB();
+	
+	//Metal Ores
+	public static final int PYRITE_COLOUR = new Color(0x675d51).getRGB();
+	public static final int CHALCOPYRITE_COLOUR = new Color(0x785e11).getRGB();
+	public static final int SPHALERITE_COLOUR = new Color(0x3c4242).getRGB();
+	public static final int STIBNITE_COLOUR = new Color(0x94a6a1).getRGB();
+	public static final int CINNABAR_COLOUR = new Color(0xb94142).getRGB();
+	public static final int REALGAR_COLOUR = new Color(0x951218).getRGB();
+	public static final int GALENA_COLOUR = new Color(0x7d88a4).getRGB();
+	public static final int HEMATITE_COLOUR = new Color(0x43433f).getRGB();
+	public static final int SPINEL_COLOUR = new Color(0xdb566f).getRGB();
+	public static final int MAGNETITE_COLOUR = new Color(0x767877).getRGB();
+	public static final int ILMENITE_COLOUR = new Color(0x97969e).getRGB();
+	public static final int CHROMITE_COLOUR = new Color(0x71686d).getRGB();
+	public static final int CASSITERITE_COLOUR = new Color(0x353334).getRGB();
+	public static final int RUTILE_COLOUR = new Color(0x5f4642).getRGB();
+	public static final int URANINITE_COLOUR = new Color(0x06092a).getRGB();
+	public static final int GOETHITE_COLOUR = new Color(0x0c2f1f).getRGB();
+	public static final int MALACHITE_COLOUR = new Color(0x087645).getRGB();
+	public static final int WOLFRAMITE_COLOUR = new Color(0xa9876b).getRGB();
+	public static final int WULFENITE_COLOUR = new Color(0xd97d00).getRGB();
+	public static final int CARNOTITE_COLOUR = new Color(0x8eb052).getRGB();
+	public static final int BAUXITE_COLOUR = new Color(0xab6b45).getRGB();
+	public static final int	SPERRYLITE_COLOUR = new Color(0xa2a6e1).getRGB();
+	public static final int BORNITE_COLOUR = new Color(0xc2ba7c).getRGB();
+	public static final int COBALTITE_COLOUR = new Color(0x5b6583).getRGB();
+	public static final int	SCHEELITE_COLOUR = new Color(0xb06c09).getRGB();
 	
 	private ColourBank(){}
 

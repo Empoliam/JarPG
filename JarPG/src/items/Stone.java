@@ -42,7 +42,7 @@ public class Stone extends Item
 		
 		try
 		{
-			BufferedReader br = new BufferedReader(new FileReader("resources/gemstones.csv"));
+			BufferedReader br = new BufferedReader(new FileReader("resources/stones.csv"));
 			
 			String line = br.readLine();
 			
