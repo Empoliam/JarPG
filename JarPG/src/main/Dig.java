@@ -3,7 +3,6 @@ package main;
 import java.util.Random;
 
 import items.Item;
-import items.Stone;
 import world.geology.Rock;
 
 import static main.Main.*;
@@ -42,8 +41,7 @@ public class Dig
 		if(hit == true)
 		{
 			mainWindow.textarea.append("You strike " + mined.name + "!\n");
-			if(mined.yeild == 10) player.addItem(new Stone(mined.meta,new Random().nextInt(6)));
-			else player.addItem(new Item(mined.yeild));
+			player.addItem(new Item(mined.yeild));
 		}
 
 	}
@@ -75,8 +73,7 @@ public class Dig
 		if(hit == true)
 		{
 			mainWindow.textarea.append("You strike " + mined.name + "!\n");
-			if(mined.yeild == 10) player.addItem(new Stone(mined.meta,new Random().nextInt(6)));
-			else player.addItem(new Item(mined.yeild));
+			player.addItem(new Item(mined.yeild));
 		}
 
 	}

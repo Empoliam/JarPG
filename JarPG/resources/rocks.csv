@@ -1,101 +1,101 @@
-0,Native Gold,0,0,-1,0xffcc00
-1,Native Silver,0,1,-1,0xcccccc
-2,Native Copper,0,2,-1,0xcc9900
-3,Native Iron,0,3,-1,0x801900
-4,Sulphur,0,4,-1,0xffff66
-5,Pyrite,1,10,22,0x675d51
-6,Chalcopyrite,1,10,23,0x785e11
-7,Sphalerite,1,10,24,0x3c4242
-8,Stibnite,1,10,25,0x94a6a1
-9,Cinnabar,1,10,26,0xb94142
-10,Realgar,1,10,27,0x951218
-11,Galena,1,10,28,0x7d88a4
-12,Hematite,1,10,29,0x43433f
-13,Spinel,1,10,30,0xdb566f
-14,Magnetite,1,10,31,0x767877
-15,Ilmenite,1,10,32,0x97969e
-16,Chromite,1,10,33,0x71686d
-17,Cassiterite,1,10,34,0x353334
-18,Rutile,1,10,35,0x5f4642
-19,Uraninite,1,10,36,0x06092a
-20,Goethite,1,10,37,0x0c2f1f
-21,Malachite,1,10,38,0x087645
-22,Wolframite,1,10,39,0xa9876b
-23,Wulfenite,1,10,40,0xd97d00
-24,Carnotite,1,10,41,0x8eb052
-25,Borax,2,10,42,0xe6e6e6
-26,Anhydrite,2,10,43,0x73655a
-27,Breccia,2,10,44,0x918d82
-28,Conglomerate,2,10,45,0xbaa578
-29,Arkose,2,10,46,0xce6b29
-30,Greywacke,2,10,47,0x7a7b9b
-31,Siltstone,2,10,48,0xc6a08b
-32,Sandstone,2,10,49,0xf0b54d
-33,Claystone,2,10,50,0x83744b
-34,Mudstone,2,10,51,0xd2c4a9
-35,Shale,2,10,52,0x675c60
-36,Loess,2,10,53,0xe0b356
-37,Limestone,2,10,54,0xd4cac8
-38,Sillimanite,3,10,55,0xFFFFFF
-39,Kyanite,3,10,56,0xFFFFFF
-40,Staurolite,3,10,57,0xFFFFFF
-41,Talc,3,10,58,0xFFFFFF
-42,Skarn,3,10,59,0xFFFFFF
-43,Serpentinite,3,10,60,0xFFFFFF
-44,Marble,3,10,61,0xFFFFFF
-45,Hornfels,3,10,62,0xFFFFFF
-46,Migmatite,3,10,63,0xFFFFFF
-47,Slate,3,10,64,0xFFFFFF
-48,Phyllite,3,10,65,0xFFFFFF
-49,Quartzite,3,10,66,0xFFFFFF
-50,Schist,3,10,67,0xFFFFFF
-51,Gneiss,3,10,68,0xFFFFFF
-52,Eclogite,3,10,69,0xFFFFFF
-53,Granulite,3,10,70,0xFFFFFF
-54,Amphibolite,3,10,71,0xFFFFFF
-55,Mylonite,3,10,72,0xFFFFFF
-56,Jadeitite,3,10,0,0xFFFFFF
-57,Granite,4,10,73,0xFFFFFF
-58,Pegmatite,4,10,74,0xFFFFFF
-59,Grandiorite,4,10,75,0xFFFFFF
-60,Dolerite,4,10,76,0xFFFFFF
-61,Gabbro,4,10,77,0xFFFFFF
-62,Diorite,4,10,78,0xFFFFFF
-63,Lamprophyre,4,10,79,0xFFFFFF
-64,Kimberlite,4,10,1,0xFFFFFF
-65,Peridotite,4,10,2,0xFFFFFF
-66,Basalt,4,10,80,0xFFFFFF
-67,Dacite,4,10,81,0xFFFFFF
-68,Obsidian,4,10,82,0xFFFFFF
-69,Andesite,4,10,83,0xFFFFFF
-70,Rhyolite,4,10,84,0xFFFFFF
-71,Corundum ,5,10,3,0xFFFFFF
-72,Flourite,5,10,4,0xFFFFFF
-73,Halite,5,11,-1,0xFFFFFF
-74,Dolomite,5,10,5,0xFFFFFF
-75,Rhodochrosite,5,10,6,0xFFFFFF
-76,Calcite,5,10,7,0xFFFFFF
-77,Azurite,5,10,8,0xFFFFFF
-78,Gypsum,5,10,9,0xFFFFFF
-79,Turquoise,5,10,10,0xFFFFFF
-80,Garnet vein,5,10,11,0xFFFFFF
-81,Olivine vein,5,10,12,0xFFFFFF
-82,Zircon vein,5,10,13,0xFFFFFF
-83,Andalusite,5,10,14,0xFFFFFF
-84,Topaz vein,5,10,15,0xFFFFFF
-85,Epidote vein,5,10,16,0xFFFFFF
-86,Beryl vein,5,10,17,0xFFFFFF
-87,Pyroxene vein,5,10,18,0xFFFFFF
-88,Amphibole vein,5,10,19,0xFFFFFF
-89,Muscovite,5,10,20,0xFFFFFF
-90,Quartz,5,10,21,0xFFFFFF
-91,Tar,6,5,-1,0x000000
-92,Peat,6,6,-1,0x2f1700
-93,Anthracite,6,7,-1,0x252525
-94,Bituminous Coal,6,8,-1,0x565656
-95,Lignite,6,9,-1,0xbc3a26
-96,Bauxite,1,10,85,0xab6b45
-97,Sperrylite,1,10,86,0xa2a6e1
-98,Bornite,1,10,87,0xc2ba7c
-99,Cobaltite,1,10,88,0x5b6583
-100,Scheelite,1,10,89,0xb06c09
+0,Native Gold,0,0,0xffcc00
+1,Native Silver,0,1,0xcccccc
+2,Native Copper,0,2,0xcc9900
+3,Native Iron,0,3,0x801900
+4,Sulphur,0,4,0xffff66
+5,Pyrite,1,33,0x675d51
+6,Chalcopyrite,1,34,0x785e11
+7,Sphalerite,1,35,0x3c4242
+8,Stibnite,1,36,0x94a6a1
+9,Cinnabar,1,37,0xb94142
+10,Realgar,1,38,0x951218
+11,Galena,1,39,0x7d88a4
+12,Hematite,1,40,0x43433f
+13,Spinel,1,41,0xdb566f
+14,Magnetite,1,42,0x767877
+15,Ilmenite,1,43,0x97969e
+16,Chromite,1,44,0x71686d
+17,Cassiterite,1,45,0x353334
+18,Rutile,1,46,0x5f4642
+19,Uraninite,1,47,0x06092a
+20,Goethite,1,48,0x0c2f1f
+21,Malachite,1,49,0x087645
+22,Wolframite,1,50,0xa9876b
+23,Wulfenite,1,51,0xd97d00
+24,Carnotite,1,52,0x8eb052
+25,Borax,2,53,0xe6e6e6
+26,Anhydrite,2,54,0x73655a
+27,Breccia,2,55,0x918d82
+28,Conglomerate,2,56,0xbaa578
+29,Arkose,2,57,0xce6b29
+30,Greywacke,2,58,0x7a7b9b
+31,Siltstone,2,59,0xc6a08b
+32,Sandstone,2,60,0xf0b54d
+33,Claystone,2,61,0x83744b
+34,Mudstone,2,62,0xd2c4a9
+35,Shale,2,63,0x675c60
+36,Loess,2,64,0xe0b356
+37,Limestone,2,65,0xd4cac8
+38,Sillimanite,3,66,0xFFFFFF
+39,Kyanite,3,67,0xFFFFFF
+40,Staurolite,3,68,0xFFFFFF
+41,Talc,3,69,0xFFFFFF
+42,Skarn,3,70,0xFFFFFF
+43,Serpentinite,3,71,0xFFFFFF
+44,Marble,3,72,0xFFFFFF
+45,Hornfels,3,73,0xFFFFFF
+46,Migmatite,3,74,0xFFFFFF
+47,Slate,3,75,0xFFFFFF
+48,Phyllite,3,76,0xFFFFFF
+49,Quartzite,3,77,0xFFFFFF
+50,Schist,3,78,0xFFFFFF
+51,Gneiss,3,79,0xFFFFFF
+52,Eclogite,3,80,0xFFFFFF
+53,Granulite,3,81,0xFFFFFF
+54,Amphibolite,3,82,0xFFFFFF
+55,Mylonite,3,83,0xFFFFFF
+56,Jadeitite,3,11,0xFFFFFF
+57,Granite,4,84,0xFFFFFF
+58,Pegmatite,4,85,0xFFFFFF
+59,Grandiorite,4,86,0xFFFFFF
+60,Dolerite,4,87,0xFFFFFF
+61,Gabbro,4,88,0xFFFFFF
+62,Diorite,4,89,0xFFFFFF
+63,Lamprophyre,4,90,0xFFFFFF
+64,Kimberlite,4,12,0xFFFFFF
+65,Peridotite,4,13,0xFFFFFF
+66,Basalt,4,91,0xFFFFFF
+67,Dacite,4,92,0xFFFFFF
+68,Obsidian,4,93,0xFFFFFF
+69,Andesite,4,94,0xFFFFFF
+70,Rhyolite,4,95,0xFFFFFF
+71,Corundum ,5,14,0xFFFFFF
+72,Flourite,5,15,0xFFFFFF
+73,Halite,5,10,0xFFFFFF
+74,Dolomite,5,16,0xFFFFFF
+75,Rhodochrosite,5,17,0xFFFFFF
+76,Calcite,5,18,0xFFFFFF
+77,Azurite,5,19,0xFFFFFF
+78,Gypsum,5,20,0xFFFFFF
+79,Turquoise,5,21,0xFFFFFF
+80,Garnet vein,5,22,0xFFFFFF
+81,Olivine vein,5,23,0xFFFFFF
+82,Zircon vein,5,24,0xFFFFFF
+83,Andalusite,5,25,0xFFFFFF
+84,Topaz vein,5,26,0xFFFFFF
+85,Epidote vein,5,27,0xFFFFFF
+86,Beryl vein,5,28,0xFFFFFF
+87,Pyroxene vein,5,29,0xFFFFFF
+88,Amphibole vein,5,30,0xFFFFFF
+89,Muscovite,5,31,0xFFFFFF
+90,Quartz,5,32,0xFFFFFF
+91,Tar,6,5,0x000000
+92,Peat,6,6,0x2f1700
+93,Anthracite,6,7,0x252525
+94,Bituminous Coal,6,8,0x565656
+95,Lignite,6,9,0xbc3a26
+96,Bauxite,1,96,0xab6b45
+97,Sperrylite,1,97,0xa2a6e1
+98,Bornite,1,98,0xc2ba7c
+99,Cobaltite,1,99,0x5b6583
+100,Scheelite,1,100,0xb06c09

@@ -16,7 +16,6 @@ import com.google.gson.GsonBuilder;
 import gui.IntroWindow;
 import gui.MainWindow;
 import items.Item;
-import items.Stone;
 import unit.Player;
 import world.Region;
 import world.SuperRegion;
@@ -51,8 +50,7 @@ public abstract class Main
 		Rock.populateRockList();
 		Item.getList();
 		Item.getPrefixes();
-		Stone.getList();
-
+		
 		loadGame();
 
 	}
