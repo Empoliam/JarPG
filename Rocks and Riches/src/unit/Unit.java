@@ -1,39 +1,31 @@
 package unit;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import items.Item;
 
 public abstract class Unit implements Serializable 
 {
 
-	final static long serialVersionUID = 1L;
+	final static long serialVersionUID = 2L;
+	
+	public List<Item> inventory = new ArrayList<Item>();
 	
 	String fName, lName;
-	int HP, cHP, MP, cMP;
 	
-	Unit(int HPi, int MPi)
+	Unit()
 	{
-		
-		HP = HPi;
-		cHP = HPi;
-		MP = MPi;
-		cMP = MPi;
-		
+				
 	}
 	
-	Unit(String fName, String lName ,int HP, int MP)
+	Unit(String fName, String lName)
 	{
 		
-		this.HP = HP;
-		this.cHP = HP;
-		this.MP = MP;
-		this.cMP = MP;
-
+		this.fName = fName;
+		this.lName = lName;
 		
 	}
-	
-	public int getHP(){ return HP; }
-	public int getcHP(){ return cHP; }
-	public int getMP(){ return MP; }
-	public int getcMP(){ return cMP; }
 	
 }

@@ -19,36 +19,26 @@ import unit.Player;
 public class CreateWindow extends JDialog
 {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	String PATH;
 
-	private int MAX_POINTS = 30;
-	private int HP_MULT = 3;
-	private int MP_MULT = 5;
+	private int MAX_POINTS = 10;
 
 	JPanel panel = new JPanel();
 
 	String fName, lName;
-	int HP, MP, x, y;
+	int Mining, x, y;
 
 	Player player;
 
-	JLabel head = new JLabel("Character Creation");
-	JLabel fNameLabel = new JLabel("First Name: ");
-	JLabel lNameLabel = new JLabel("Last Name: ");
-	JLabel HPLabel = new JLabel("HP: ");
-	JLabel MPLabel = new JLabel("MP: ");
 	JLabel PointLabel = new JLabel("Points left: " + MAX_POINTS);
 
 	JTextField fNameField = new JTextField(10);
 	JTextField lNameField = new JTextField(10);
-	STextField HPField = new STextField();
-	STextField MPField = new STextField();
+	STextField MiningField = new STextField();
 
-	SButton HPp = new SButton("+");
-	SButton MPp = new SButton("+");	
-	SButton HPm = new SButton("-");
-	SButton MPm = new SButton("-");
+	SButton miningP = new SButton("+");
+	SButton miningM = new SButton("-");
 
 	JButton go = new JButton("Go!");
 
@@ -59,53 +49,26 @@ public class CreateWindow extends JDialog
 		public void actionPerformed(ActionEvent e)
 		{
 
-			int value = Integer.parseInt(HPField.getText());
+			int value = Integer.parseInt(MiningField.getText());
 
 			switch( e.getActionCommand() )
 			{
 
 			case "+" :
-				value = value + HP_MULT;
+				value ++;
 				break;
 
 			case "-" :
-				value = value - HP_MULT;
+				value --;
 				break;
 
 			}
 
-			HPField.setText(Integer.toString(value));
+			MiningField.setText(Integer.toString(value));
 
 		}
 	};
 	
-	ActionListener MPa = new ActionListener() 
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-
-			int value = Integer.parseInt(MPField.getText());
-
-			switch( e.getActionCommand() )
-			{
-
-			case "+" :
-				value = value + MP_MULT;
-				break;
-
-			case "-" :
-				value = value - MP_MULT;
-				break;
-
-			}
-
-			MPField.setText(Integer.toString(value));
-
-		}
-	};
-
 	ActionListener GOa = new ActionListener() 
 	{
 
@@ -131,38 +94,29 @@ public class CreateWindow extends JDialog
 		
 		panel.setLayout(new MigLayout());
 
-		panel.add(head,"span 2, wrap, align center");
+		panel.add(new JLabel("Character creation"),"span 2, wrap, align center");
 
-		panel.add(fNameLabel);
+		panel.add(new JLabel("First name"));
 		panel.add(fNameField,"wrap");
 
-		panel.add(lNameLabel);
+		panel.add(new JLabel("Last name"));
 		panel.add(lNameField,"wrap");
 
 		panel.add(PointLabel,"span 2,wrap,align center");
 
-		panel.add(HPLabel,"align right");
-		panel.add(HPm,"split 3, align center");
-		panel.add(HPField);
-		panel.add(HPp,"wrap");
-
-		panel.add(MPLabel, "align right");
-		panel.add(MPm,"split 3, align center");
-		panel.add(MPField);
-		panel.add(MPp,"wrap");
+		panel.add(new JLabel("Mining"),"align right");
+		panel.add(miningM,"split 3, align center");
+		panel.add(MiningField);
+		panel.add(miningP,"wrap");
 
 		panel.add(go,"span 2, align center");
 
-		HPp.addActionListener(HPa);
-		HPm.addActionListener(HPa);
-
-		MPp.addActionListener(MPa);
-		MPm.addActionListener(MPa);
+		miningP.addActionListener(HPa);
+		miningM.addActionListener(HPa);
 
 		go.addActionListener(GOa);
 
-		HPField.setText("60");
-		MPField.setText("50");
+		MiningField.setText("10");
 
 		add(panel);
 
@@ -177,16 +131,14 @@ public class CreateWindow extends JDialog
 
 			public void actionPerformed(ActionEvent e) {
 
-				HP = Integer.parseInt(HPField.getText());
-				MP = Integer.parseInt(MPField.getText());
+				Mining = Integer.parseInt(MiningField.getText());
 				
-				if(HP <= 0) HPm.setEnabled(false); else HPm.setEnabled(true);
-				if(MP <= 0) MPm.setEnabled(false); else MPm.setEnabled(true);
+				if(Mining <= 0) miningM.setEnabled(false); else miningM.setEnabled(true);
 
-				if((HP/HP_MULT)+(MP/MP_MULT) >= MAX_POINTS)	allButtonState(false);
+				if(Mining >= MAX_POINTS) allButtonState(false);
 				else allButtonState(true);
 
-				int pointsLeft = MAX_POINTS-((HP/HP_MULT)+(MP/MP_MULT));
+				int pointsLeft = MAX_POINTS  - Mining;
 
 				PointLabel.setText("Points remaining: " + pointsLeft); 
 
@@ -203,8 +155,7 @@ public class CreateWindow extends JDialog
 	private void allButtonState(boolean state)
 	{
 
-		HPp.setEnabled(state);
-		MPp.setEnabled(state);
+		miningP.setEnabled(state);
 
 	}
 
@@ -214,8 +165,9 @@ public class CreateWindow extends JDialog
 		fName = fNameField.getText();
 		lName = lNameField.getText();
 
-		player = new Player(fName, lName, HP, MP, x, y);
-
+		player = new Player(fName, lName, x, y);
+		player.mining = Mining;
+		
 	}
 
 	private void save()

@@ -1,26 +1,21 @@
 package unit;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import items.Item;
 
 public class Player extends Unit
 {
 
-	final static long serialVersionUID = 2L;
-	
-	public List<Item> inventory = new ArrayList<Item>();
-	
+	final static long serialVersionUID = 3L;
+		
 	public int x, y;
 	
 	//Player Skills
 	public int mining = 0;
 	
-	public Player(String fName, String lName, int HP, int MP, int x, int y)
+	public Player(String fName, String lName, int x, int y)
 	{
 		
-		super(fName, lName, HP, MP);
+		super(fName, lName);
 		this.x = x;
 		this.y = y;
 		
