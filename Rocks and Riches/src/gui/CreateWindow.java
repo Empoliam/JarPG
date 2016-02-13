@@ -42,7 +42,7 @@ public class CreateWindow extends JDialog
 
 	JButton go = new JButton("Go!");
 
-	ActionListener HPa = new ActionListener() 
+	ActionListener miningA = new ActionListener() 
 	{
 
 		@Override
@@ -111,8 +111,8 @@ public class CreateWindow extends JDialog
 
 		panel.add(go,"span 2, align center");
 
-		miningP.addActionListener(HPa);
-		miningM.addActionListener(HPa);
+		miningP.addActionListener(miningA);
+		miningM.addActionListener(miningA);
 
 		go.addActionListener(GOa);
 
