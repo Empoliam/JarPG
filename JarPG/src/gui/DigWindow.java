@@ -25,7 +25,7 @@ public class DigWindow extends JFrame
 	JPanel mainPane = new JPanel();
 
 	JPanel layerPane = new JPanel();
-	JLabel layerMap = new JLabel(new GeologySample().getIcon());
+	JLabel layerMap = new JLabel(new GeologySample().getIcon());	
 
 	JPanel selectPane = new JPanel();
 	JButton bDig = new JButton("Dig");
@@ -66,6 +66,7 @@ public class DigWindow extends JFrame
 
 		mainPane.setLayout(new MigLayout());
 		selectPane.setLayout(new MigLayout());
+		layerPane.setLayout(new MigLayout());
 
 		bLayers.add(rAny);
 		bLayers.add(rOrganic);
@@ -92,8 +93,9 @@ public class DigWindow extends JFrame
 		else
 		{
 
+			layerPane.add(new JLabel("Rock samples"),"align center, wrap");
 			layerPane.add(layerMap,"align center");
-						
+
 		}
 
 		if(player.mining < 10)

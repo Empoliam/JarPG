@@ -11,7 +11,7 @@ import java.util.List;
 public class Rock implements Serializable
 {
 
-	private static final long serialVersionUID = 5L;
+	private static final long serialVersionUID = 6L;
 
 	final static List<String> allrockstrings = new ArrayList<String>();
 	public final static List<Rock> allrocks = new ArrayList<Rock>();
@@ -19,7 +19,6 @@ public class Rock implements Serializable
 	public int id;
 	public String name;
 	public int yeild;
-	public int meta;
 	public Color colour;
 	
 	private Rock(int id)
@@ -31,8 +30,7 @@ public class Rock implements Serializable
 				
 		name = line[1];
 		yeild = Integer.parseInt(line[3]);
-		meta = Integer.parseInt(line[4]);
-		colour = Color.decode(line[5]);
+		colour = Color.decode(line[4]);
 		
 	}
 	

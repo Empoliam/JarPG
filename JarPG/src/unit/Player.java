@@ -15,7 +15,7 @@ public class Player extends Unit
 	public int x, y;
 	
 	//Player Skills
-	public int mining = 5;
+	public int mining = 0;
 	
 	public Player(String fName, String lName, int HP, int MP, int x, int y)
 	{
@@ -61,7 +61,7 @@ public class Player extends Unit
 			if(i.id == in.id && i.stacksize < i.maxstacksize)
 			{
 				
-				if(i.meta == in.meta && i.prefixid == in.prefixid)
+				if(i.prefixid == in.prefixid)
 				{
 					i.stacksize ++;
 					newItem = false;
