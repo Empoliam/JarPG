@@ -1,22 +1,45 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import items.Item;
-
-import static main.Main.player;
+import items.SmeltingRecipeSingle;
 
 public class Smelt 
 {
 
-	public static List<String> singleSmelting = new ArrayList<String>();
-	
-	public static void smelt(Item iA)
+	public static List<SmeltingRecipeSingle> singleSmelting = new ArrayList<SmeltingRecipeSingle>();
+
+	public static void smeltSingle(Item iA)
 	{
-		
-		player.removeItem(iA);
-		
+
+
+
 	}
-	
+
+	public static final void populateLists()
+	{
+
+		try {
+
+			BufferedReader br = new BufferedReader(new FileReader("resources/singleSmelting.csv"));
+			String read = br.readLine();
+			while(read != null)
+			{
+
+				singleSmelting.add(new SmeltingRecipeSingle(read));
+				read = br.readLine();
+
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }

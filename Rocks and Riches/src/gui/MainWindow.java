@@ -21,6 +21,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
+import gui.intro.SmeltingWindow;
 import gui.utility.InventoryWindow;
 import gui.utility.MapWindow;
 import main.Main;
@@ -47,6 +48,7 @@ public class MainWindow extends JFrame
 	JPanel actionPanel = new JPanel();
 	JButton digButton = new JButton("Dig");
 	JButton invButton = new JButton("Inventory");
+	JButton smeltButton = new JButton("Smelting");
 	
 	JPanel systemPanel = new JPanel();
 	JButton saveButton = new JButton("Save");
@@ -90,7 +92,8 @@ public class MainWindow extends JFrame
 			
 			case "Dig" : new DigWindow(); break;
 			case "Inventory" : new InventoryWindow(); break;
-			case "Map" : new MapWindow();
+			case "Map" : new MapWindow(); break;
+			case "Smelting" : new SmeltingWindow(); break;
 			
 			}
 			
@@ -146,10 +149,12 @@ public class MainWindow extends JFrame
 		buttonRight.addActionListener(aMove);
 		
 		actionPanel.add(digButton,"aligny top, alignx center, wrap");
-		actionPanel.add(invButton, "aligny top, alignx center");
+		actionPanel.add(invButton, "aligny top, alignx center, wrap");
+		actionPanel.add(smeltButton, "aligny top, alignx center");
 		
 		invButton.addActionListener(aAction);
 		digButton.addActionListener(aAction);
+		smeltButton.addActionListener(aAction);
 		actionPanel.setBorder(BorderFactory.createEtchedBorder());		
 		
 		systemPanel.add(saveButton,"aligny top, alignx center,wrap");

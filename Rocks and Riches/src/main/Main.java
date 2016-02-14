@@ -50,7 +50,8 @@ public abstract class Main
 		Rock.populateRockList();
 		Item.getList();
 		Item.getPrefixes();
-		
+		Smelt.populateLists();
+
 		loadGame();
 
 	}
