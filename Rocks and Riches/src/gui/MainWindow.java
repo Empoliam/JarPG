@@ -21,6 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
+import gui.utility.InventoryWindow;
+import gui.utility.MapWindow;
 import main.Main;
 import main.Move;
 

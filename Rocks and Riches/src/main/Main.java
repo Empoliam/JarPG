@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import gui.IntroWindow;
 import gui.MainWindow;
+import gui.intro.IntroWindow;
 import items.Item;
 import unit.Player;
 import world.Region;

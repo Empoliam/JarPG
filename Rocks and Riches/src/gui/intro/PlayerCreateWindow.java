@@ -1,4 +1,4 @@
-package gui;
+package gui.intro;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
@@ -16,7 +16,7 @@ import net.miginfocom.swing.MigLayout;
 import statComponents.*;
 import unit.Player;
 
-public class CreateWindow extends JDialog
+public class PlayerCreateWindow extends JDialog
 {
 
 	private static final long serialVersionUID = 2L;
@@ -80,11 +80,10 @@ public class CreateWindow extends JDialog
 			save();
 			setVisible(false);
 
-
 		}
 	};
 
-	public CreateWindow(IntroWindow introWindow, String PATH, int x, int y)
+	public PlayerCreateWindow(IntroWindow introWindow, String PATH, int x, int y)
 	{
 
 		super(introWindow, true);
