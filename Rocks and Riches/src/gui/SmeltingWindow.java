@@ -1,4 +1,4 @@
-package gui.intro;
+package gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +24,7 @@ public class SmeltingWindow extends JFrame {
 	
 	Item currentIn;
 	Item currentOut;
+	SmeltingRecipeSingle currentRecipe;
 	
 	JPanel mainPane = new JPanel();
 	JPanel inventoryList = new JPanel();
@@ -49,21 +50,27 @@ public class SmeltingWindow extends JFrame {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			currentIn = new Item(player.inventory.get(Integer.parseInt(e.getActionCommand())).id);
+			
+			currentIn = player.inventory.get(Integer.parseInt(e.getActionCommand()));
+			
 			lIn.setText(currentIn.name);
+			
 			for(SmeltingRecipeSingle s : singleSmelting)
 			{
 				
 				if (currentIn.id == s.requires)
 				{
 					
+					currentRecipe = s;
 					currentOut = new Item(s.yeild);
+					currentOut.stacksize = s.nYeild;
 					lOut.setText(currentOut.name);
 					break;
 					
 				}
 				
 			}
+			
 			bSmelt.setEnabled(true);
 			craftingPane.repaint();
 			craftingPane.revalidate();
@@ -76,11 +83,17 @@ public class SmeltingWindow extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			player.removeItem(currentIn);
+			player.removeItem(currentIn,currentRecipe.nQuantity);
 			player.addItem(currentOut);
-			lIn.setText("");
-			lOut.setText("");
-			bSmelt.setEnabled(false);
+			
+			if(currentIn.stacksize == 0)
+			{
+				lIn.setText("");
+				lOut.setText("");
+				bSmelt.setEnabled(false);
+				
+			}
+			
 			getInventory();
 			inventoryList.revalidate();
 			inventoryList.repaint();
@@ -133,7 +146,7 @@ public class SmeltingWindow extends JFrame {
 			for(SmeltingRecipeSingle s : singleSmelting)
 			{
 				
-				if(i.id == s.requires)
+				if(i.id == s.requires && i.stacksize >= s.nQuantity)
 				{
 					
 					JButton button = new JButton("Add");

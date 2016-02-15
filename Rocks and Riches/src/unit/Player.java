@@ -58,7 +58,11 @@ public class Player extends Unit
 
 				if(i.prefixid == in.prefixid)
 				{
-					i.stacksize ++;
+
+					for(int x = in.stacksize; x > 0; x--)
+					{
+						i.stacksize ++;
+					}
 					newItem = false;
 					break;
 				}
@@ -76,32 +80,37 @@ public class Player extends Unit
 
 	}
 
-	public void removeItem(Item out)
+	public void removeItem(Item out, int no)
 	{
 
-		for(Item i : inventory)
+		for(; no > 0; no --)
 		{
-			
-			if(i.id == out.id)
+			for(Item i : inventory)
 			{
-				
-				if(i.stacksize > 1)
+
+				if(i.id == out.id)
 				{
-					
-					i.stacksize --;
-					
+
+					if(i.stacksize > 1)
+					{
+
+						i.stacksize --;
+
+					}
+					else
+					{
+
+						i.stacksize --;
+						inventory.remove(inventory.indexOf(i));
+
+					}
+
+					break;
+
 				}
-				else
-				{
-					
-					inventory.remove(inventory.indexOf(i));
-					
-				}
-				
-				break;
-				
+
 			}
-			
+
 		}
 
 	}

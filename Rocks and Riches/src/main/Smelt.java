@@ -6,20 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import items.Item;
 import items.SmeltingRecipeSingle;
 
 public class Smelt 
 {
 
 	public static List<SmeltingRecipeSingle> singleSmelting = new ArrayList<SmeltingRecipeSingle>();
-
-	public static void smeltSingle(Item iA)
-	{
-
-
-
-	}
 
 	public static final void populateLists()
 	{

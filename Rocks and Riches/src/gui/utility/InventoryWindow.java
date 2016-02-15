@@ -44,7 +44,7 @@ public class InventoryWindow extends JDialog
 		public void actionPerformed(ActionEvent e) {
 
 			int index = Integer.parseInt(e.getActionCommand());
-			player.removeItem(player.inventory.get(index));
+			player.removeItem(player.inventory.get(index),1);
 			inventoryPane.removeAll();
 			initializeTable();
 			inventoryPane.revalidate();
