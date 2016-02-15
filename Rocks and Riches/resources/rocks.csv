@@ -11,7 +11,7 @@
 10,Realgar,1,38,0x951218
 11,Galena,1,39,0x7d88a4
 12,Hematite,1,40,0x43433f
-13,Spinel,1,41,0xdb566f
+13,Dolomite,1,41,0xb2b2aa
 14,Magnetite,1,42,0x767877
 15,Ilmenite,1,43,0x97969e
 16,Chromite,1,44,0x71686d
@@ -72,7 +72,7 @@
 71,Corundum ,5,14,0xFFFFFF
 72,Flourite,5,15,0xFFFFFF
 73,Halite,5,10,0xFFFFFF
-74,Dolomite,5,16,0xFFFFFF
+74,Spinel,5,16,0xdb566f
 75,Rhodochrosite,5,17,0xFFFFFF
 76,Calcite,5,18,0xFFFFFF
 77,Azurite,5,19,0xFFFFFF

@@ -116,10 +116,10 @@ public class MainWindow extends JFrame
 				ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(Main.PATH + "/player.dat"));
 				os.writeObject(Main.player);
 				os.close();
-				textarea.append("Save successful.");
+				textarea.append("Save successful.\n");
 			} catch (IOException e1) {
 				e1.printStackTrace();
-				textarea.append("Save failed.");
+				textarea.append("Save failed.\n");
 			}
 
 		}

@@ -45,7 +45,7 @@ public class Player extends Unit
 
 	}
 
-	public void addItem(Item in)
+	public void addItem(Item in, int quantity)
 	{
 
 		boolean newItem = true;
@@ -59,10 +59,8 @@ public class Player extends Unit
 				if(i.prefixid == in.prefixid)
 				{
 
-					for(int x = in.stacksize; x > 0; x--)
-					{
-						i.stacksize ++;
-					}
+					i.stacksize += quantity;
+
 					newItem = false;
 					break;
 				}
@@ -74,6 +72,7 @@ public class Player extends Unit
 		if(newItem == true)
 		{
 
+			in.stacksize = quantity;
 			inventory.add(in);
 
 		}

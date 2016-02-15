@@ -12,7 +12,6 @@ import net.miginfocom.swing.MigLayout;
 
 import static main.Smelt.singleSmelting;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -84,7 +83,7 @@ public class SmeltingWindow extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			
 			player.removeItem(currentIn,currentRecipe.nQuantity);
-			player.addItem(currentOut);
+			player.addItem(currentOut,currentRecipe.nYeild);
 			
 			if(currentIn.stacksize == 0)
 			{
@@ -108,7 +107,6 @@ public class SmeltingWindow extends JFrame {
 		inventoryList.setLayout(new MigLayout());
 		craftingPane.setLayout(new MigLayout());
 		
-		inventoryPane.setPreferredSize(new Dimension(256,256));
 		getInventory();
 		
 		craftingPane.add(new JLabel("Input:"));
@@ -120,7 +118,7 @@ public class SmeltingWindow extends JFrame {
 		bSmelt.setEnabled(false);
 		bSmelt.addActionListener(aSmelt);
 		
-		mainPane.add(inventoryPane,"grow,push,wrap");
+		mainPane.add(inventoryPane,"grow,push,wrap,height max(256),width min(256)");
 		mainPane.add(craftingPane, "wrap,alignx center");
 		mainPane.add(bExit,"alignx center");
 		

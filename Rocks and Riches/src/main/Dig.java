@@ -41,7 +41,7 @@ public class Dig
 		if(hit == true)
 		{
 			mainWindow.textarea.append("You strike " + mined.name + "!\n");
-			player.addItem(new Item(mined.yeild));
+			player.addItem(new Item(mined.yeild),1);
 		}
 
 	}
@@ -73,7 +73,7 @@ public class Dig
 		if(hit == true)
 		{
 			mainWindow.textarea.append("You strike " + mined.name + "!\n");
-			player.addItem(new Item(mined.yeild));
+			player.addItem(new Item(mined.yeild),1);
 		}
 
 	}
