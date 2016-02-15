@@ -14,7 +14,7 @@
 13,Peridot,0,0,999
 14,Sapphire,0,0,999
 15,Flourine,0,0,999
-16,Dolomite,0,0,999
+16,Spinel,0,0,999
 17,Rhodochrosite,0,0,999
 18,Calcite,0,0,999
 19,Azurite,0,0,999
@@ -39,7 +39,7 @@
 38,Realgar,0,0,999
 39,Galena,0,0,999
 40,Hematite,0,0,999
-41,Spinel,0,0,999
+41,Dolomite,0,0,999
 42,Magnetite,0,0,999
 43,Ilmenite,0,0,999
 44,Chromite,0,0,999
@@ -105,3 +105,13 @@
 104,Iron Ingot,0,0,999
 105,Zinc Ingot,0,0,999
 106,Antimony Ingot,0,0,999
+107,Arsenic,0,0,999
+108,Lead Ingot,0,0,999
+109,Magnesium Ingot,0,0,999
+110,Titanium Ingot,0,0,999
+111,Chromium Bar,0,0,999
+112,Tin Ingot,0,0,999
+113,Tungsten Ingot,0,0,999
+114,Aluminium Ingot,0,0,999
+115,Platinum Ingot,0,0,999
+116,Cobalt Ingot,0,0,999

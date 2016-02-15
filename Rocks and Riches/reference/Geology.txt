@@ -14,7 +14,7 @@ Cinnabar		- Mercury
 Realgar			- Arsenic
 Galena			- Lead
 Hematite		- Iron
-Spinel			- Magnesium
+Dolomite		- Magnesium
 Magnetite		- Iron
 Ilmenite		- Titanium
 Chromite		- Chromium
@@ -88,7 +88,7 @@ Rhyolite
 Corundum 		- Sapphire
 Flourite		- Flourine
 Halite			- Salt
-Dolomite		- Dolomite
+Spinel			- Spinel
 Rhodochrosite	- Rhodochrosite
 Calcite			- Calcite
 Azurite			- Azurite

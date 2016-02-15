@@ -48,35 +48,35 @@ public class NativeLayer{
 				double pointDataA = A[x][y];
 				double pointDataB = B[x][y];
 											
-				if (pointDataA < 0.7 && pointDataB > 0.7)
+				if (pointDataA <= 0.6 && pointDataB > 0.7)
 				{
 
 					data[x][y] = 4;
 					image.setRGB(x, y, SULPHUR_COLOUR);
 
 				}
-				else if (pointDataA < 0.45 && pointDataB < 0.7)
+				else if (pointDataA <= 0.45 && pointDataB <= 0.7)
 				{
 
 					data[x][y] = 3;
 					image.setRGB(x, y, IRON_COLOUR);
 
 				}
-				else if ((pointDataA < 0.7 && pointDataA > 0.45)&& pointDataB < 0.7)
+				else if ((pointDataA <= 0.7 && pointDataA > 0.45)&& pointDataB <= 0.7)
 				{
 
 					data[x][y] = 2;
 					image.setRGB(x, y, COPPER_COLOUR);
 
 				}
-				else if (pointDataA > 0.7 && pointDataB < 0.7)
+				else if (pointDataA >= 0.7 && pointDataB <= 0.7)
 				{
 
 					data[x][y] = 1;
 					image.setRGB(x, y, SILVER_COLOUR);
 
 				}
-				else if (pointDataA > 0.7 && pointDataB > 0.7)
+				else if (pointDataA >= 0.6 && pointDataB >= 0.7)
 				{
 
 					data[x][y] = 0;

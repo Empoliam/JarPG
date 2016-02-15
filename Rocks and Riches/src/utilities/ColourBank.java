@@ -64,7 +64,7 @@ public final class ColourBank {
 	public static final int REALGAR_COLOUR = new Color(0x951218).getRGB();
 	public static final int GALENA_COLOUR = new Color(0x7d88a4).getRGB();
 	public static final int HEMATITE_COLOUR = new Color(0x43433f).getRGB();
-	public static final int SPINEL_COLOUR = new Color(0xdb566f).getRGB();
+	public static final int DOLOMITE_COLOUR = new Color(0xb2b2aa).getRGB();
 	public static final int MAGNETITE_COLOUR = new Color(0x767877).getRGB();
 	public static final int ILMENITE_COLOUR = new Color(0x97969e).getRGB();
 	public static final int CHROMITE_COLOUR = new Color(0x71686d).getRGB();

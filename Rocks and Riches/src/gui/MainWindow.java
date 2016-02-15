@@ -20,9 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 
 import gui.utility.InventoryWindow;
 import gui.utility.MapWindow;
+import gui.utility.RecipeBook;
 import main.Main;
 import main.Move;
 
@@ -33,6 +35,8 @@ public class MainWindow extends JFrame
 
 	private static final long serialVersionUID = 1L;
 
+	Border etched = BorderFactory.createEtchedBorder();
+	
 	JPanel mainpanel = new JPanel();
 
 	JPanel topPanel = new JPanel();
@@ -52,6 +56,9 @@ public class MainWindow extends JFrame
 	JPanel systemPanel = new JPanel();
 	JButton saveButton = new JButton("Save");
 	JButton mapButton = new JButton("Map");
+	
+	JPanel codexPanel = new JPanel();
+	JButton recipeButton = new JButton("Recipes");
 	
 	public JTextArea textarea = new JTextArea(24,50);
 	JScrollPane scroll = new JScrollPane(textarea);
@@ -93,6 +100,7 @@ public class MainWindow extends JFrame
 			case "Inventory" : new InventoryWindow(); break;
 			case "Map" : new MapWindow(); break;
 			case "Smelting" : new SmeltingWindow(); break;
+			case "Recipes" : new RecipeBook(); break;
 			
 			}
 			
@@ -135,18 +143,20 @@ public class MainWindow extends JFrame
 		
 		topPanel.add(scroll);
 		topPanel.add(mapLabel);
-		topPanel.setBorder(BorderFactory.createEtchedBorder());
+		topPanel.setBorder(etched);
 
+		//MOVEMENT
 		movementPanel.add(buttonUp,"span 2, align center, wrap");
 		movementPanel.add(buttonLeft,"align left");
 		movementPanel.add(buttonRight, "align right,wrap");
 		movementPanel.add(buttonDown, "span 2, align center");
-		movementPanel.setBorder(BorderFactory.createEtchedBorder());
+		movementPanel.setBorder(BorderFactory.createTitledBorder(etched, "Move"));
 		buttonUp.addActionListener(aMove);
 		buttonLeft.addActionListener(aMove);
 		buttonDown.addActionListener(aMove);
 		buttonRight.addActionListener(aMove);
 		
+		//ACTION
 		actionPanel.add(digButton,"aligny top, alignx center, wrap");
 		actionPanel.add(invButton, "aligny top, alignx center, wrap");
 		actionPanel.add(smeltButton, "aligny top, alignx center");
@@ -154,20 +164,28 @@ public class MainWindow extends JFrame
 		invButton.addActionListener(aAction);
 		digButton.addActionListener(aAction);
 		smeltButton.addActionListener(aAction);
-		actionPanel.setBorder(BorderFactory.createEtchedBorder());		
+		actionPanel.setBorder(BorderFactory.createTitledBorder(etched,"Actions"));		
 		
+		//SYSTEM
 		systemPanel.add(saveButton,"aligny top, alignx center,wrap");
 		systemPanel.add(mapButton,"aligny top, alignx center");
-		
+				
 		saveButton.addActionListener(aSave);
 		mapButton.addActionListener(aAction);
-		systemPanel.setBorder(BorderFactory.createEtchedBorder());
+		systemPanel.setBorder(BorderFactory.createTitledBorder(etched,"Menu"));
 		
-		mainpanel.add(topPanel,"wrap");
-		mainpanel.add(movementPanel,"split 2");
-		mainpanel.add(actionPanel, "growy, wrap");
-		mainpanel.add(systemPanel);		
-
+		//CODEX
+		codexPanel.add(recipeButton,"aligny top, alignx center, wrap");
+		
+		recipeButton.addActionListener(aAction);
+		codexPanel.setBorder(BorderFactory.createTitledBorder(etched,"Codex"));
+		
+		mainpanel.add(topPanel,"span 2,wrap");
+		mainpanel.add(movementPanel,",growy");
+		mainpanel.add(actionPanel,"growy,wrap");
+		mainpanel.add(systemPanel,"growy,growx");		
+		mainpanel.add(codexPanel,"growy,wrap");
+		
 		add(mainpanel);
 
 		pack();

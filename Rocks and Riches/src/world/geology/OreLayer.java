@@ -108,7 +108,7 @@ public class OreLayer{
 				{
 					
 					data[x][y] = 13;
-					image.setRGB(x, y, SPINEL_COLOUR);
+					image.setRGB(x, y, DOLOMITE_COLOUR);
 					
 				}
 				else if(pointDataA >= 0.68 && (pointDataB >= 0.56 && pointDataB <= 0.68))
