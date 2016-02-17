@@ -79,9 +79,11 @@ public class Player extends Unit
 
 	}
 
-	public void removeItem(Item out, int no)
+	public int removeItem(Item out, int no)
 	{
 
+		int remain = 0;
+		
 		for(; no > 0; no --)
 		{
 			for(Item i : inventory)
@@ -94,6 +96,7 @@ public class Player extends Unit
 					{
 
 						i.stacksize --;
+						remain = i.stacksize;
 
 					}
 					else
@@ -101,6 +104,7 @@ public class Player extends Unit
 
 						i.stacksize --;
 						inventory.remove(inventory.indexOf(i));
+						remain = 0;
 
 					}
 
@@ -111,6 +115,8 @@ public class Player extends Unit
 			}
 
 		}
+		
+		return remain;
 
 	}
 
