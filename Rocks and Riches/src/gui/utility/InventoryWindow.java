@@ -39,7 +39,7 @@ public class InventoryWindow extends JDialog
 	};
 
 	ActionListener aDrop = new ActionListener() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
@@ -49,18 +49,18 @@ public class InventoryWindow extends JDialog
 			initializeTable();
 			inventoryPane.revalidate();
 			inventoryPane.repaint();
-			
+
 		}
 	};
-	
+
 	public InventoryWindow()
 	{
 
 		setTitle("Inventory");
 		setMaximumSize(new Dimension(1028,500));
-		
+
 		mainPane.setLayout(new MigLayout());
-		
+
 		inventoryPane.setLayout(new MigLayout());
 		itemScroll.setPreferredSize(new Dimension(512,250));
 		initializeTable();
@@ -81,7 +81,7 @@ public class InventoryWindow extends JDialog
 
 	private void initializeTable()
 	{
-		
+
 		inventoryPane.add(new JLabel("Quantity"),"pushx,alignx center");
 		inventoryPane.add(new JLabel("Item"),"pushx,alignx center");
 		inventoryPane.add(new JLabel("Quality"),"pushx,alignx center");
@@ -96,7 +96,7 @@ public class InventoryWindow extends JDialog
 			JButton dButton = new JButton("Drop");
 			dButton.setActionCommand(Integer.toString(player.inventory.indexOf(i)));
 			dButton.addActionListener(aDrop);
-			
+
 			inventoryPane.add(new JLabel(Integer.toString(i.stacksize)),"alignx center");
 			inventoryPane.add(new JLabel(i.name),"alignx center");
 			inventoryPane.add(new JLabel(i.prefix),"alignx center"); 
@@ -108,5 +108,5 @@ public class InventoryWindow extends JDialog
 		}
 
 	}
-
 }
+
