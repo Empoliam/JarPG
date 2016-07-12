@@ -9,10 +9,16 @@ rocks.csv:
 0: id
 1: name
 2: layer
-3: yeild
+3: yield
 4: meta
 
 gemstones.csv
 0: id
 1: name
 2: base value
+
+singleSmelting.csv
+0: requires
+1: number required
+2: yields
+3: nuber yielded

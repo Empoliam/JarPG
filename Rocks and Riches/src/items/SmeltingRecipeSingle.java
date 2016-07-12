@@ -5,8 +5,8 @@ public class SmeltingRecipeSingle
 
 	public int requires;
 	public int nQuantity;
-	public int yeild;
-	public int nYeild;
+	public int yield;
+	public int nYield;
 	
 	public SmeltingRecipeSingle(String in)
 	{
@@ -14,8 +14,8 @@ public class SmeltingRecipeSingle
 		String[] parse = in.split(",");
 		requires = Integer.parseInt(parse[0]);
 		nQuantity = Integer.parseInt(parse[1]);
-		yeild = Integer.parseInt(parse[2]);
-		nYeild = Integer.parseInt(parse[3]);
+		yield = Integer.parseInt(parse[2]);
+		nYield = Integer.parseInt(parse[3]);
 		
 	}
 		

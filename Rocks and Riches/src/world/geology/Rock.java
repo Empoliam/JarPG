@@ -13,7 +13,7 @@ public class Rock implements Serializable
 
 	private static final long serialVersionUID = 6L;
 
-	final static List<String> allrockstrings = new ArrayList<String>();
+	private final static List<String> allrockstrings = new ArrayList<String>();
 	public final static List<Rock> allrocks = new ArrayList<Rock>();
 	
 	public int id;

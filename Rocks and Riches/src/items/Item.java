@@ -10,7 +10,7 @@ import java.util.List;
 public class Item implements Serializable 
 {
 
-	final static long serialVersionUID = 4L;
+	final static long serialVersionUID = 5L;
 	final static List<String> allitems = new ArrayList<String>();
 	final static List<String> prefixes = new ArrayList<String>();
 		
@@ -22,6 +22,8 @@ public class Item implements Serializable
 	public final int maxstacksize;
 	public int stacksize;
 	public int prefixid;
+	public int type;
+	public int meta;
 	
 	public Item(int id)
 	{
@@ -36,6 +38,25 @@ public class Item implements Serializable
 		maxstacksize = Integer.parseInt(load[4]);
 		stacksize = 1;
 		prefixid = 0;
+		type = 0;
+		meta = 0;
+		
+	}
+	
+	public Item(int id, int quantity)
+	{
+		
+		this(id);
+		stacksize = quantity;		
+		
+	}
+	
+	public Item(int id, int type, int meta)
+	{
+		
+		this(id);
+		this.type = type;
+		this.meta = meta;
 		
 	}
 		

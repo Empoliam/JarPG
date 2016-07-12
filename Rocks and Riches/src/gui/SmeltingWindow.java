@@ -71,7 +71,7 @@ public class SmeltingWindow extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			int remain = player.removeItem(new Item(currentRecipe.requires),currentRecipe.nQuantity);
-			player.addItem(new Item(currentRecipe.yeild), currentRecipe.nYeild);			
+			player.addItem(new Item(currentRecipe.yield), currentRecipe.nYield);			
 						
 			if(remain < currentRecipe.nQuantity)
 			{
@@ -146,8 +146,8 @@ public class SmeltingWindow extends JFrame {
 					button.setActionCommand(inxRp + "," + inxReq);
 					button.addActionListener(aAdd);
 
-					inventoryList.add(new JLabel(Integer.toString(s.nYeild)),"pushx,alignx center");
-					inventoryList.add(new JLabel(new Item(s.yeild).name),"pushx,alignx center");
+					inventoryList.add(new JLabel(Integer.toString(s.nYield)),"pushx,alignx center");
+					inventoryList.add(new JLabel(new Item(s.yield).name),"pushx,alignx center");
 					inventoryList.add(button,"wrap, pushx,alignx center");
 
 				}

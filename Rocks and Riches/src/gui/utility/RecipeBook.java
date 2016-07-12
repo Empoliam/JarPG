@@ -35,7 +35,7 @@ public class RecipeBook extends JFrame
 
 			smeltingPane.add(new JLabel(s.nQuantity + " " + new Item(s.requires).name));
 			smeltingPane.add(new JLabel(">>>"),"gapleft 40, gapright 40");
-			smeltingPane.add(new JLabel(s.nYeild + " " + new Item(s.yeild).name),"wrap");
+			smeltingPane.add(new JLabel(s.nYield + " " + new Item(s.yield).name),"wrap");
 
 		}
 
