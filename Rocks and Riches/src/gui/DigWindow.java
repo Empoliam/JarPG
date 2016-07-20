@@ -42,11 +42,11 @@ public class DigWindow extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			if(rAny.isSelected()) Dig.digRandom();
-			else if(rOrganic.isSelected()) Dig.digSpecific("Organic");		
-			else if(rSediment.isSelected()) Dig.digSpecific("Sediment");
-			else if(rNative.isSelected()) Dig.digSpecific("Native");
-			else if(rOre.isSelected()) Dig.digSpecific("Ore");
+			if(rAny.isSelected()) Dig.digLayer(0);
+			else if(rOrganic.isSelected()) Dig.digLayer(1);		
+			else if(rSediment.isSelected()) Dig.digLayer(2);
+			else if(rNative.isSelected()) Dig.digLayer(3);
+			else if(rOre.isSelected()) Dig.digLayer(4);
 
 		}
 	};

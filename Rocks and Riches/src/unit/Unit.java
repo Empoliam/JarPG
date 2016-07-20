@@ -9,7 +9,7 @@ import items.Item;
 public class Unit implements Serializable 
 {
 
-	final static long serialVersionUID = 2L;
+	final static long serialVersionUID = 3L;
 	
 	public List<Item> inventory = new ArrayList<Item>();
 	
@@ -17,6 +17,7 @@ public class Unit implements Serializable
 	
 	//skills
 	public int mining = 0;
+	public int smelting = 0;
 	
 	String fName, lName;
 	

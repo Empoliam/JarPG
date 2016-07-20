@@ -11,7 +11,6 @@ import net.miginfocom.swing.MigLayout;
 
 import static main.Main.player;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -57,15 +56,13 @@ public class InventoryWindow extends JDialog
 	{
 
 		setTitle("Inventory");
-		setMaximumSize(new Dimension(1028,500));
 
 		mainPane.setLayout(new MigLayout());
 
 		inventoryPane.setLayout(new MigLayout());
-		itemScroll.setPreferredSize(new Dimension(512,250));
 		initializeTable();
 
-		mainPane.add(itemScroll,"growy,push,wrap");
+		mainPane.add(itemScroll,"growy,push,wrap,height 500");
 		mainPane.add(bClose, "align center");
 
 		bClose.addActionListener(aQuit);
@@ -106,7 +103,7 @@ public class InventoryWindow extends JDialog
 			inventoryPane.add(dButton,"wrap , alignx center");
 
 		}
-
+		
 	}
 }
 

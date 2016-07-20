@@ -7,73 +7,47 @@ import world.geology.Rock;
 
 import static main.Main.*;
 
-public class Dig 
+public abstract class Dig 
 {
 
-	public static void digSpecific(String in)
+	public static void digLayer(int in)
 	{
 
 		Rock mined = null;
-		boolean hit = true;
 
 		switch(in)
 		{
-
-		case "Sediment": 
+		case 0:
+			int ranLayer = new Random().nextInt(4)+1;
+			digLayer(ranLayer);
+			return;
+		case 1:
 			mined = activeRegion.getRock("sediment", new Random().nextInt(3));
 			break;
-		case "Native":
+		case 2:
 			mined = activeRegion.getRock("native", new Random().nextInt(2));
 			break;
-		case "Organic":
+		case 3:
 			mined = activeRegion.getRock("organics", new Random().nextInt(2));
 			break;
-		case "Ore":
+		case 4:
 			mined = activeRegion.getRock("ore", new Random().nextInt(4));
 			break;
 		default:
 			mainWindow.textarea.append("Such a layer does not exist.\n");
-			hit = false;
 			break;
 		}
 
+		double chance = (double)player.mining / 20.0;
 
-		if(hit == true)
+		if(Math.random() <= chance)
 		{
 			mainWindow.textarea.append("You strike " + mined.name + "!\n");
 			player.addItem(new Item(mined.yeild),1);
 		}
-
-	}
-
-	public static void digRandom()
-	{
-
-		int ranLayer = new Random().nextInt(4);
-		Rock mined = null;
-		boolean hit = true;
-
-		switch(ranLayer)
+		else
 		{
-
-		case 0: 
-			mined = activeRegion.getRock("sediment", new Random().nextInt(3));
-			break;
-		case 1:
-			mined = activeRegion.getRock("native", new Random().nextInt(2));
-			break;
-		case 2:
-			mined = activeRegion.getRock("organics", new Random().nextInt(2));
-			break;
-		case 3:
-			mined = activeRegion.getRock("ore", new Random().nextInt(4));
-			break;
-		}
-
-		if(hit == true)
-		{
-			mainWindow.textarea.append("You strike " + mined.name + "!\n");
-			player.addItem(new Item(mined.yeild),1);
+			mainWindow.textarea.append("You fail to find anything of value.\n");					
 		}
 
 	}
