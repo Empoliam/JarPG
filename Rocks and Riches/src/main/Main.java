@@ -16,7 +16,7 @@ import com.google.gson.GsonBuilder;
 import gui.MainWindow;
 import gui.intro.IntroWindow;
 import items.Item;
-import unit.Player;
+import unit.Unit;
 import world.Region;
 import world.SuperRegion;
 import world.geology.Rock;
@@ -37,7 +37,7 @@ public abstract class Main
 	public static int currenty, currentY;
 
 	//active stuff
-	public static Player player;
+	public static Unit player;
 	public static SuperRegion activeSuperRegion;
 	public static Region activeRegion;
 
@@ -113,7 +113,7 @@ public abstract class Main
 		try {
 
 			ObjectInputStream is = new ObjectInputStream(new FileInputStream(PATH + "/player.dat"));
-			Main.player = (Player) is.readObject();
+			Main.player = (Unit) is.readObject();
 			is.close();
 			currentx = player.getX();
 			currenty = player.getY();

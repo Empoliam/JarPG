@@ -14,7 +14,7 @@ import javax.swing.Timer;
 
 import net.miginfocom.swing.MigLayout;
 import statComponents.*;
-import unit.Player;
+import unit.Unit;
 
 public class PlayerCreateWindow extends JDialog
 {
@@ -29,7 +29,7 @@ public class PlayerCreateWindow extends JDialog
 	String fName, lName;
 	int Mining, x, y;
 
-	Player player;
+	Unit player;
 
 	JLabel PointLabel = new JLabel("Points left: " + MAX_POINTS);
 
@@ -164,7 +164,7 @@ public class PlayerCreateWindow extends JDialog
 		fName = fNameField.getText();
 		lName = lNameField.getText();
 
-		player = new Player(fName, lName, x, y);
+		player = new Unit(fName, lName, x, y);
 		player.mining = Mining;
 		
 	}
