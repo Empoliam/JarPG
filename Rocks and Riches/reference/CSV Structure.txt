@@ -21,4 +21,11 @@ singleSmelting.csv
 0: requires
 1: number required
 2: yields
-3: nuber yielded
+3: number yielded
+
+defaultWeapon.csv
+0: id
+1: material
+2: quality
+3: sharp
+4: value

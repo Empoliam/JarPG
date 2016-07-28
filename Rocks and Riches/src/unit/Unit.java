@@ -9,7 +9,7 @@ import items.Item;
 public class Unit implements Serializable 
 {
 
-	final static long serialVersionUID = 3L;
+	final static long serialVersionUID = 4L;
 	
 	public List<Item> inventory = new ArrayList<Item>();
 	
@@ -17,7 +17,7 @@ public class Unit implements Serializable
 	
 	//skills
 	public int mining = 0;
-	public int smelting = 0;
+	public int forging = 0;
 	
 	String fName, lName;
 	
@@ -68,7 +68,10 @@ public class Unit implements Serializable
 		for(Item i : inventory)
 		{
 
-			if(i.id == in.id && i.stacksize < i.maxstacksize)
+			if(i.id == in.id 
+					&& i.stacksize < i.maxstacksize 
+					&& i.meta == in.meta 
+					&& i.type == in.type)
 			{
 
 				if(i.prefixid == in.prefixid)
@@ -104,7 +107,9 @@ public class Unit implements Serializable
 			for(Item i : inventory)
 			{
 
-				if(i.id == out.id)
+				if(i.id == out.id
+						&& i.meta == out.meta
+						&& i.type == out.type)
 				{
 
 					if(i.stacksize > 1)
